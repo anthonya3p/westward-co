@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* Overlay layers */
+  --z-overlay: 400;
+
+  --z-spotlight: 1000; /* Tutorial spotlights/guided help */
+
+  /* System layers */
+  --z-critical: 2000; /* Critical system notifications */
+
+  /* spacing */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+}
+
+:root {
+  --background: #F4EFE6;
+  --foreground: #1C1B18;
+  --surface: #EDE4D6;
+  --surface-foreground: #1C1B18;
+  --sidebar: #F4EFE6;
+  --sidebar-foreground: #1C1B18;
+  --card: #F4EFE6;
+  --card-foreground: #1C1B18;
+  --popup: #F4EFE6;
+  --popup-foreground: #1C1B18;
+  --primary: #1C1B18;
+  --primary-foreground: #F4EFE6;
+  --secondary: #D8C7AE;
+  --secondary-foreground: #1C1B18;
+  --accent: #73715A;
+  --accent-foreground: #F4EFE6;
+  --muted: #E9E0D2;
+  --muted-foreground: #6E685F;
+  --success: #66735E;
+  --success-foreground: #F4EFE6;
+  --error: #8A4F45;
+  --error-foreground: #F4EFE6;
+  --warning: #9A744E;
+  --warning-foreground: #1C1B18;
+  --info: #73715A;
+  --info-foreground: #F4EFE6;
+  --info-hover: #66644F;
+  --info-active: #575642;
+  --border: rgba(28,27,24,0.18);
+  --font-family-base: 'Inter', sans-serif;
+  --font-family-display: 'DM Serif Display', Georgia, serif;
+  --font-family-monospace: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-family-cursive: cursive;
+  --shadow: 0 1px 2px rgba(28,27,24,0.05);
+  --shadow-md: 0 6px 20px rgba(28,27,24,0.08);
+  --shadow-lg: 0 14px 40px rgba(28,27,24,0.10);
+  --shadow-focus: 0 0 0 3px rgba(115,113,90,0.22);
+  --radius-sm: 2px;
+  --radius: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-full: 9999px;
+  --animation-duration-fast: 140ms;
+  --animation-duration-normal: 240ms;
+  --animation-duration-slow: 480ms;
+  --chart-color-1: #73715A;
+  --chart-color-2: #8A694F;
+  --chart-color-3: #D8C7AE;
+  --chart-color-4: #1C1B18;
+  --chart-color-5: #A6977F;
+}
+
+.dark {}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-family-base); }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+img { max-width: 100%; }
+#notre-histoire { scroll-margin-top: 92px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.legal { min-height: 60vh; padding: 120px 24px; max-width: 900px; margin: 0 auto; }
+.legal .eyebrow { font: 600 12px/1 var(--font-family-base); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.legal h1 { font: 400 clamp(3rem,6vw,5rem)/1.1 var(--font-family-display); margin: 18px 0 26px; }
+.legal > p:last-child { line-height: 1.8; }
