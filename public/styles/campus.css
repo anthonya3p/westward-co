@@ -14,11 +14,14 @@
 .campusSite .brand,
 .campusSite .footerBrand img,
 .campusLockupLogo { width: 220px; }
+.campusSite .brand,
+.campusLockupLogo { overflow: hidden; }
 .campusSite .brand img,
 .campusSite .footerBrand img,
 .campusLockupLogo img { display: block; width: 100%; object-fit: contain; }
-.campusSite .brand img { height: 70px; }
-.campusSite .footerBrand img { height: 128px; object-position: left center; }
+.campusSite .brand img { height: 70px; transform: scale(1.42); }
+.campusSite .footerBrand { overflow: hidden; }
+.campusSite .footerBrand img { height: 128px; object-position: left center; transform: scale(1.32); transform-origin: left center; }
 
 .campusHero { background: var(--campus-dark); color: var(--campus-paper); }
 .campusHeroInner {
@@ -35,7 +38,7 @@
 .backLink { display: inline-block; margin-bottom: 40px; color: rgba(244,239,230,.64); text-decoration: none; font: 600 .74rem/1.4 var(--font-family-base); letter-spacing: .13em; text-transform: uppercase; }
 .campusLockup { width: 220px; margin-bottom: 38px; }
 .campusLockupLogo { height: 72px; }
-.campusLockupLogo img { height: 72px; object-position: center; }
+.campusLockupLogo img { height: 72px; object-position: center; transform: scale(1.42); }
 .campusLockupBranch { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
 .campusLockupBranch span { height: 1px; background: rgba(244,239,230,.48); }
 .campusLockupBranch strong { font: 700 .7rem/1 var(--font-family-base); letter-spacing: .3em; }
