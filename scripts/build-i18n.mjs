@@ -318,6 +318,8 @@ function localizeLinks(html, lang) {
 for (const route of routes) {
   const sourcePath = join(root, route, 'index.html');
   let source = await readFile(sourcePath, 'utf8');
+  source = source.replace(/\/styles\/chrome\.css(?:\?v=[^"]+)?/, '/styles/chrome.css?v=20260929-2');
+  source = source.replace(/\/scripts\/site\.js(?:\?v=[^"]+)?/, '/scripts/site.js?v=20260929-2');
   if (!source.includes('hreflang="en"')) source = source.replace('<meta name="robots" content="index, follow">', `<meta name="robots" content="index, follow">\n  ${alternates(route)}`);
   source = source.replace(
     /<nav class="desktopRight"[\s\S]*?(?=\s*<nav class="mobileLang")/,
