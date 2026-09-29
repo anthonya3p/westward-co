@@ -111,6 +111,9 @@ const pageText = {
     'Les besoins liés au voyage, au logement, au téléphone ou aux premières démarches peuvent être abordés pendant la préparation. Les services éventuellement disponibles sont précisés selon le projet et la destination.':'Travel, housing, phone and initial practical needs can be discussed during preparation. Any available services are specified according to the project and destination.',
     'Premier échange':'First conversation', 'Parlez-nous de votre projet d’études.':'Tell us about your study project.',
     'Ce premier contact permet de comprendre votre situation et de déterminer les prochaines étapes possibles.':'This first contact helps us understand your situation and identify possible next steps.',
+    'Demande de suivi':'Follow-up request', 'Préparons un premier échange vraiment utile.':'Let’s prepare a genuinely useful first conversation.',
+    'Ce questionnaire nous permet de comprendre le profil de l’étudiant, l’avancement du projet et les priorités de la famille avant de vous recontacter.':'This questionnaire helps us understand the student’s profile, the project’s progress and the family’s priorities before contacting you.',
+    '4 étapes':'4 steps', 'Environ 8 minutes':'About 8 minutes', 'Sans engagement':'No commitment',
     'Nom et prénom':'Full name', 'E-mail':'Email', 'Téléphone':'Phone', 'Rentrée envisagée':'Planned intake', 'Situation actuelle':'Current situation',
     'Choisir une réponse':'Choose an option', 'Collégien ou lycéen':'Middle or high school student', 'Étudiant':'University student', 'En année de césure':'On a gap year', 'Parent ou représentant légal':'Parent or legal guardian', 'Autre situation':'Other situation',
     'Votre projet':'Your project', 'J’accepte que les informations transmises soient utilisées pour répondre à ma demande, conformément à la':'I agree that the information submitted may be used to answer my request, in accordance with the',
@@ -242,6 +245,9 @@ const pageText = {
     'Les besoins liés au voyage, au logement, au téléphone ou aux premières démarches peuvent être abordés pendant la préparation. Les services éventuellement disponibles sont précisés selon le projet et la destination.':'Las necesidades relacionadas con el viaje, el alojamiento, el teléfono o los primeros trámites pueden tratarse durante la preparación. Los servicios disponibles se precisan según el proyecto y el destino.',
     'Premier échange':'Primera conversación', 'Parlez-nous de votre projet d’études.':'Háblenos de su proyecto de estudios.',
     'Ce premier contact permet de comprendre votre situation et de déterminer les prochaines étapes possibles.':'Este primer contacto permite comprender su situación y determinar los posibles pasos siguientes.',
+    'Demande de suivi':'Solicitud de seguimiento', 'Préparons un premier échange vraiment utile.':'Preparemos una primera conversación realmente útil.',
+    'Ce questionnaire nous permet de comprendre le profil de l’étudiant, l’avancement du projet et les priorités de la famille avant de vous recontacter.':'Este cuestionario nos permite comprender el perfil del estudiante, el avance del proyecto y las prioridades de la familia antes de volver a contactarle.',
+    '4 étapes':'4 etapas', 'Environ 8 minutes':'Unos 8 minutos', 'Sans engagement':'Sin compromiso',
     'Nom et prénom':'Nombre y apellidos', 'E-mail':'Correo electrónico', 'Téléphone':'Teléfono', 'Rentrée envisagée':'Inicio previsto', 'Situation actuelle':'Situación actual',
     'Choisir une réponse':'Elegir una opción', 'Collégien ou lycéen':'Estudiante de secundaria', 'Étudiant':'Estudiante universitario', 'En année de césure':'En año sabático', 'Parent ou représentant légal':'Padre, madre o representante legal', 'Autre situation':'Otra situación',
     'Votre projet':'Su proyecto', 'J’accepte que les informations transmises soient utilisées pour répondre à ma demande, conformément à la':'Acepto que la información enviada se utilice para responder a mi solicitud, de acuerdo con la',
@@ -384,7 +390,7 @@ for (const route of routes) {
   const sourcePath = join(root, route, 'index.html');
   let source = await readFile(sourcePath, 'utf8');
   source = source.replace(/\/styles\/chrome\.css(?:\?v=[^"]+)?/, '/styles/chrome.css?v=20260929-2');
-  source = source.replace(/\/scripts\/site\.js(?:\?v=[^"]+)?/, '/scripts/site.js?v=20260929-3');
+  source = source.replace(/\/scripts\/site\.js(?:\?v=[^"]+)?/, '/scripts/site.js?v=20260929-4');
   if (!source.includes('hreflang="en"')) source = source.replace('<meta name="robots" content="index, follow">', `<meta name="robots" content="index, follow">\n  ${alternates(route)}`);
   source = source.replace(
     /<nav class="desktopRight"[\s\S]*?(?=\s*<nav class="mobileLang")/,
