@@ -25,22 +25,30 @@
   form?.addEventListener('submit', event => {
     event.preventDefault();
     const data = new FormData(form);
+    const lang = document.documentElement.lang;
+    const labels = lang === 'en' ? {name:'Name',email:'Email'} : lang === 'es' ? {name:'Nombre',email:'Correo electrónico'} : {name:'Nom',email:'Email'};
     const subject = encodeURIComponent(String(data.get('objet') || 'Contact Westward Co.'));
-    const body = encodeURIComponent(`Nom : ${data.get('nom') || ''}\nEmail : ${data.get('email') || ''}\n\n${data.get('message') || ''}`);
+    const body = encodeURIComponent(`${labels.name} : ${data.get('nom') || ''}\n${labels.email} : ${data.get('email') || ''}\n\n${data.get('message') || ''}`);
     window.location.href = `mailto:anthony@westwardco.fr?subject=${subject}&body=${body}`;
   });
   const campusForm = document.getElementById('campus-form');
   campusForm?.addEventListener('submit', event => {
     event.preventDefault();
     const data = new FormData(campusForm);
-    const subject = encodeURIComponent('Projet d’études — Westward Co. Campus');
+    const lang = document.documentElement.lang;
+    const labels = lang === 'en'
+      ? {subject:'Study project — Westward Co. Campus',name:'Name',email:'Email',phone:'Phone',situation:'Current situation',intake:'Planned intake',project:'Project',empty:'Not provided'}
+      : lang === 'es'
+        ? {subject:'Proyecto de estudios — Westward Co. Campus',name:'Nombre',email:'Correo electrónico',phone:'Teléfono',situation:'Situación actual',intake:'Inicio previsto',project:'Proyecto',empty:'No indicado'}
+        : {subject:'Projet d’études — Westward Co. Campus',name:'Nom',email:'E-mail',phone:'Téléphone',situation:'Situation',intake:'Rentrée envisagée',project:'Projet',empty:'Non renseigné'};
+    const subject = encodeURIComponent(labels.subject);
     const body = encodeURIComponent(
-      `Nom : ${data.get('nom') || ''}\n` +
-      `E-mail : ${data.get('email') || ''}\n` +
-      `Téléphone : ${data.get('telephone') || 'Non renseigné'}\n` +
-      `Situation : ${data.get('situation') || ''}\n` +
-      `Rentrée envisagée : ${data.get('rentree') || 'Non renseignée'}\n\n` +
-      `Projet :\n${data.get('message') || ''}`
+      `${labels.name} : ${data.get('nom') || ''}\n` +
+      `${labels.email} : ${data.get('email') || ''}\n` +
+      `${labels.phone} : ${data.get('telephone') || labels.empty}\n` +
+      `${labels.situation} : ${data.get('situation') || ''}\n` +
+      `${labels.intake} : ${data.get('rentree') || labels.empty}\n\n` +
+      `${labels.project} :\n${data.get('message') || ''}`
     );
     window.location.href = `mailto:anthony@westwardco.fr?subject=${subject}&body=${body}`;
   });

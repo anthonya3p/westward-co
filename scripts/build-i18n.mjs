@@ -1,0 +1,362 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+
+const root = new URL('../public/', import.meta.url).pathname;
+const routes = ['', 'nos-univers/', 'campus/', 'coffee-shop/', 'cowboy-culture/', 'digital/', 'contact/', 'mentions-legales/', 'confidentialite/'];
+
+const common = {
+  en: {
+    'Notre histoire':'Our story', 'Nos univers':'Our worlds', 'Mentions légales':'Legal notice',
+    'Politique de confidentialité':'Privacy policy', 'Navigation principale gauche':'Main navigation left',
+    'Navigation principale droite':'Main navigation right', 'Navigation mobile':'Mobile navigation',
+    'Navigation de pied de page':'Footer navigation', 'Ouvrir le menu':'Open menu',
+    'Westward Co. - accueil':'Westward Co. - home', 'Découvrir':'Discover', 'Accéder':'Open',
+    'Nous contacter':'Contact us', 'France × États-Unis':'France × United States'
+  },
+  es: {
+    'Notre histoire':'Nuestra historia', 'Nos univers':'Nuestros universos', 'Mentions légales':'Aviso legal',
+    'Politique de confidentialité':'Política de privacidad', 'Navigation principale gauche':'Navegación principal izquierda',
+    'Navigation principale droite':'Navegación principal derecha', 'Navigation mobile':'Navegación móvil',
+    'Navigation de pied de page':'Navegación del pie de página', 'Ouvrir le menu':'Abrir el menú',
+    'Westward Co. - accueil':'Westward Co. - inicio', 'Découvrir':'Descubrir', 'Accéder':'Acceder',
+    'Nous contacter':'Contactarnos', 'France × États-Unis':'Francia × Estados Unidos', 'France × United States':'Francia × Estados Unidos', 'Contact':'Contacto',
+    'United States':'Estados Unidos'
+  }
+};
+
+const pageText = {
+  en: {
+    'Westward Co. | Projets entre la France et les États-Unis':'Westward Co. | Projects between France and the United States',
+    'Westward Co. est une marque ombrelle née d’une histoire familiale et de projets développés entre la France et les États-Unis.':'Westward Co. is an umbrella brand born from a family story and projects developed between France and the United States.',
+    "Paysage de l'Ouest américain — Westward Co.":'American West landscape — Westward Co.',
+    'Différents projets,':'Different projects,', 'une même direction.':'one shared direction.',
+    'Westward Co. rassemble différents projets nés de l’amour d’un père pour ses enfants et d’une même volonté : leur offrir davantage d’opportunités, d’ouverture et de choix pour l’avenir.':'Westward Co. brings together projects born from a father’s love for his children and a shared ambition: to offer them more opportunities, openness and choices for the future.',
+    'Tout est parti d’un projet familial.':'It all began with a family project.',
+    'Lorsque mon fils a choisi de poursuivre ses études aux États-Unis, ce qui devait être avant tout une aventure étudiante est progressivement devenu beaucoup plus.':'When my son chose to continue his studies in the United States, what was initially meant to be a student adventure gradually became much more.',
+    'En découvrant de l’intérieur les démarches, les choix à faire, les opportunités mais aussi les difficultés liées à un projet de vie entre la France et les États-Unis, une idée s’est installée :':'By experiencing the procedures, decisions, opportunities and challenges of a life project between France and the United States from the inside, one idea took root:',
+    '« Ne pas simplement attendre que les opportunités se présentent, mais essayer de les créer. »':'“Do not simply wait for opportunities to arise, but try to create them.”',
+    'Westward Co. est né de cette réflexion.':'Westward Co. grew from this reflection.',
+    'Pas autour d’une activité unique, mais autour de plusieurs projets développés avec la même intention : construire, entreprendre et ouvrir de nouvelles possibilités pour l’avenir de mes enfants.':'Not around one single activity, but around several projects developed with the same intention: to build, create and open new possibilities for my children’s future.',
+    'Avec le temps, ces projets ont pris des formes différentes. Westward Co. est aujourd’hui l’identité qui les rassemble.':'Over time, these projects have taken different forms. Today, Westward Co. is the identity that brings them together.',
+    'Notre vision':'Our vision', 'Créer des projets qui ont du sens, et leur laisser la possibilité d’évoluer.':'Creating meaningful projects and giving them room to evolve.',
+    'Westward Co. n’est pas né autour d’un secteur d’activité unique.':'Westward Co. was not built around a single business sector.',
+    'Les projets qui le composent peuvent être très différents, mais ils partagent une même origine :':'The projects within it may be very different, but they share the same origin:',
+    'l’envie de créer de nouvelles possibilités, de construire dans le temps et de ne pas se limiter à un seul cadre.':'the desire to create new possibilities, build for the long term and avoid being limited to a single framework.',
+    'Certains projets sont développés en France, d’autres sont tournés vers les États-Unis. Certains sont déjà concrets, d’autres sont encore en construction.':'Some projects are developed in France, while others are focused on the United States. Some already exist, while others are still being built.',
+    'L’objectif n’est pas de tout réunir artificiellement sous une même activité, mais de donner à chaque projet':'The goal is not to force everything into one activity, but to give each project',
+    'sa propre identité, son propre développement et sa propre destination':'its own identity, development and destination',
+    ', tout en conservant Westward Co. comme fil conducteur.':', while keeping Westward Co. as the common thread.',
+    'La suite':'What comes next', 'Westward Co. continuera d’évoluer au rythme des projets, des rencontres et des opportunités qui lui donnent du sens.':'Westward Co. will continue to evolve through the projects, encounters and opportunities that give it meaning.',
+    'Découvrir nos univers':'Discover our worlds',
+
+    'Nos univers | Westward Co.':'Our worlds | Westward Co.',
+    'Découvrez les univers Westward Co. : Campus, Coffee Shop, Digital, Cowboy Culture et le média Mon Enfant aux USA.':'Discover the Westward Co. worlds: Campus, Coffee Shop, Digital, Cowboy Culture and the Mon Enfant aux USA media platform.',
+    'Des projets indépendants,':'Independent projects,', 'réunis par une même histoire.':'connected by one story.',
+    'Westward Co. rassemble plusieurs projets développés dans des domaines différents. Chacun évolue avec sa propre identité, son propre public et ses propres objectifs.':'Westward Co. brings together several projects developed in different fields. Each one evolves with its own identity, audience and goals.',
+    'Choisissez l’univers que vous souhaitez découvrir.':'Choose the world you would like to discover.',
+    'Westward Co. Campus accompagne les familles et les étudiants français dans la préparation d’un projet d’études aux États-Unis, de la recherche d’établissement jusqu’à la préparation du départ.':'Westward Co. Campus supports French students and their families as they prepare to study in the United States, from finding a school to preparing for departure.',
+    'Retrouvez bientôt ici l’accès au site officiel et à l’application de commande WESTWARD CO. COFFEE SHOP.':'The official website and ordering app for WESTWARD CO. COFFEE SHOP will soon be available here.',
+    'Westward Co. Digital développe des identités visuelles, des sites internet et des contenus digitaux pensés pour aider des projets et des entreprises à construire une présence cohérente et professionnelle.':'Westward Co. Digital creates visual identities, websites and digital content to help projects and businesses build a consistent, professional presence.',
+    'Westward Co. Cowboy Culture développe un univers lifestyle inspiré de la culture western américaine, à travers des vêtements, des accessoires et des objets pensés dans une approche contemporaine.':'Westward Co. Cowboy Culture develops a lifestyle world inspired by American Western culture through clothing, accessories and objects with a contemporary approach.',
+    'Média associé à Westward Co.':'Media partner of Westward Co.',
+    'Mon Enfant aux USA est un média consacré à l’expérience des études et de la vie étudiante aux États-Unis, construit à partir d’une expérience familiale réelle et partagé pour informer les familles qui envisagent à leur tour ce parcours.':'Mon Enfant aux USA is a media platform about studying and student life in the United States, based on a real family experience and shared to inform families considering the same journey.',
+
+    'Étudier aux États-Unis | Westward Co. Campus':'Study in the United States | Westward Co. Campus',
+    'Westward Co. Campus accompagne les étudiants français et leurs familles dans la préparation d’un projet d’études aux États-Unis.':'Westward Co. Campus supports French students and their families as they prepare to study in the United States.',
+    'Un accompagnement humain pour préparer un projet d’études aux États-Unis, de la réflexion au départ.':'Personal support for preparing a study project in the United States, from the first idea to departure.',
+    'Westward Co. Campus — études aux États-Unis':'Westward Co. Campus — study in the United States',
+    'Campus universitaire américain au pied des montagnes':'American university campus at the foot of the mountains',
+    'Étapes de l’accompagnement':'Support stages', "Paysage de l'Ouest américain au coucher du soleil":'American West landscape at sunset',
+    'Présentez-nous brièvement le projet, la destination envisagée et vos principales questions.':'Briefly describe the project, the intended destination and your main questions.',
+    'Étudier aux États-Unis':'Study in the United States', 'Votre projet':'Your project', 'prend la route.':'starts here.',
+    'Un accompagnement humain pour aider les étudiants français et leurs familles à transformer une envie d’Amérique en projet clair, préparé et réaliste.':'Personal support to help French students and their families turn the dream of America into a clear, prepared and realistic project.',
+    'Parler de votre projet':'Discuss your project', 'Guide gratuit':'Free guide', 'Découvrir notre méthode':'Discover our method',
+    'Préparer le départ, comprendre les étapes, avancer en confiance.':'Prepare for departure, understand each step and move forward with confidence.',
+    'Orientation':'Guidance', 'Admission':'Admissions', 'Visa':'Visa', 'Installation':'Settling in',
+    'L’accompagnement':'Support', 'Comprendre les étapes avant de prendre une décision.':'Understand the steps before making a decision.',
+    'Choisir d’étudier aux États-Unis soulève beaucoup de questions : l’établissement, le budget, le dossier, le visa, le logement ou encore l’arrivée sur place.':'Choosing to study in the United States raises many questions: the school, budget, application, visa, housing and arrival.',
+    'Westward Co. Campus propose un accompagnement humain et progressif pour aider chaque famille à comprendre ses options, organiser ses démarches et avancer avec une vision plus claire du projet.':'Westward Co. Campus offers personal, step-by-step support to help each family understand its options, organize the process and move forward with a clearer view of the project.',
+    'Les décisions d’admission et de visa relèvent exclusivement des établissements et des autorités compétentes.':'Admission and visa decisions are made exclusively by the relevant schools and authorities.',
+    'Notre méthode':'Our method', 'Quatre décisions à prendre, dans le bon ordre.':'Four decisions to make, in the right order.',
+    'Vous ne recevez pas une liste abstraite de démarches. Chaque étape répond à une question concrète, produit un résultat clair et prépare la décision suivante.':'You do not receive an abstract checklist. Each step answers a concrete question, produces a clear result and prepares the next decision.',
+    'Comprendre':'Understand', '« Mon projet est-il réaliste ? »':'“Is my project realistic?”', 'Poser le bon diagnostic.':'Start with the right assessment.',
+    'Profil scolaire, niveau d’anglais, objectifs, calendrier et budget : nous mettons les éléments essentiels sur la table dès le départ.':'Academic profile, English level, goals, schedule and budget: we review the essential elements from the start.',
+    'Résultat':'Outcome', 'Une vision claire des possibilités et des points de vigilance.':'A clear view of the possibilities and points requiring attention.',
+    'Choisir':'Choose', '« Quelles options me correspondent vraiment ? »':'“Which options truly suit me?”', 'Comparer sans se disperser.':'Compare without losing focus.',
+    'Nous examinons les établissements, les formations, les conditions d’admission et le coût global pour faire émerger des choix cohérents.':'We review schools, programs, admission requirements and overall cost to identify coherent choices.',
+    'Une sélection argumentée, adaptée au projet familial.':'A reasoned selection tailored to the family project.',
+    'Préparer':'Prepare', '« Que faut-il faire, et à quel moment ? »':'“What needs to be done, and when?”', 'Transformer le projet en calendrier.':'Turn the project into a schedule.',
+    'Dossier, pièces justificatives, échéances et visa : les démarches sont organisées dans un ordre lisible, sans promesse irréaliste.':'Application, supporting documents, deadlines and visa: every step is organized clearly, without unrealistic promises.',
+    'Une feuille de route précise pour avancer sereinement.':'A precise roadmap for moving forward with confidence.',
+    'Partir':'Leave', '« Comment réussir l’arrivée sur place ? »':'“How can I prepare for arrival?”', 'Anticiper la vie quotidienne.':'Prepare for everyday life.',
+    'Voyage, logement, téléphone, banque et premiers repères : nous préparons les sujets pratiques qui comptent une fois aux États-Unis.':'Travel, housing, phone, banking and first points of reference: we prepare the practical matters that count once in the United States.',
+    'Un départ mieux préparé pour l’étudiant comme pour sa famille.':'A better-prepared departure for both the student and the family.',
+    'Le fil conducteur':'The guiding principle', 'Comprendre avant de choisir.':'Understand before choosing.', 'Choisir avant d’engager.':'Choose before committing.', 'Préparer avant de partir.':'Prepare before leaving.',
+    'Commencer par un échange':'Start with a conversation', 'Une histoire vraie':'A true story', 'L’expérience d’un père et de son fils':'A father and son’s experience',
+    'Une expérience vécue':'Real-life experience', 'Né d’un parcours familial réel.':'Born from a real family journey.',
+    'Westward Co. Campus est né de l’expérience d’Anthony, père d’un étudiant français parti poursuivre ses études aux États-Unis.':'Westward Co. Campus grew out of Anthony’s experience as the father of a French student who went to study in the United States.',
+    'Les recherches, les démarches, les choix financiers, l’installation et la vie sur place ont permis de comprendre les questions que se posent réellement les familles — mais aussi les informations qui leur manquent souvent au début du projet.':'The research, procedures, financial decisions, move and daily life revealed the questions families truly ask—and the information they often lack at the start.',
+    'L’objectif est simple : transmettre cette expérience et offrir un point de contact accessible tout au long de la préparation.':'The goal is simple: share this experience and provide an accessible point of contact throughout the preparation.',
+    'Un fonctionnement transparent':'A transparent approach', 'Des modalités expliquées avant toute démarche.':'Clear terms before any step is taken.',
+    'Selon l’établissement choisi et l’existence d’un partenariat actif, l’accompagnement jusqu’au départ pourra être pris en charge par l’établissement partenaire.':'Depending on the chosen school and an active partnership, support through departure may be covered by the partner school.',
+    'Les éventuels frais, la rémunération versée par un établissement et le périmètre exact de l’accompagnement seront toujours présentés clairement à la famille avant tout engagement.':'Any fees, compensation paid by a school and the exact scope of support will always be clearly presented to the family before any commitment.',
+    'Questions fréquentes':'Frequently asked questions', 'Les premières réponses avant d’échanger.':'Initial answers before we speak.',
+    'À quel moment faut-il commencer les démarches ?':'When should the process begin?',
+    'Idéalement plusieurs mois avant la rentrée souhaitée. Le bon calendrier dépend de l’établissement, du dossier et du temps nécessaire pour les formalités.':'Ideally, several months before the desired intake. The right timeline depends on the school, the application and the time required for formalities.',
+    'L’accompagnement est-il toujours gratuit pour les familles ?':'Is support always free for families?',
+    'Pas nécessairement. Lorsqu’un partenariat actif permet une prise en charge par l’établissement, cela est expliqué clairement. Dans les autres situations, les éventuels frais sont annoncés avant toute démarche.':'Not necessarily. When an active partnership allows the school to cover support, this is clearly explained. In other situations, any fees are announced before the process begins.',
+    'Westward Co. Campus garantit-il une admission ou un visa ?':'Does Westward Co. Campus guarantee admission or a visa?',
+    'Non. L’admission appartient à chaque établissement et la délivrance du visa relève exclusivement des autorités américaines. L’accompagnement sert à mieux comprendre et préparer le parcours.':'No. Admission decisions belong to each school, and visas are issued exclusively by U.S. authorities. Support helps families understand and prepare for the journey.',
+    'Pouvez-vous aider pour l’installation aux États-Unis ?':'Can you help with settling in the United States?',
+    'Les besoins liés au voyage, au logement, au téléphone ou aux premières démarches peuvent être abordés pendant la préparation. Les services éventuellement disponibles sont précisés selon le projet et la destination.':'Travel, housing, phone and initial practical needs can be discussed during preparation. Any available services are specified according to the project and destination.',
+    'Premier échange':'First conversation', 'Parlez-nous de votre projet d’études.':'Tell us about your study project.',
+    'Ce premier contact permet de comprendre votre situation et de déterminer les prochaines étapes possibles.':'This first contact helps us understand your situation and identify possible next steps.',
+    'Nom et prénom':'Full name', 'E-mail':'Email', 'Téléphone':'Phone', 'Rentrée envisagée':'Planned intake', 'Situation actuelle':'Current situation',
+    'Choisir une réponse':'Choose an option', 'Collégien ou lycéen':'Middle or high school student', 'Étudiant':'University student', 'En année de césure':'On a gap year', 'Parent ou représentant légal':'Parent or legal guardian', 'Autre situation':'Other situation',
+    'Votre projet':'Your project', 'J’accepte que les informations transmises soient utilisées pour répondre à ma demande, conformément à la':'I agree that the information submitted may be used to answer my request, in accordance with the',
+    'politique de confidentialité':'privacy policy', 'Envoyer ma demande':'Send my request', 'Le formulaire ouvrira votre application e-mail avec le message déjà préparé.':'The form will open your email application with a prepared message.',
+
+    'Accédez bientôt au site officiel et à l’application de commande WESTWARD CO. COFFEE SHOP.':'The official website and ordering app for WESTWARD CO. COFFEE SHOP are coming soon.',
+    'Le point d’accès au futur site et à l’application WESTWARD CO. COFFEE SHOP.':'Your access point to the future WESTWARD CO. COFFEE SHOP website and app.',
+    'Découvrir. Commander. Entreprendre.':'Discover. Order. Build.', 'Choisissez votre':'Choose your', 'destination.':'destination.',
+    'Cette page reliera bientôt l’univers Westward Co. au site officiel, à l’application de commande et au programme de franchise WESTWARD CO. COFFEE SHOP.':'This page will soon connect the Westward Co. world to the official website, ordering app and WESTWARD CO. COFFEE SHOP franchise program.',
+    'Le site officiel':'The official website', 'Découvrir l’univers, la carte, les événements et toutes les informations pratiques.':'Discover the world, menu, events and all practical information.',
+    'Bientôt disponible':'Coming soon', 'L’application':'The app', 'Commander à l’avance, suivre ses points et retrouver ses avantages.':'Order ahead, track points and access rewards.', 'En préparation':'In development',
+    'Développer le concept':'Grow the concept', 'Devenir franchisé':'Become a franchisee',
+    'Le programme de franchise est en préparation. Vous pouvez dès maintenant présenter votre projet et être informé de son ouverture.':'The franchise program is in development. You can already introduce your project and be notified when it opens.',
+    'Présenter mon projet':'Introduce my project', 'Les accès seront activés ici dès leur mise en ligne.':'Access links will be activated here as soon as they go live.', 'Un projet professionnel ou une question&nbsp;?':'A business project or a question?',
+
+    'Accédez bientôt à la boutique en ligne WESTWARD CO. COWBOY CULTURE.':'The WESTWARD CO. COWBOY CULTURE online store is coming soon.',
+    'Le point d’accès à la future boutique en ligne WESTWARD CO. COWBOY CULTURE.':'Your access point to the future WESTWARD CO. COWBOY CULTURE online store.',
+    'Univers western contemporain WESTWARD CO. COWBOY CULTURE':'Contemporary Western world of WESTWARD CO. COWBOY CULTURE',
+    'La boutique':'The store', 'arrive bientôt.':'is coming soon.', 'Cette page deviendra le point d’entrée vers la boutique en ligne WESTWARD CO. COWBOY CULTURE.':'This page will become the gateway to the WESTWARD CO. COWBOY CULTURE online store.',
+    'Future destination':'Future destination', 'La boutique en ligne':'The online store', 'Vêtements, accessoires et objets inspirés de la culture western américaine.':'Clothing, accessories and objects inspired by American Western culture.', 'Une question sur le projet&nbsp;?':'A question about the project?',
+
+    'Identités visuelles, sites internet et contenus digitaux par WESTWARD CO. DIGITAL.':'Visual identities, websites and digital content by WESTWARD CO. DIGITAL.',
+    'Identités visuelles, sites internet et contenus digitaux pensés avec cohérence.':'Visual identities, websites and digital content designed with consistency.',
+    'Espace de création WESTWARD CO. DIGITAL':'WESTWARD CO. DIGITAL creative workspace', 'Bureau de création WESTWARD CO. DIGITAL face aux grands espaces':'WESTWARD CO. DIGITAL creative workspace overlooking open landscapes',
+    'Créer une présence cohérente':'Build a consistent presence', 'Donner une forme':'Give a clear shape', 'claire aux idées.':'to ideas.',
+    'WESTWARD CO. DIGITAL accompagne les projets et les entreprises dans la construction de leur identité et de leur présence en ligne.':'WESTWARD CO. DIGITAL helps projects and businesses build their identity and online presence.',
+    'Le site dédié est en préparation. Les demandes de projet sont déjà ouvertes.':'The dedicated website is in development. Project enquiries are already open.',
+    'Expertises':'Expertise', 'EXPERTISES':'EXPERTISE', 'Trois domaines.':'Three areas.', 'Une même direction.':'One direction.',
+    'Identité visuelle':'Visual identity', 'Logo, univers graphique et supports cohérents pour rendre un projet immédiatement identifiable.':'Logo, visual world and consistent materials that make a project immediately recognizable.',
+    'Sites internet':'Websites', 'Des sites clairs, accessibles et pensés autour des objectifs réels de chaque activité.':'Clear, accessible websites designed around the real goals of each activity.',
+    'Contenus digitaux':'Digital content', 'Des contenus visuels et éditoriaux adaptés aux réseaux sociaux et aux prises de parole de la marque.':'Visual and editorial content adapted to social media and brand communications.',
+    'Parlons de votre projet':'Let’s discuss your project', 'PARLONS DE VOTRE PROJET':'LET’S DISCUSS YOUR PROJECT',
+    'Une idée à structurer':'An idea to shape', 'ou une présence à construire&nbsp;?':'or a presence to build?',
+    'Présentez simplement votre activité, votre besoin et votre calendrier. Nous reviendrons vers vous pour définir la suite.':'Tell us about your activity, needs and schedule. We will get back to you to define the next steps.',
+
+    'Parlons de votre projet.':'Let’s discuss your project.', 'Pour une demande générale, une collaboration ou une prise de contact avec Westward Co., vous pouvez nous écrire directement.':'For a general enquiry, collaboration or first contact with Westward Co., you can write to us directly.',
+    'Contactez Westward Co. pour une demande générale, une collaboration ou un premier échange autour de nos projets.':'Contact Westward Co. for a general enquiry, collaboration or first conversation about our projects.',
+    'Nous écrire':'Write to us', 'Un premier échange, simplement.':'A simple first conversation.',
+    'Pour toute demande liée à une activité spécifique de Westward Co., vous pouvez également passer directement par le site de l’univers concerné.':'For enquiries about a specific Westward Co. activity, you can also visit the relevant world directly.',
+    'Objet':'Subject', 'Message':'Message', 'Envoyer':'Send',
+
+    'Mentions légales | Westward Co.':'Legal notice | Westward Co.', 'Mentions légales du site Westward Co.':'Legal notice for the Westward Co. website.', 'Cette page est en cours de finalisation. Les informations légales seront ajoutées avant la mise en production définitive du site.':'This page is being finalized. Legal information will be added before the final production launch.',
+    'Politique de confidentialité | Westward Co.':'Privacy policy | Westward Co.', 'Politique de confidentialité du site Westward Co.':'Privacy policy for the Westward Co. website.', 'Cette page est en cours de finalisation. Les informations relatives à la confidentialité seront ajoutées avant la mise en production définitive du site.':'This page is being finalized. Privacy information will be added before the final production launch.'
+  },
+  es: {
+    'Westward Co. | Projets entre la France et les États-Unis':'Westward Co. | Proyectos entre Francia y Estados Unidos',
+    'Westward Co. est une marque ombrelle née d’une histoire familiale et de projets développés entre la France et les États-Unis.':'Westward Co. es una marca paraguas nacida de una historia familiar y de proyectos desarrollados entre Francia y Estados Unidos.',
+    "Paysage de l'Ouest américain — Westward Co.":'Paisaje del Oeste americano — Westward Co.',
+    'Différents projets,':'Proyectos diferentes,', 'une même direction.':'una misma dirección.',
+    'Westward Co. rassemble différents projets nés de l’amour d’un père pour ses enfants et d’une même volonté : leur offrir davantage d’opportunités, d’ouverture et de choix pour l’avenir.':'Westward Co. reúne diferentes proyectos nacidos del amor de un padre por sus hijos y de una misma voluntad: ofrecerles más oportunidades, apertura y opciones para el futuro.',
+    'Tout est parti d’un projet familial.':'Todo comenzó con un proyecto familiar.',
+    'Lorsque mon fils a choisi de poursuivre ses études aux États-Unis, ce qui devait être avant tout une aventure étudiante est progressivement devenu beaucoup plus.':'Cuando mi hijo decidió continuar sus estudios en Estados Unidos, lo que debía ser ante todo una aventura estudiantil se convirtió poco a poco en mucho más.',
+    'En découvrant de l’intérieur les démarches, les choix à faire, les opportunités mais aussi les difficultés liées à un projet de vie entre la France et les États-Unis, une idée s’est installée :':'Al vivir desde dentro los trámites, las decisiones, las oportunidades y también las dificultades de un proyecto de vida entre Francia y Estados Unidos, nació una idea:',
+    '« Ne pas simplement attendre que les opportunités se présentent, mais essayer de les créer. »':'«No limitarse a esperar las oportunidades, sino intentar crearlas.»',
+    'Westward Co. est né de cette réflexion.':'Westward Co. nació de esta reflexión.',
+    'Pas autour d’une activité unique, mais autour de plusieurs projets développés avec la même intention : construire, entreprendre et ouvrir de nouvelles possibilités pour l’avenir de mes enfants.':'No en torno a una única actividad, sino a varios proyectos desarrollados con la misma intención: construir, emprender y abrir nuevas posibilidades para el futuro de mis hijos.',
+    'Avec le temps, ces projets ont pris des formes différentes. Westward Co. est aujourd’hui l’identité qui les rassemble.':'Con el tiempo, estos proyectos han adoptado formas diferentes. Hoy, Westward Co. es la identidad que los reúne.',
+    'Notre vision':'Nuestra visión', 'Créer des projets qui ont du sens, et leur laisser la possibilité d’évoluer.':'Crear proyectos con sentido y darles la posibilidad de evolucionar.',
+    'Westward Co. n’est pas né autour d’un secteur d’activité unique.':'Westward Co. no nació en torno a un único sector de actividad.',
+    'Les projets qui le composent peuvent être très différents, mais ils partagent une même origine :':'Los proyectos que lo componen pueden ser muy diferentes, pero comparten un mismo origen:',
+    'l’envie de créer de nouvelles possibilités, de construire dans le temps et de ne pas se limiter à un seul cadre.':'el deseo de crear nuevas posibilidades, construir a largo plazo y no limitarse a un único marco.',
+    'Certains projets sont développés en France, d’autres sont tournés vers les États-Unis. Certains sont déjà concrets, d’autres sont encore en construction.':'Algunos proyectos se desarrollan en Francia y otros se orientan hacia Estados Unidos. Algunos ya son una realidad y otros siguen en construcción.',
+    'L’objectif n’est pas de tout réunir artificiellement sous une même activité, mais de donner à chaque projet':'El objetivo no es reunirlo todo artificialmente bajo una misma actividad, sino dar a cada proyecto',
+    'sa propre identité, son propre développement et sa propre destination':'su propia identidad, su propio desarrollo y su propio destino',
+    ', tout en conservant Westward Co. comme fil conducteur.':', manteniendo Westward Co. como hilo conductor.',
+    'La suite':'Lo que viene', 'Westward Co. continuera d’évoluer au rythme des projets, des rencontres et des opportunités qui lui donnent du sens.':'Westward Co. seguirá evolucionando al ritmo de los proyectos, los encuentros y las oportunidades que le dan sentido.',
+    'Découvrir nos univers':'Descubrir nuestros universos',
+
+    'Nos univers | Westward Co.':'Nuestros universos | Westward Co.',
+    'Découvrez les univers Westward Co. : Campus, Coffee Shop, Digital, Cowboy Culture et le média Mon Enfant aux USA.':'Descubra los universos Westward Co.: Campus, Coffee Shop, Digital, Cowboy Culture y el medio Mon Enfant aux USA.',
+    'Des projets indépendants,':'Proyectos independientes,', 'réunis par une même histoire.':'unidos por una misma historia.',
+    'Westward Co. rassemble plusieurs projets développés dans des domaines différents. Chacun évolue avec sa propre identité, son propre public et ses propres objectifs.':'Westward Co. reúne varios proyectos desarrollados en ámbitos diferentes. Cada uno evoluciona con su propia identidad, su público y sus objetivos.',
+    'Choisissez l’univers que vous souhaitez découvrir.':'Elija el universo que desea descubrir.',
+    'Westward Co. Campus accompagne les familles et les étudiants français dans la préparation d’un projet d’études aux États-Unis, de la recherche d’établissement jusqu’à la préparation du départ.':'Westward Co. Campus acompaña a estudiantes franceses y sus familias en la preparación de un proyecto de estudios en Estados Unidos, desde la búsqueda de un centro hasta la preparación del viaje.',
+    'Retrouvez bientôt ici l’accès au site officiel et à l’application de commande WESTWARD CO. COFFEE SHOP.':'Muy pronto encontrará aquí el acceso al sitio oficial y a la aplicación de pedidos de WESTWARD CO. COFFEE SHOP.',
+    'Westward Co. Digital développe des identités visuelles, des sites internet et des contenus digitaux pensés pour aider des projets et des entreprises à construire une présence cohérente et professionnelle.':'Westward Co. Digital crea identidades visuales, sitios web y contenidos digitales para ayudar a proyectos y empresas a construir una presencia coherente y profesional.',
+    'Westward Co. Cowboy Culture développe un univers lifestyle inspiré de la culture western américaine, à travers des vêtements, des accessoires et des objets pensés dans une approche contemporaine.':'Westward Co. Cowboy Culture desarrolla un universo lifestyle inspirado en la cultura western estadounidense mediante ropa, accesorios y objetos con un enfoque contemporáneo.',
+    'Média associé à Westward Co.':'Medio asociado a Westward Co.',
+    'Mon Enfant aux USA est un média consacré à l’expérience des études et de la vie étudiante aux États-Unis, construit à partir d’une expérience familiale réelle et partagé pour informer les familles qui envisagent à leur tour ce parcours.':'Mon Enfant aux USA es un medio dedicado a la experiencia de estudiar y vivir como estudiante en Estados Unidos, basado en una experiencia familiar real y compartido para informar a las familias que contemplan este camino.',
+
+    'Étudier aux États-Unis | Westward Co. Campus':'Estudiar en Estados Unidos | Westward Co. Campus',
+    'Westward Co. Campus accompagne les étudiants français et leurs familles dans la préparation d’un projet d’études aux États-Unis.':'Westward Co. Campus acompaña a los estudiantes franceses y a sus familias en la preparación de un proyecto de estudios en Estados Unidos.',
+    'Un accompagnement humain pour préparer un projet d’études aux États-Unis, de la réflexion au départ.':'Un acompañamiento humano para preparar un proyecto de estudios en Estados Unidos, desde la reflexión hasta la salida.',
+    'Westward Co. Campus — études aux États-Unis':'Westward Co. Campus — estudios en Estados Unidos',
+    'Campus universitaire américain au pied des montagnes':'Campus universitario estadounidense al pie de las montañas',
+    'Étapes de l’accompagnement':'Etapas del acompañamiento', "Paysage de l'Ouest américain au coucher du soleil":'Paisaje del Oeste americano al atardecer',
+    'Présentez-nous brièvement le projet, la destination envisagée et vos principales questions.':'Presente brevemente el proyecto, el destino previsto y sus principales preguntas.',
+    'Étudier aux États-Unis':'Estudiar en Estados Unidos', 'Votre projet':'Su proyecto', 'prend la route.':'empieza aquí.',
+    'Un accompagnement humain pour aider les étudiants français et leurs familles à transformer une envie d’Amérique en projet clair, préparé et réaliste.':'Un acompañamiento humano para ayudar a los estudiantes franceses y a sus familias a convertir el deseo de estudiar en Estados Unidos en un proyecto claro, preparado y realista.',
+    'Parler de votre projet':'Hablar de su proyecto', 'Guide gratuit':'Guía gratuita', 'Découvrir notre méthode':'Descubrir nuestro método',
+    'Préparer le départ, comprendre les étapes, avancer en confiance.':'Preparar la salida, comprender las etapas y avanzar con confianza.',
+    'Orientation':'Orientación', 'Admission':'Admisión', 'Visa':'Visado', 'Installation':'Instalación',
+    'L’accompagnement':'El acompañamiento', 'Comprendre les étapes avant de prendre une décision.':'Comprender las etapas antes de tomar una decisión.',
+    'Choisir d’étudier aux États-Unis soulève beaucoup de questions : l’établissement, le budget, le dossier, le visa, le logement ou encore l’arrivée sur place.':'Elegir estudiar en Estados Unidos plantea muchas preguntas: el centro, el presupuesto, la solicitud, el visado, el alojamiento y la llegada.',
+    'Westward Co. Campus propose un accompagnement humain et progressif pour aider chaque famille à comprendre ses options, organiser ses démarches et avancer avec une vision plus claire du projet.':'Westward Co. Campus ofrece un acompañamiento humano y progresivo para ayudar a cada familia a comprender sus opciones, organizar los trámites y avanzar con una visión más clara del proyecto.',
+    'Les décisions d’admission et de visa relèvent exclusivement des établissements et des autorités compétentes.':'Las decisiones de admisión y visado corresponden exclusivamente a los centros y a las autoridades competentes.',
+    'Notre méthode':'Nuestro método', 'Quatre décisions à prendre, dans le bon ordre.':'Cuatro decisiones que tomar, en el orden correcto.',
+    'Vous ne recevez pas une liste abstraite de démarches. Chaque étape répond à une question concrète, produit un résultat clair et prépare la décision suivante.':'No recibirá una lista abstracta de trámites. Cada etapa responde a una pregunta concreta, produce un resultado claro y prepara la siguiente decisión.',
+    'Comprendre':'Comprender', '« Mon projet est-il réaliste ? »':'«¿Es realista mi proyecto?»', 'Poser le bon diagnostic.':'Establecer el diagnóstico adecuado.',
+    'Profil scolaire, niveau d’anglais, objectifs, calendrier et budget : nous mettons les éléments essentiels sur la table dès le départ.':'Perfil académico, nivel de inglés, objetivos, calendario y presupuesto: revisamos los elementos esenciales desde el principio.',
+    'Résultat':'Resultado', 'Une vision claire des possibilités et des points de vigilance.':'Una visión clara de las posibilidades y de los puntos de atención.',
+    'Choisir':'Elegir', '« Quelles options me correspondent vraiment ? »':'«¿Qué opciones me corresponden realmente?»', 'Comparer sans se disperser.':'Comparar sin dispersarse.',
+    'Nous examinons les établissements, les formations, les conditions d’admission et le coût global pour faire émerger des choix cohérents.':'Examinamos los centros, los programas, los requisitos de admisión y el coste total para identificar opciones coherentes.',
+    'Une sélection argumentée, adaptée au projet familial.':'Una selección razonada y adaptada al proyecto familiar.',
+    'Préparer':'Preparar', '« Que faut-il faire, et à quel moment ? »':'«¿Qué hay que hacer y cuándo?»', 'Transformer le projet en calendrier.':'Convertir el proyecto en un calendario.',
+    'Dossier, pièces justificatives, échéances et visa : les démarches sont organisées dans un ordre lisible, sans promesse irréaliste.':'Solicitud, documentos, plazos y visado: los trámites se organizan de forma clara, sin promesas irreales.',
+    'Une feuille de route précise pour avancer sereinement.':'Una hoja de ruta precisa para avanzar con tranquilidad.',
+    'Partir':'Partir', '« Comment réussir l’arrivée sur place ? »':'«¿Cómo preparar bien la llegada?»', 'Anticiper la vie quotidienne.':'Anticipar la vida cotidiana.',
+    'Voyage, logement, téléphone, banque et premiers repères : nous préparons les sujets pratiques qui comptent une fois aux États-Unis.':'Viaje, alojamiento, teléfono, banco y primeras referencias: preparamos los aspectos prácticos que cuentan una vez en Estados Unidos.',
+    'Un départ mieux préparé pour l’étudiant comme pour sa famille.':'Una salida mejor preparada tanto para el estudiante como para su familia.',
+    'Le fil conducteur':'El hilo conductor', 'Comprendre avant de choisir.':'Comprender antes de elegir.', 'Choisir avant d’engager.':'Elegir antes de comprometerse.', 'Préparer avant de partir.':'Preparar antes de partir.',
+    'Commencer par un échange':'Empezar con una conversación', 'Une histoire vraie':'Una historia real', 'L’expérience d’un père et de son fils':'La experiencia de un padre y su hijo',
+    'Une expérience vécue':'Una experiencia vivida', 'Né d’un parcours familial réel.':'Nacido de una experiencia familiar real.',
+    'Westward Co. Campus est né de l’expérience d’Anthony, père d’un étudiant français parti poursuivre ses études aux États-Unis.':'Westward Co. Campus nació de la experiencia de Anthony, padre de un estudiante francés que se fue a estudiar a Estados Unidos.',
+    'Les recherches, les démarches, les choix financiers, l’installation et la vie sur place ont permis de comprendre les questions que se posent réellement les familles — mais aussi les informations qui leur manquent souvent au début du projet.':'La búsqueda, los trámites, las decisiones financieras, la instalación y la vida allí permitieron comprender las preguntas reales de las familias y la información que suele faltar al principio.',
+    'L’objectif est simple : transmettre cette expérience et offrir un point de contact accessible tout au long de la préparation.':'El objetivo es sencillo: compartir esta experiencia y ofrecer un punto de contacto accesible durante toda la preparación.',
+    'Un fonctionnement transparent':'Un funcionamiento transparente', 'Des modalités expliquées avant toute démarche.':'Condiciones explicadas antes de cualquier trámite.',
+    'Selon l’établissement choisi et l’existence d’un partenariat actif, l’accompagnement jusqu’au départ pourra être pris en charge par l’établissement partenaire.':'Según el centro elegido y la existencia de una colaboración activa, el centro asociado podrá asumir el acompañamiento hasta la salida.',
+    'Les éventuels frais, la rémunération versée par un établissement et le périmètre exact de l’accompagnement seront toujours présentés clairement à la famille avant tout engagement.':'Los posibles gastos, la remuneración abonada por un centro y el alcance exacto del acompañamiento siempre se explicarán claramente a la familia antes de cualquier compromiso.',
+    'Questions fréquentes':'Preguntas frecuentes', 'Les premières réponses avant d’échanger.':'Primeras respuestas antes de hablar.',
+    'À quel moment faut-il commencer les démarches ?':'¿Cuándo hay que empezar los trámites?',
+    'Idéalement plusieurs mois avant la rentrée souhaitée. Le bon calendrier dépend de l’établissement, du dossier et du temps nécessaire pour les formalités.':'Idealmente, varios meses antes del inicio deseado. El calendario adecuado depende del centro, la solicitud y el tiempo necesario para los trámites.',
+    'L’accompagnement est-il toujours gratuit pour les familles ?':'¿El acompañamiento es siempre gratuito para las familias?',
+    'Pas nécessairement. Lorsqu’un partenariat actif permet une prise en charge par l’établissement, cela est expliqué clairement. Dans les autres situations, les éventuels frais sont annoncés avant toute démarche.':'No necesariamente. Cuando una colaboración activa permite que el centro asuma el acompañamiento, se explica claramente. En las demás situaciones, los posibles gastos se anuncian antes de iniciar los trámites.',
+    'Westward Co. Campus garantit-il une admission ou un visa ?':'¿Westward Co. Campus garantiza la admisión o el visado?',
+    'Non. L’admission appartient à chaque établissement et la délivrance du visa relève exclusivement des autorités américaines. L’accompagnement sert à mieux comprendre et préparer le parcours.':'No. La admisión corresponde a cada centro y la concesión del visado depende exclusivamente de las autoridades estadounidenses. El acompañamiento ayuda a comprender y preparar mejor el recorrido.',
+    'Pouvez-vous aider pour l’installation aux États-Unis ?':'¿Pueden ayudar con la instalación en Estados Unidos?',
+    'Les besoins liés au voyage, au logement, au téléphone ou aux premières démarches peuvent être abordés pendant la préparation. Les services éventuellement disponibles sont précisés selon le projet et la destination.':'Las necesidades relacionadas con el viaje, el alojamiento, el teléfono o los primeros trámites pueden tratarse durante la preparación. Los servicios disponibles se precisan según el proyecto y el destino.',
+    'Premier échange':'Primera conversación', 'Parlez-nous de votre projet d’études.':'Háblenos de su proyecto de estudios.',
+    'Ce premier contact permet de comprendre votre situation et de déterminer les prochaines étapes possibles.':'Este primer contacto permite comprender su situación y determinar los posibles pasos siguientes.',
+    'Nom et prénom':'Nombre y apellidos', 'E-mail':'Correo electrónico', 'Téléphone':'Teléfono', 'Rentrée envisagée':'Inicio previsto', 'Situation actuelle':'Situación actual',
+    'Choisir une réponse':'Elegir una opción', 'Collégien ou lycéen':'Estudiante de secundaria', 'Étudiant':'Estudiante universitario', 'En année de césure':'En año sabático', 'Parent ou représentant légal':'Padre, madre o representante legal', 'Autre situation':'Otra situación',
+    'Votre projet':'Su proyecto', 'J’accepte que les informations transmises soient utilisées pour répondre à ma demande, conformément à la':'Acepto que la información enviada se utilice para responder a mi solicitud, de acuerdo con la',
+    'politique de confidentialité':'política de privacidad', 'Envoyer ma demande':'Enviar mi solicitud', 'Le formulaire ouvrira votre application e-mail avec le message déjà préparé.':'El formulario abrirá su aplicación de correo electrónico con el mensaje preparado.',
+
+    'Accédez bientôt au site officiel et à l’application de commande WESTWARD CO. COFFEE SHOP.':'Muy pronto podrá acceder al sitio oficial y a la aplicación de pedidos de WESTWARD CO. COFFEE SHOP.',
+    'Le point d’accès au futur site et à l’application WESTWARD CO. COFFEE SHOP.':'El punto de acceso al futuro sitio y a la aplicación de WESTWARD CO. COFFEE SHOP.',
+    'Découvrir. Commander. Entreprendre.':'Descubrir. Pedir. Emprender.', 'Choisissez votre':'Elija su', 'destination.':'destino.',
+    'Cette page reliera bientôt l’univers Westward Co. au site officiel, à l’application de commande et au programme de franchise WESTWARD CO. COFFEE SHOP.':'Esta página conectará próximamente el universo Westward Co. con el sitio oficial, la aplicación de pedidos y el programa de franquicias WESTWARD CO. COFFEE SHOP.',
+    'Le site officiel':'El sitio oficial', 'Découvrir l’univers, la carte, les événements et toutes les informations pratiques.':'Descubrir el universo, la carta, los eventos y toda la información práctica.',
+    'Bientôt disponible':'Próximamente', 'L’application':'La aplicación', 'Commander à l’avance, suivre ses points et retrouver ses avantages.':'Pedir con antelación, consultar los puntos y acceder a las ventajas.', 'En préparation':'En preparación',
+    'Développer le concept':'Desarrollar el concepto', 'Devenir franchisé':'Convertirse en franquiciado',
+    'Le programme de franchise est en préparation. Vous pouvez dès maintenant présenter votre projet et être informé de son ouverture.':'El programa de franquicias está en preparación. Ya puede presentar su proyecto y recibir información sobre su apertura.',
+    'Présenter mon projet':'Presentar mi proyecto', 'Les accès seront activés ici dès leur mise en ligne.':'Los accesos se activarán aquí en cuanto estén disponibles.', 'Un projet professionnel ou une question&nbsp;?':'¿Un proyecto profesional o una pregunta?',
+
+    'Accédez bientôt à la boutique en ligne WESTWARD CO. COWBOY CULTURE.':'La tienda en línea WESTWARD CO. COWBOY CULTURE estará disponible próximamente.',
+    'Le point d’accès à la future boutique en ligne WESTWARD CO. COWBOY CULTURE.':'El punto de acceso a la futura tienda en línea WESTWARD CO. COWBOY CULTURE.',
+    'Univers western contemporain WESTWARD CO. COWBOY CULTURE':'Universo western contemporáneo WESTWARD CO. COWBOY CULTURE',
+    'La boutique':'La tienda', 'arrive bientôt.':'llegará pronto.', 'Cette page deviendra le point d’entrée vers la boutique en ligne WESTWARD CO. COWBOY CULTURE.':'Esta página será el punto de entrada a la tienda en línea WESTWARD CO. COWBOY CULTURE.',
+    'Future destination':'Próximo destino', 'La boutique en ligne':'La tienda en línea', 'Vêtements, accessoires et objets inspirés de la culture western américaine.':'Ropa, accesorios y objetos inspirados en la cultura western estadounidense.', 'Une question sur le projet&nbsp;?':'¿Una pregunta sobre el proyecto?',
+
+    'Identités visuelles, sites internet et contenus digitaux par WESTWARD CO. DIGITAL.':'Identidades visuales, sitios web y contenidos digitales de WESTWARD CO. DIGITAL.',
+    'Identités visuelles, sites internet et contenus digitaux pensés avec cohérence.':'Identidades visuales, sitios web y contenidos digitales concebidos con coherencia.',
+    'Espace de création WESTWARD CO. DIGITAL':'Espacio creativo WESTWARD CO. DIGITAL', 'Bureau de création WESTWARD CO. DIGITAL face aux grands espaces':'Espacio creativo WESTWARD CO. DIGITAL frente a grandes paisajes',
+    'Créer une présence cohérente':'Crear una presencia coherente', 'Donner une forme':'Dar una forma', 'claire aux idées.':'clara a las ideas.',
+    'WESTWARD CO. DIGITAL accompagne les projets et les entreprises dans la construction de leur identité et de leur présence en ligne.':'WESTWARD CO. DIGITAL acompaña a proyectos y empresas en la construcción de su identidad y su presencia en línea.',
+    'Le site dédié est en préparation. Les demandes de projet sont déjà ouvertes.':'El sitio dedicado está en preparación. Ya aceptamos solicitudes de proyectos.',
+    'Expertises':'Especialidades', 'EXPERTISES':'ESPECIALIDADES', 'Trois domaines.':'Tres ámbitos.', 'Une même direction.':'Una misma dirección.',
+    'Identité visuelle':'Identidad visual', 'Logo, univers graphique et supports cohérents pour rendre un projet immédiatement identifiable.':'Logotipo, universo gráfico y soportes coherentes para que un proyecto sea inmediatamente reconocible.',
+    'Sites internet':'Sitios web', 'Des sites clairs, accessibles et pensés autour des objectifs réels de chaque activité.':'Sitios claros, accesibles y pensados en torno a los objetivos reales de cada actividad.',
+    'Contenus digitaux':'Contenidos digitales', 'Des contenus visuels et éditoriaux adaptés aux réseaux sociaux et aux prises de parole de la marque.':'Contenidos visuales y editoriales adaptados a las redes sociales y a la comunicación de la marca.',
+    'Parlons de votre projet':'Hablemos de su proyecto', 'PARLONS DE VOTRE PROJET':'HABLEMOS DE SU PROYECTO',
+    'Une idée à structurer':'Una idea que estructurar', 'ou une présence à construire&nbsp;?':'o una presencia que construir?',
+    'Présentez simplement votre activité, votre besoin et votre calendrier. Nous reviendrons vers vous pour définir la suite.':'Presente brevemente su actividad, sus necesidades y su calendario. Nos pondremos en contacto para definir los siguientes pasos.',
+
+    'Parlons de votre projet.':'Hablemos de su proyecto.', 'Pour une demande générale, une collaboration ou une prise de contact avec Westward Co., vous pouvez nous écrire directement.':'Para una consulta general, una colaboración o un primer contacto con Westward Co., puede escribirnos directamente.',
+    'Contactez Westward Co. pour une demande générale, une collaboration ou un premier échange autour de nos projets.':'Contacte con Westward Co. para una consulta general, una colaboración o una primera conversación sobre nuestros proyectos.',
+    'Nous écrire':'Escribirnos', 'Un premier échange, simplement.':'Una primera conversación, sencillamente.',
+    'Pour toute demande liée à une activité spécifique de Westward Co., vous pouvez également passer directement par le site de l’univers concerné.':'Para cualquier consulta relacionada con una actividad específica de Westward Co., también puede acceder directamente al universo correspondiente.',
+    'Objet':'Asunto', 'Message':'Mensaje', 'Envoyer':'Enviar',
+
+    'Mentions légales | Westward Co.':'Aviso legal | Westward Co.', 'Mentions légales du site Westward Co.':'Aviso legal del sitio web Westward Co.', 'Cette page est en cours de finalisation. Les informations légales seront ajoutées avant la mise en production définitive du site.':'Esta página se está finalizando. La información legal se añadirá antes del lanzamiento definitivo del sitio.',
+    'Politique de confidentialité | Westward Co.':'Política de privacidad | Westward Co.', 'Politique de confidentialité du site Westward Co.':'Política de privacidad del sitio web Westward Co.', 'Cette page est en cours de finalisation. Les informations relatives à la confidentialité seront ajoutées avant la mise en production définitive du site.':'Esta página se está finalizando. La información sobre privacidad se añadirá antes del lanzamiento definitivo del sitio.'
+  }
+};
+
+function replaceAll(text, map) {
+  const keys = Object.keys(map).sort((a,b) => b.length - a.length).map(key => key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  return text.replace(new RegExp(keys.join('|'), 'g'), match => map[match]);
+}
+
+function pathFor(lang, route) { return lang === 'fr' ? `/${route}` : `/${lang}/${route}`; }
+
+function languageNav(lang, route, mobile = false) {
+  const labels = {fr:'Français', en:'English', es:'Español'};
+  const links = ['fr','en','es'].map(code => `<a href="${pathFor(code, route)}" lang="${code}"${code === lang ? ' class="active" aria-current="page"' : ''}>${code.toUpperCase()}<span class="srOnly"> — ${labels[code]}</span></a>`).join('<i>/</i>');
+  return mobile
+    ? `<nav class="mobileLang" aria-label="Language / Idioma">${links}</nav>`
+    : `<span class="languageNav" role="navigation" aria-label="Language / Idioma">${links}</span>`;
+}
+
+function alternates(route) {
+  return `<link rel="alternate" hreflang="fr" href="https://westwardco.fr/${route}"><link rel="alternate" hreflang="en" href="https://westwardco.fr/en/${route}"><link rel="alternate" hreflang="es" href="https://westwardco.fr/es/${route}"><link rel="alternate" hreflang="x-default" href="https://westwardco.fr/${route}">`;
+}
+
+function localizeLinks(html, lang) {
+  if (lang === 'fr') return html;
+  const prefix = `/${lang}`;
+  const destinations = ['/#notre-histoire','/nos-univers/','/campus/','/coffee-shop/','/cowboy-culture/','/digital/','/contact/','/mentions-legales/','/confidentialite/'];
+  for (const destination of destinations) html = html.split(`href="${destination}"`).join(`href="${prefix}${destination}"`);
+  html = html.split('href="/"').join(`href="${prefix}/"`);
+  return html;
+}
+
+for (const route of routes) {
+  const sourcePath = join(root, route, 'index.html');
+  let source = await readFile(sourcePath, 'utf8');
+  if (!source.includes('hreflang="en"')) source = source.replace('<meta name="robots" content="index, follow">', `<meta name="robots" content="index, follow">\n  ${alternates(route)}`);
+  source = source.replace(
+    /<nav class="desktopRight"[\s\S]*?(?=\s*<nav class="mobileLang")/,
+    `<nav class="desktopRight" aria-label="Navigation principale droite"><a href="/contact/">Contact</a>${languageNav('fr', route)}</nav>`
+  );
+  source = source.replace(/<span class="mobileLang">FR \/ EN<\/span>|<nav class="mobileLang"[\s\S]*?<\/nav>/, languageNav('fr', route, true));
+  await writeFile(sourcePath, source);
+
+  const canonical = `https://westwardco.fr/${route}`;
+  for (const lang of ['en','es']) {
+    let translated = source;
+    translated = translated.replace('<html lang="fr">', `<html lang="${lang}">`);
+    translated = translated.replace('content="fr_FR"', `content="${lang === 'en' ? 'en_US' : 'es_ES'}"`);
+    translated = translated.split('"inLanguage": "fr-FR"').join(`"inLanguage": "${lang === 'en' ? 'en-US' : 'es-ES'}"`);
+    translated = translated.split('"inLanguage":"fr-FR"').join(`"inLanguage":"${lang === 'en' ? 'en-US' : 'es-ES'}"`);
+    const translatedCanonical = `https://westwardco.fr/${lang}/${route}`;
+    translated = translated.replace(`rel="canonical" href="${canonical}"`, `rel="canonical" href="${translatedCanonical}"`);
+    translated = translated.replace(`property="og:url" content="${canonical}"`, `property="og:url" content="${translatedCanonical}"`);
+    translated = translated.replace(
+      `"@id": "${canonical}#webpage", "url": "${canonical}"`,
+      `"@id": "${translatedCanonical}#webpage", "url": "${translatedCanonical}"`
+    );
+    translated = translated.replace(languageNav('fr', route), '<!--LANGUAGE_NAV-->');
+    translated = translated.replace(languageNav('fr', route, true), '<!--MOBILE_LANGUAGE_NAV-->');
+    translated = localizeLinks(translated, lang);
+    translated = replaceAll(translated, {...common[lang], ...pageText[lang]});
+    translated = translated.replace('<!--LANGUAGE_NAV-->', languageNav(lang, route));
+    translated = translated.replace('<!--MOBILE_LANGUAGE_NAV-->', languageNav(lang, route, true));
+    const destination = join(root, lang, route, 'index.html');
+    await mkdir(dirname(destination), {recursive:true});
+    await writeFile(destination, translated);
+  }
+}
+
+const sitemapPath = join(root, 'sitemap.xml');
+const sitemapUrls = ['', 'en/', 'es/'].flatMap(prefix => routes.map(route => {
+  const priority = route === '' ? (prefix === '' ? '1.0' : '0.9') : '0.7';
+  return `  <url><loc>https://westwardco.fr/${prefix}${route}</loc><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
+}));
+await writeFile(sitemapPath, `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls.join('\n')}\n</urlset>\n`);
+
+console.log(`Generated ${routes.length * 2} translated pages.`);

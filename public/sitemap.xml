@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://westwardco.fr/</loc></url>
-  <url><loc>https://westwardco.fr/nos-univers/</loc></url>
-  <url><loc>https://westwardco.fr/campus/</loc></url>
-  <url><loc>https://westwardco.fr/coffee-shop/</loc></url>
-  <url><loc>https://westwardco.fr/digital/</loc></url>
-  <url><loc>https://westwardco.fr/cowboy-culture/</loc></url>
-  <url><loc>https://westwardco.fr/contact/</loc></url>
+  <url><loc>https://westwardco.fr/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://westwardco.fr/nos-univers/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/campus/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/coffee-shop/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/cowboy-culture/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/digital/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/contact/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/mentions-legales/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/confidentialite/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/en/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://westwardco.fr/en/nos-univers/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/en/campus/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/en/coffee-shop/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/en/cowboy-culture/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/en/digital/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/en/contact/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/en/mentions-legales/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/en/confidentialite/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/es/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://westwardco.fr/es/nos-univers/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/es/campus/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/es/coffee-shop/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/es/cowboy-culture/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/es/digital/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/es/contact/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/es/mentions-legales/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://westwardco.fr/es/confidentialite/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
