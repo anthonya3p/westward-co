@@ -296,7 +296,8 @@ function pathFor(lang, route) { return lang === 'fr' ? `/${route}` : `/${lang}/$
 
 function languageNav(lang, route, mobile = false) {
   const labels = {fr:'Français', en:'English', es:'Español'};
-  const links = ['fr','en','es'].map(code => `<a href="${pathFor(code, route)}" lang="${code}"${code === lang ? ' class="active" aria-current="page"' : ''}>${code.toUpperCase()}<span class="srOnly"> — ${labels[code]}</span></a>`).join('<i>/</i>');
+  const flags = {fr:'🇫🇷', en:'🇺🇸', es:'🇪🇸'};
+  const links = ['fr','en','es'].map(code => `<a href="${pathFor(code, route)}" lang="${code}" aria-label="${labels[code]}" title="${labels[code]}"${code === lang ? ' class="active" aria-current="page"' : ''}><span aria-hidden="true">${flags[code]}</span></a>`).join('');
   return mobile
     ? `<nav class="mobileLang" aria-label="Language / Idioma">${links}</nav>`
     : `<span class="languageNav" role="navigation" aria-label="Language / Idioma">${links}</span>`;
