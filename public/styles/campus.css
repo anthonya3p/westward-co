@@ -38,7 +38,7 @@
 .backLink { display: inline-block; margin-bottom: 40px; color: rgba(244,239,230,.64); text-decoration: none; font: 600 .74rem/1.4 var(--font-family-base); letter-spacing: .13em; text-transform: uppercase; }
 .campusLockup { width: 220px; margin-bottom: 38px; }
 .campusLockupLogo { height: 72px; }
-.campusLockupLogo img { height: 72px; object-position: center; transform: scale(1.42); }
+.campusLockupLogo img { height: 72px; object-position: center; transform: scale(1.42); filter: invert(1) brightness(1.15); }
 .campusLockupBranch { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
 .campusLockupBranch span { height: 1px; background: rgba(244,239,230,.48); }
 .campusLockupBranch strong { font: 700 .7rem/1 var(--font-family-base); letter-spacing: .3em; }
