@@ -29,4 +29,19 @@
     const body = encodeURIComponent(`Nom : ${data.get('nom') || ''}\nEmail : ${data.get('email') || ''}\n\n${data.get('message') || ''}`);
     window.location.href = `mailto:anthony@westwardco.fr?subject=${subject}&body=${body}`;
   });
+  const campusForm = document.getElementById('campus-form');
+  campusForm?.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(campusForm);
+    const subject = encodeURIComponent('Projet d’études — Westward Co. Campus');
+    const body = encodeURIComponent(
+      `Nom : ${data.get('nom') || ''}\n` +
+      `E-mail : ${data.get('email') || ''}\n` +
+      `Téléphone : ${data.get('telephone') || 'Non renseigné'}\n` +
+      `Situation : ${data.get('situation') || ''}\n` +
+      `Rentrée envisagée : ${data.get('rentree') || 'Non renseignée'}\n\n` +
+      `Projet :\n${data.get('message') || ''}`
+    );
+    window.location.href = `mailto:anthony@westwardco.fr?subject=${subject}&body=${body}`;
+  });
 })();

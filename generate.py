@@ -125,10 +125,10 @@ universes = [
     ("DIGITAL", "digital", "#1C1B18", "bf11cd61-1c11-45ca-a1c8-6acf991af2ad-westward-digital-bg.png", "Westward Co. Digital développe des identités visuelles, des sites internet et des contenus digitaux pensés pour aider des projets et des entreprises à construire une présence cohérente et professionnelle."),
     ("COWBOY CULTURE", "cowboy", "#8A694F", "1e854af7-4c40-4e47-b15a-4cf4830b1f88-westward-cowboy-bg.png", "Westward Co. Cowboy Culture développe un univers lifestyle inspiré de la culture western américaine, à travers des vêtements, des accessoires et des objets pensés dans une approche contemporaine."),
 ]
-rows = "\n".join(f'''<article class="row {kind}" style="--accent:{accent};--bg-image:url('/assets/{image}')">
+rows = "\n".join(f'''<{"a" if kind == "campus" else "article"} class="row {kind}" {"href=\"/campus/\"" if kind == "campus" else ""} style="--accent:{accent};--bg-image:url('/assets/{image}')">
   <div class="identity"><img src="{LOGO_BLACK}" alt="Westward Co."><div class="branchLockup"><span class="branchRule" aria-hidden="true"></span><strong>{name}</strong><span class="branchRule" aria-hidden="true"></span></div></div>
-  <p>{description}</p><span class="discover">Site à venir</span>
-</article>''' for name, kind, accent, image, description in universes)
+  <p>{description}</p><span class="discover">{"Découvrir <b>→</b>" if kind == "campus" else "Site à venir"}</span>
+</{"a" if kind == "campus" else "article"}>''' for name, kind, accent, image, description in universes)
 universe_body = f'''<main class="page"><section class="hero"><img src="{LOGO_BLACK}" alt="Westward Co.">
   <p class="eyebrow">Nos univers</p><h1>Des projets indépendants,<br>réunis par une même histoire.</h1>
   <p>Westward Co. rassemble plusieurs projets développés dans des domaines différents. Chacun évolue avec sa propre identité, son propre public et ses propres objectifs.</p>
