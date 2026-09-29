@@ -43,35 +43,72 @@
       }
     });
   });
-  const form = document.getElementById('contact-form');
-  form?.addEventListener('submit', event => {
-    event.preventDefault();
+  const formMessages = {
+    fr: {sending:'Envoi en cours…',success:'Merci, votre demande a bien été envoyée.',fallback:'L’envoi direct est temporairement indisponible. Votre messagerie va s’ouvrir avec le message préparé.',error:'L’envoi n’a pas abouti. Vous pouvez écrire à anthony@westwardco.fr.'},
+    en: {sending:'Sending…',success:'Thank you, your request has been sent.',fallback:'Direct sending is temporarily unavailable. Your email application will open with a prepared message.',error:'Your request could not be sent. You can email anthony@westwardco.fr.'},
+    es: {sending:'Enviando…',success:'Gracias, su solicitud ha sido enviada.',fallback:'El envío directo no está disponible temporalmente. Su aplicación de correo se abrirá con el mensaje preparado.',error:'No se ha podido enviar su solicitud. Puede escribir a anthony@westwardco.fr.'}
+  };
+
+  function mailtoFor(form, type) {
     const data = new FormData(form);
-    const lang = document.documentElement.lang;
-    const labels = lang === 'en' ? {name:'Name',email:'Email'} : lang === 'es' ? {name:'Nombre',email:'Correo electrónico'} : {name:'Nom',email:'Email'};
-    const subject = encodeURIComponent(String(data.get('objet') || 'Contact Westward Co.'));
-    const body = encodeURIComponent(`${labels.name} : ${data.get('nom') || ''}\n${labels.email} : ${data.get('email') || ''}\n\n${data.get('message') || ''}`);
-    window.location.href = `mailto:anthony@westwardco.fr?subject=${subject}&body=${body}`;
-  });
-  const campusForm = document.getElementById('campus-form');
-  campusForm?.addEventListener('submit', event => {
-    event.preventDefault();
-    const data = new FormData(campusForm);
     const lang = document.documentElement.lang;
     const labels = lang === 'en'
       ? {subject:'Study project — Westward Co. Campus',name:'Name',email:'Email',phone:'Phone',situation:'Current situation',intake:'Planned intake',project:'Project',empty:'Not provided'}
       : lang === 'es'
         ? {subject:'Proyecto de estudios — Westward Co. Campus',name:'Nombre',email:'Correo electrónico',phone:'Teléfono',situation:'Situación actual',intake:'Inicio previsto',project:'Proyecto',empty:'No indicado'}
         : {subject:'Projet d’études — Westward Co. Campus',name:'Nom',email:'E-mail',phone:'Téléphone',situation:'Situation',intake:'Rentrée envisagée',project:'Projet',empty:'Non renseigné'};
-    const subject = encodeURIComponent(labels.subject);
-    const body = encodeURIComponent(
-      `${labels.name} : ${data.get('nom') || ''}\n` +
-      `${labels.email} : ${data.get('email') || ''}\n` +
-      `${labels.phone} : ${data.get('telephone') || labels.empty}\n` +
-      `${labels.situation} : ${data.get('situation') || ''}\n` +
-      `${labels.intake} : ${data.get('rentree') || labels.empty}\n\n` +
-      `${labels.project} :\n${data.get('message') || ''}`
-    );
-    window.location.href = `mailto:anthony@westwardco.fr?subject=${subject}&body=${body}`;
-  });
+    if (type === 'campus') {
+      const body = `${labels.name} : ${data.get('nom') || ''}\n${labels.email} : ${data.get('email') || ''}\n${labels.phone} : ${data.get('telephone') || labels.empty}\n${labels.situation} : ${data.get('situation') || ''}\n${labels.intake} : ${data.get('rentree') || labels.empty}\n\n${labels.project} :\n${data.get('message') || ''}`;
+      return `mailto:anthony@westwardco.fr?subject=${encodeURIComponent(labels.subject)}&body=${encodeURIComponent(body)}`;
+    }
+    const nameLabel = lang === 'es' ? 'Nombre' : lang === 'en' ? 'Name' : 'Nom';
+    const emailLabel = lang === 'es' ? 'Correo electrónico' : 'Email';
+    const subject = String(data.get('objet') || 'Contact Westward Co.');
+    const body = `${nameLabel} : ${data.get('nom') || ''}\n${emailLabel} : ${data.get('email') || ''}\n\n${data.get('message') || ''}`;
+    return `mailto:anthony@westwardco.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
+  function enableDirectSubmission(form, type) {
+    if (!form) return;
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const lang = ['fr','en','es'].includes(document.documentElement.lang) ? document.documentElement.lang : 'fr';
+      const messages = formMessages[lang];
+      const status = form.querySelector('.formStatus');
+      const button = form.querySelector('button[type="submit"]');
+      const originalLabel = button.textContent;
+      const payload = Object.fromEntries(new FormData(form).entries());
+      payload.type = type;
+      status.className = 'formStatus';
+      status.textContent = messages.sending;
+      button.disabled = true;
+      button.textContent = messages.sending;
+      try {
+        const response = await fetch('/api/contact', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(payload) });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          if (result.code === 'email_not_configured' || response.status >= 500) {
+            status.classList.add('isError');
+            status.textContent = messages.fallback;
+            window.location.href = mailtoFor(form, type);
+            return;
+          }
+          throw new Error('invalid-request');
+        }
+        form.reset();
+        status.classList.add('isSuccess');
+        status.textContent = messages.success;
+      } catch {
+        status.classList.add('isError');
+        status.textContent = messages.error;
+      } finally {
+        button.disabled = false;
+        button.textContent = originalLabel;
+      }
+    });
+  }
+
+  enableDirectSubmission(document.getElementById('contact-form'), 'contact');
+  enableDirectSubmission(document.getElementById('campus-form'), 'campus');
 })();

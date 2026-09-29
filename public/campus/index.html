@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/styles/base.css"><link rel="stylesheet" href="/styles/chrome.css?v=20260929-2">
   <link rel="stylesheet" href="/styles/campus.css?v=20260929-4">
   <link rel="preload" as="image" href="/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png">
-  <script src="/scripts/site.js?v=20260929-2" defer></script>
+  <script src="/scripts/site.js?v=20260929-3" defer></script>
 </head><body class="campusSite"><header class="header" id="site-header">
   <div class="headerInner">
     <nav class="desktopLeft" aria-label="Navigation principale gauche">
@@ -130,14 +130,16 @@
       <p>Ce premier contact permet de comprendre votre situation et de déterminer les prochaines étapes possibles.</p>
       <a href="mailto:anthony@westwardco.fr">anthony@westwardco.fr</a></div>
       <form class="campusForm" id="campus-form">
+        <div class="formTrap" aria-hidden="true"><label>Ne pas remplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
         <div class="formSplit"><label>Nom et prénom<input name="nom" autocomplete="name" required></label><label>E-mail<input name="email" type="email" autocomplete="email" required></label></div>
         <div class="formSplit"><label>Téléphone<input name="telephone" type="tel" autocomplete="tel"></label><label>Rentrée envisagée<input name="rentree" placeholder="Ex. : automne 2027"></label></div>
         <label>Situation actuelle<select name="situation" required><option value="">Choisir une réponse</option><option>Collégien ou lycéen</option><option>Étudiant</option><option>En année de césure</option><option>Parent ou représentant légal</option><option>Autre situation</option></select></label>
         <label>Votre projet<textarea name="message" rows="6" placeholder="Présentez-nous brièvement le projet, la destination envisagée et vos principales questions." required></textarea></label>
         <label class="consent"><input name="consentement" type="checkbox" required><span>J’accepte que les informations transmises soient utilisées pour répondre à ma demande, conformément à la <a href="/confidentialite/">politique de confidentialité</a>.</span></label>
         <button type="submit">Envoyer ma demande</button>
-        <p class="formHelp">Le formulaire ouvrira votre application e-mail avec le message déjà préparé.</p>
-        <p class="privacyNotice">Les informations saisies sont utilisées uniquement pour répondre à votre demande. Le formulaire prépare un e-mail adressé à Westward Co. et aucune donnée n’est enregistrée dans une base de données du site. <a href="/confidentialite/">En savoir plus sur la gestion de vos données.</a></p>
+        <p class="formStatus" role="status" aria-live="polite"></p>
+        <p class="formHelp">Votre demande sera envoyée directement à Westward Co.</p>
+        <p class="privacyNotice">Les informations saisies sont transmises à Westward Co. uniquement pour répondre à votre demande. Elles ne sont pas enregistrées dans une base de données du site. <a href="/confidentialite/">En savoir plus sur la gestion de vos données.</a></p>
       </form>
     </div>
   </section>

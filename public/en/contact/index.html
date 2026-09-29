@@ -15,9 +15,9 @@
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://westwardco.fr/#organization", "name": "Westward Co.", "url": "https://westwardco.fr/", "logo": "https://westwardco.fr/assets/0a89128e-3b66-4128-b890-8c855a164e61-westward-logo-black.png", "email": "anthony@westwardco.fr"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "@id": "https://westwardco.fr/en/contact/#webpage", "url": "https://westwardco.fr/en/contact/", "name": "Contact | Westward Co.", "description": "Contact Westward Co. for a general enquiry, collaboration or first conversation about our projects.", "inLanguage": "en-US", "isPartOf": {"@id": "https://westwardco.fr/#website"}, "publisher": {"@id": "https://westwardco.fr/#organization"}}</script>
   <link rel="stylesheet" href="/styles/base.css"><link rel="stylesheet" href="/styles/chrome.css?v=20260929-2">
-  <link rel="stylesheet" href="/styles/contact.css">
+  <link rel="stylesheet" href="/styles/contact.css?v=20260929-2">
   
-  <script src="/scripts/site.js?v=20260929-2" defer></script>
+  <script src="/scripts/site.js?v=20260929-3" defer></script>
 </head><body><header class="header" id="site-header">
   <div class="headerInner">
     <nav class="desktopLeft" aria-label="Main navigation left">
@@ -38,11 +38,12 @@
   <section class="contactGrid"><div class="contactInfo"><p class="eyebrow">Write to us</p>
     <h2>A simple first conversation.</h2><a href="mailto:anthony@westwardco.fr">anthony@westwardco.fr</a>
     <p>For enquiries about a specific Westward Co. activity, you can also visit the relevant world directly.</p></div>
-    <form class="form" id="contact-form"><label>Full name<input name="nom" required></label>
+    <form class="form" id="contact-form"><div class="formTrap" aria-hidden="true"><label>Ne pas remplir<input name="website" tabindex="-1" autocomplete="off"></label></div><label>Full name<input name="nom" autocomplete="name" required></label>
       <label>Email<input name="email" type="email" required></label><label>Subject<input name="objet" required></label>
       <label>Message<textarea name="message" rows="7" required></textarea></label>
       <button type="submit">Send</button>
-      <p class="privacyNotice">The information entered is used only to respond to your request. The form prepares an email to Westward Co. and no data is stored in a website database. <a href="/en/confidentialite/">Learn more about how your data is handled.</a></p>
+      <p class="formStatus" role="status" aria-live="polite"></p>
+      <p class="privacyNotice">The information entered is sent to Westward Co. solely to respond to your request. It is not stored in a website database. <a href="/en/confidentialite/">Learn more about how your data is handled.</a></p>
     </form>
   </section>
 </main><footer class="footer">

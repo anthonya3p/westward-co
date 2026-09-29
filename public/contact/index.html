@@ -15,9 +15,9 @@
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://westwardco.fr/#organization", "name": "Westward Co.", "url": "https://westwardco.fr/", "logo": "https://westwardco.fr/assets/0a89128e-3b66-4128-b890-8c855a164e61-westward-logo-black.png", "email": "anthony@westwardco.fr"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "@id": "https://westwardco.fr/contact/#webpage", "url": "https://westwardco.fr/contact/", "name": "Contact | Westward Co.", "description": "Contactez Westward Co. pour une demande générale, une collaboration ou un premier échange autour de nos projets.", "inLanguage": "fr-FR", "isPartOf": {"@id": "https://westwardco.fr/#website"}, "publisher": {"@id": "https://westwardco.fr/#organization"}}</script>
   <link rel="stylesheet" href="/styles/base.css"><link rel="stylesheet" href="/styles/chrome.css?v=20260929-2">
-  <link rel="stylesheet" href="/styles/contact.css">
+  <link rel="stylesheet" href="/styles/contact.css?v=20260929-2">
   
-  <script src="/scripts/site.js?v=20260929-2" defer></script>
+  <script src="/scripts/site.js?v=20260929-3" defer></script>
 </head><body><header class="header" id="site-header">
   <div class="headerInner">
     <nav class="desktopLeft" aria-label="Navigation principale gauche">
@@ -38,11 +38,12 @@
   <section class="contactGrid"><div class="contactInfo"><p class="eyebrow">Nous écrire</p>
     <h2>Un premier échange, simplement.</h2><a href="mailto:anthony@westwardco.fr">anthony@westwardco.fr</a>
     <p>Pour toute demande liée à une activité spécifique de Westward Co., vous pouvez également passer directement par le site de l’univers concerné.</p></div>
-    <form class="form" id="contact-form"><label>Nom et prénom<input name="nom" required></label>
+    <form class="form" id="contact-form"><div class="formTrap" aria-hidden="true"><label>Ne pas remplir<input name="website" tabindex="-1" autocomplete="off"></label></div><label>Nom et prénom<input name="nom" autocomplete="name" required></label>
       <label>E-mail<input name="email" type="email" required></label><label>Objet<input name="objet" required></label>
       <label>Message<textarea name="message" rows="7" required></textarea></label>
       <button type="submit">Envoyer</button>
-      <p class="privacyNotice">Les informations saisies sont utilisées uniquement pour répondre à votre demande. Le formulaire prépare un e-mail adressé à Westward Co. et aucune donnée n’est enregistrée dans une base de données du site. <a href="/confidentialite/">En savoir plus sur la gestion de vos données.</a></p>
+      <p class="formStatus" role="status" aria-live="polite"></p>
+      <p class="privacyNotice">Les informations saisies sont transmises à Westward Co. uniquement pour répondre à votre demande. Elles ne sont pas enregistrées dans une base de données du site. <a href="/confidentialite/">En savoir plus sur la gestion de vos données.</a></p>
     </form>
   </section>
 </main><footer class="footer">
