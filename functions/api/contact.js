@@ -1,4 +1,4 @@
-const MAX = { nom: 120, email: 254, telephone: 40, objet: 160, situation: 160, rentree: 100, message: 5000 };
+const MAX = { nom: 120, email: 254, telephone: 40, objet: 160, situation: 160, rentree: 100, message: 5000, resume: 14000 };
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -27,17 +27,18 @@ export async function onRequestPost({ request, env }) {
   const data = {
     nom: clean(input.nom, 'nom'), email: clean(input.email, 'email'), telephone: clean(input.telephone, 'telephone'),
     objet: clean(input.objet, 'objet'), situation: clean(input.situation, 'situation'), rentree: clean(input.rentree, 'rentree'),
-    message: clean(input.message, 'message')
+    message: clean(input.message, 'message'), resume: clean(input.resume, 'resume')
   };
-  if (!data.nom || !data.message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return json({ ok: false, code: 'invalid' }, 400);
-  if (type === 'campus' && !data.situation) return json({ ok: false, code: 'invalid' }, 400);
+  if (!data.nom || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return json({ ok: false, code: 'invalid' }, 400);
+  if (type === 'contact' && !data.message) return json({ ok: false, code: 'invalid' }, 400);
+  if (type === 'campus' && (!data.situation || !data.resume || input.consentement !== 'oui')) return json({ ok: false, code: 'invalid' }, 400);
 
   const accountId = env.CLOUDFLARE_ACCOUNT_ID;
   const token = env.CLOUDFLARE_EMAIL_API_TOKEN;
   if (!accountId || !token) return json({ ok: false, code: 'email_not_configured' }, 503);
 
   const lines = type === 'campus'
-    ? [`Nom : ${data.nom}`, `E-mail : ${data.email}`, `Téléphone : ${data.telephone || 'Non renseigné'}`, `Situation : ${data.situation}`, `Rentrée envisagée : ${data.rentree || 'Non renseignée'}`, '', 'Projet :', data.message]
+    ? ['DEMANDE DE SUIVI ÉTUDIANT', '', data.resume]
     : [`Nom : ${data.nom}`, `E-mail : ${data.email}`, '', 'Message :', data.message];
   const subject = type === 'campus' ? 'Nouveau projet d’études — Westward Co. Campus' : `Nouveau contact — ${data.objet || 'Westward Co.'}`;
   const text = lines.join('\n');
