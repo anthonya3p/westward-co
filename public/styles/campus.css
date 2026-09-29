@@ -139,6 +139,8 @@
 .consent a { color: inherit; }
 .campusForm button { justify-self: start; min-height: 50px; padding: 0 23px; border: 1px solid var(--campus-dark); border-radius: 0; background: var(--campus-dark); color: var(--campus-paper); font: 700 .78rem/1 var(--font-family-base); letter-spacing: .1em; text-transform: uppercase; }
 .formHelp { margin: -8px 0 0; color: var(--campus-muted); font: 400 .8rem/1.5 var(--font-family-base); }
+.campusForm .privacyNotice { margin: -4px 0 0; color: var(--campus-muted); font: 400 .78rem/1.6 var(--font-family-base); letter-spacing: 0; text-transform: none; }
+.campusForm .privacyNotice a { color: inherit; text-underline-offset: 3px; }
 
 @media (max-width: 980px) {
   .campusHeroInner { width: min(100% - 40px,760px); grid-template-columns: 1fr; gap: 58px; padding: 48px 0 64px; }

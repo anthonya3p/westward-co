@@ -47,6 +47,8 @@
 .form textarea { resize: vertical; }
 .form input:focus, .form textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(28,27,24,.12); }
 .form button { min-height: 48px; padding: 0 20px; background: var(--primary); color: var(--primary-foreground); border: 1px solid var(--primary); font: 600 .86rem/1 var(--font-family-base); }
+.privacyNotice { margin: 2px 0 0; color: var(--muted-foreground); font: 400 .78rem/1.6 var(--font-family-base); letter-spacing: 0; text-transform: none; }
+.privacyNotice a { color: inherit; text-underline-offset: 3px; }
 
 @media (max-width: 900px) {
   .hero { min-height: 500px; width: min(100% - 40px, 720px); padding: 68px 0; }
