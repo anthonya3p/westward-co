@@ -58,7 +58,7 @@
         ? {subject:'Proyecto de estudios — Westward Co. Campus',name:'Nombre',email:'Correo electrónico',phone:'Teléfono',situation:'Situación actual',intake:'Inicio previsto',project:'Proyecto',empty:'No indicado'}
         : {subject:'Projet d’études — Westward Co. Campus',name:'Nom',email:'E-mail',phone:'Téléphone',situation:'Situation',intake:'Rentrée envisagée',project:'Projet',empty:'Non renseigné'};
     if (type === 'campus') {
-      const body = `${labels.name} : ${data.get('nom') || ''}\n${labels.email} : ${data.get('email') || ''}\n${labels.phone} : ${data.get('telephone') || labels.empty}\n${labels.situation} : ${data.get('situation') || ''}\n${labels.intake} : ${data.get('rentree') || labels.empty}\n\n${labels.project} :\n${data.get('message') || ''}`;
+      const body = data.get('resume') || `${labels.name} : ${data.get('nom') || ''}\n${labels.email} : ${data.get('email') || ''}\n${labels.phone} : ${data.get('telephone') || labels.empty}\n${labels.situation} : ${data.get('situation') || ''}\n${labels.intake} : ${data.get('rentree') || labels.empty}\n\n${labels.project} :\n${data.get('message') || ''}`;
       return `mailto:anthony@westwardco.fr?subject=${encodeURIComponent(labels.subject)}&body=${encodeURIComponent(body)}`;
     }
     const nameLabel = lang === 'es' ? 'Nombre' : lang === 'en' ? 'Name' : 'Nom';
@@ -78,7 +78,10 @@
       const status = form.querySelector('.formStatus');
       const button = form.querySelector('button[type="submit"]');
       const originalLabel = button.textContent;
-      const payload = Object.fromEntries(new FormData(form).entries());
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+      const needs = formData.getAll('besoins');
+      if (needs.length) payload.besoins = needs;
       payload.type = type;
       status.className = 'formStatus';
       status.textContent = messages.sending;
@@ -97,6 +100,7 @@
           throw new Error('invalid-request');
         }
         form.reset();
+        if (type === 'campus') form.classList.add('isSubmitted');
         status.classList.add('isSuccess');
         status.textContent = messages.success;
       } catch {
