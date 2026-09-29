@@ -50,21 +50,21 @@
 
   mount.innerHTML = `<form class="campusForm campusQuestionnaire" id="campus-form" novalidate>
     <div class="formTrap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
-    <div class="formProgress"><div class="progressMeta"><span>${t.step} <strong data-step-number>1</strong> ${t.of} 4</span><span data-step-name>${t.sections[0]}</span></div><div class="progressTrack"><span data-progress-bar></span></div><ol>${t.sections.map((name,index)=>`<li class="${index === 0 ? 'active' : ''}" data-progress-step="${index}"><span>${index+1}</span><small>${name}</small></li>`).join('')}</ol></div>
+    <div class="formProgress"><p class="progressKicker">Westward Co. Campus</p><div class="progressMeta"><span>${t.step} <strong data-step-number>1</strong> ${t.of} 4</span><span data-step-name>${t.sections[0]}</span></div><div class="progressTrack"><span data-progress-bar></span></div><ol>${t.sections.map((name,index)=>`<li class="${index === 0 ? 'active' : ''}" data-progress-step="${index}"><span>${index+1}</span><small>${name}</small></li>`).join('')}</ol></div>
     <p class="stepError" role="alert" hidden>${t.required}</p>
-    <fieldset class="formStep active" data-step="0"><legend><span>01</span>${t.sections[0]}</legend><p class="stepIntro">${t.intro[0]}</p>
+    <fieldset class="formStep active" data-step="0"><legend class="formStepLegend">${t.sections[0]}</legend><div class="stepHeading"><span>01</span><div><p>${t.sections[0]}</p><h3>${t.intro[0]}</h3></div></div>
       ${radios('situation',t.labels.role,t.choices.role,true)}
       <div class="formSplit">${input('nom',t.labels.studentName,'text',true,'name')}${input('naissance',t.labels.birthDate,'date')}</div>
       <div class="formSplit">${input('email',t.labels.email,'email',true,'email')}${input('telephone',t.labels.phone,'tel',false,'tel')}</div>
       <div class="formSplit">${input('residence',t.labels.city)}${select('langue_contact',t.labels.language,t.choices.language)}</div>
       <div class="conditionalPanel" data-parent-fields><p>${t.optional}</p><div class="formSplit">${input('parent_nom',t.labels.parentName)}${input('parent_contact',t.labels.parentContact)}</div></div>
     </fieldset>
-    <fieldset class="formStep" data-step="1" hidden><legend><span>02</span>${t.sections[1]}</legend><p class="stepIntro">${t.intro[1]}</p>
+    <fieldset class="formStep" data-step="1" hidden><legend class="formStepLegend">${t.sections[1]}</legend><div class="stepHeading"><span>02</span><div><p>${t.sections[1]}</p><h3>${t.intro[1]}</h3></div></div>
       <div class="formSplit">${input('etablissement',t.labels.school)}${input('niveau_scolaire',t.labels.schoolLevel)}</div>
       <div class="formSplit">${input('diplome',t.labels.diploma)}${input('annee_diplome',t.labels.graduation)}</div>
       ${area('resultats',t.labels.grades,t.placeholders.grades)}${area('activites',t.labels.activities,t.placeholders.activities)}
     </fieldset>
-    <fieldset class="formStep" data-step="2" hidden><legend><span>03</span>${t.sections[2]}</legend><p class="stepIntro">${t.intro[2]}</p>
+    <fieldset class="formStep" data-step="2" hidden><legend class="formStepLegend">${t.sections[2]}</legend><div class="stepHeading"><span>03</span><div><p>${t.sections[2]}</p><h3>${t.intro[2]}</h3></div></div>
       <div class="formSplit">${input('domaine',t.labels.field,'text',true)}${input('niveau_recherche',t.labels.degree)}</div>
       <div class="formSplit">${input('rentree',t.labels.intake)}${input('duree',t.labels.duration)}</div>
       ${radios('precision_projet',t.labels.projectStage,t.choices.stage,true)}${radios('type_etablissement',t.labels.institution,t.choices.institution)}${radios('environnement',t.labels.environment,t.choices.environment)}
@@ -74,7 +74,7 @@
       <div class="formSplit">${input('budget',t.labels.budget)}${input('financement',t.labels.payer)}</div>
       ${radios('aide_financiere',t.labels.aid,t.choices.aid)}${area('details_financiers',t.labels.finance,t.placeholders.finance)}
     </fieldset>
-    <fieldset class="formStep" data-step="3" hidden><legend><span>04</span>${t.sections[3]}</legend><p class="stepIntro">${t.intro[3]}</p>
+    <fieldset class="formStep" data-step="3" hidden><legend class="formStepLegend">${t.sections[3]}</legend><div class="stepHeading"><span>04</span><div><p>${t.sections[3]}</p><h3>${t.intro[3]}</h3></div></div>
       <div class="formSplit">${radios('candidature',t.labels.applied,t.choices.yesno)}${radios('reponse',t.labels.response,t.choices.response)}</div>
       ${area('candidatures_details',t.labels.applications,t.placeholders.applications)}
       <div class="formSplit">${radios('passeport',t.labels.passport,t.choices.passport)}${radios('experience_usa',t.labels.usa,t.choices.usa)}</div>
