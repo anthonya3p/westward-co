@@ -50,6 +50,8 @@
 .heroActions { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; margin-top: 36px; }
 .primaryButton { min-height: 52px; display: inline-flex; align-items: center; padding: 0 24px; background: var(--campus-sage); color: var(--campus-paper); border: 1px solid var(--campus-sage); text-decoration: none; font: 700 .78rem/1 var(--font-family-base); letter-spacing: .1em; text-transform: uppercase; transition: transform .2s ease, background .2s ease; }
 .primaryButton:hover { transform: translateY(-2px); background: #66644F; }
+.guideButton { min-height: 52px; display: inline-flex; align-items: center; padding: 0 24px; color: var(--campus-paper); border: 1px solid rgba(244,239,230,.48); text-decoration: none; font: 700 .78rem/1 var(--font-family-base); letter-spacing: .1em; text-transform: uppercase; transition: color .2s ease, background .2s ease, border-color .2s ease; }
+.guideButton:hover { background: var(--campus-sand); border-color: var(--campus-sand); color: var(--campus-dark); }
 .textButton { color: var(--campus-paper); text-underline-offset: 6px; text-decoration-color: var(--campus-sand); font: 700 .78rem/1.4 var(--font-family-base); letter-spacing: .09em; text-transform: uppercase; }
 .campusHeroVisual { position: relative; min-height: 610px; }
 .campusHeroVisual::before { content: ""; position: absolute; inset: 26px -24px -24px 28px; border: 1px solid rgba(216,199,174,.58); }
@@ -185,5 +187,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .primaryButton { transition: none; }
+  .primaryButton, .guideButton { transition: none; }
 }
