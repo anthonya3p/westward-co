@@ -19,9 +19,10 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://westwardco.fr/#organization","name":"Westward Co.","url":"https://westwardco.fr/","logo":"https://westwardco.fr/assets/0a89128e-3b66-4128-b890-8c855a164e61-westward-logo-black.png","email":"anthony@westwardco.fr"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://westwardco.fr/campus/#webpage","url":"https://westwardco.fr/campus/","name":"Estudiar en Estados Unidos | Westward Co. Campus","description":"Westward Co. Campus acompaña a los estudiantes franceses y a sus familias en la preparación de un proyecto de estudios en Estados Unidos.","inLanguage":"es-ES","isPartOf":{"@id":"https://westwardco.fr/#website"},"publisher":{"@id":"https://westwardco.fr/#organization"}}</script>
   <link rel="stylesheet" href="/styles/base.css"><link rel="stylesheet" href="/styles/chrome.css?v=20260929-2">
-  <link rel="stylesheet" href="/styles/campus.css?v=20260929-4">
+  <link rel="stylesheet" href="/styles/campus.css?v=20260929-5">
   <link rel="preload" as="image" href="/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png">
-  <script src="/scripts/site.js?v=20260929-3" defer></script>
+  <script src="/scripts/campus-questionnaire.js?v=20260929-1" defer></script>
+  <script src="/scripts/site.js?v=20260929-4" defer></script>
 </head><body class="campusSite"><header class="header" id="site-header">
   <div class="headerInner">
     <nav class="desktopLeft" aria-label="Navegación principal izquierda">
@@ -126,21 +127,11 @@
   </section>
 
   <section class="campusContacto" id="contact-campus">
-    <div class="contactWrap"><div class="contactIntro"><p class="eyebrow">Primera conversación</p><h2>Háblenos de su proyecto de estudios.</h2>
-      <p>Este primer contacto permite comprender su situación y determinar los posibles pasos siguientes.</p>
+    <div class="contactWrap"><div class="contactIntro"><p class="eyebrow">Solicitud de seguimiento</p><h2>Preparemos una primera conversación realmente útil.</h2>
+      <p>Este cuestionario nos permite comprender el perfil del estudiante, el avance del proyecto y las prioridades de la familia antes de volver a contactarle.</p>
+      <div class="questionnairePromise"><strong>4 etapas</strong><span>Unos 8 minutos</span><span>Sin compromiso</span></div>
       <a href="mailto:anthony@westwardco.fr">anthony@westwardco.fr</a></div>
-      <form class="campusForm" id="campus-form">
-        <div class="formTrap" aria-hidden="true"><label>Ne pas remplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
-        <div class="formSplit"><label>Nombre y apellidos<input name="nom" autocomplete="name" required></label><label>Correo electrónico<input name="email" type="email" autocomplete="email" required></label></div>
-        <div class="formSplit"><label>Teléfono<input name="telephone" type="tel" autocomplete="tel"></label><label>Inicio previsto<input name="rentree" placeholder="Ex. : automne 2027"></label></div>
-        <label>Situación actual<select name="situation" required><option value="">Elegir una opción</option><option>Estudiante de secundaria</option><option>Estudiante universitario</option><option>En año sabático</option><option>Padre, madre o representante legal</option><option>Otra situación</option></select></label>
-        <label>Su proyecto<textarea name="message" rows="6" placeholder="Presente brevemente el proyecto, el destino previsto y sus principales preguntas." required></textarea></label>
-        <label class="consent"><input name="consentement" type="checkbox" required><span>Acepto que la información enviada se utilice para responder a mi solicitud, de acuerdo con la <a href="/es/confidentialite/">política de privacidad</a>.</span></label>
-        <button type="submit">Enviar mi solicitud</button>
-        <p class="formStatus" role="status" aria-live="polite"></p>
-        <p class="formHelp">Su solicitud se enviará directamente a Westward Co.</p>
-        <p class="privacyNotice">La información introducida se transmite a Westward Co. únicamente para responder a su solicitud. No se guarda en una base de datos del sitio. <a href="/es/confidentialite/">Más información sobre la gestión de sus datos.</a></p>
-      </form>
+      <div id="campus-questionnaire" class="questionnaireMount"></div>
     </div>
   </section>
 </main><footer class="footer">
