@@ -19,9 +19,10 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://westwardco.fr/#organization","name":"Westward Co.","url":"https://westwardco.fr/","logo":"https://westwardco.fr/assets/0a89128e-3b66-4128-b890-8c855a164e61-westward-logo-black.png","email":"anthony@westwardco.fr"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://westwardco.fr/campus/#webpage","url":"https://westwardco.fr/campus/","name":"Study in the United States | Westward Co. Campus","description":"Westward Co. Campus supports French students and their families as they prepare to study in the United States.","inLanguage":"en-US","isPartOf":{"@id":"https://westwardco.fr/#website"},"publisher":{"@id":"https://westwardco.fr/#organization"}}</script>
   <link rel="stylesheet" href="/styles/base.css"><link rel="stylesheet" href="/styles/chrome.css?v=20260929-2">
-  <link rel="stylesheet" href="/styles/campus.css?v=20260929-4">
+  <link rel="stylesheet" href="/styles/campus.css?v=20260929-5">
   <link rel="preload" as="image" href="/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png">
-  <script src="/scripts/site.js?v=20260929-3" defer></script>
+  <script src="/scripts/campus-questionnaire.js?v=20260929-1" defer></script>
+  <script src="/scripts/site.js?v=20260929-4" defer></script>
 </head><body class="campusSite"><header class="header" id="site-header">
   <div class="headerInner">
     <nav class="desktopLeft" aria-label="Main navigation left">
@@ -126,21 +127,11 @@
   </section>
 
   <section class="campusContact" id="contact-campus">
-    <div class="contactWrap"><div class="contactIntro"><p class="eyebrow">First conversation</p><h2>Tell us about your study project.</h2>
-      <p>This first contact helps us understand your situation and identify possible next steps.</p>
+    <div class="contactWrap"><div class="contactIntro"><p class="eyebrow">Follow-up request</p><h2>Let’s prepare a genuinely useful first conversation.</h2>
+      <p>This questionnaire helps us understand the student’s profile, the project’s progress and the family’s priorities before contacting you.</p>
+      <div class="questionnairePromise"><strong>4 steps</strong><span>About 8 minutes</span><span>No commitment</span></div>
       <a href="mailto:anthony@westwardco.fr">anthony@westwardco.fr</a></div>
-      <form class="campusForm" id="campus-form">
-        <div class="formTrap" aria-hidden="true"><label>Ne pas remplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
-        <div class="formSplit"><label>Full name<input name="nom" autocomplete="name" required></label><label>Email<input name="email" type="email" autocomplete="email" required></label></div>
-        <div class="formSplit"><label>Phone<input name="telephone" type="tel" autocomplete="tel"></label><label>Planned intake<input name="rentree" placeholder="Ex. : automne 2027"></label></div>
-        <label>Current situation<select name="situation" required><option value="">Choose an option</option><option>Middle or high school student</option><option>University student</option><option>On a gap year</option><option>Parent or legal guardian</option><option>Other situation</option></select></label>
-        <label>Your project<textarea name="message" rows="6" placeholder="Briefly describe the project, the intended destination and your main questions." required></textarea></label>
-        <label class="consent"><input name="consentement" type="checkbox" required><span>I agree that the information submitted may be used to answer my request, in accordance with the <a href="/en/confidentialite/">privacy policy</a>.</span></label>
-        <button type="submit">Send my request</button>
-        <p class="formStatus" role="status" aria-live="polite"></p>
-        <p class="formHelp">Your request will be sent directly to Westward Co.</p>
-        <p class="privacyNotice">The information entered is sent to Westward Co. solely to respond to your request. It is not stored in a website database. <a href="/en/confidentialite/">Learn more about how your data is handled.</a></p>
-      </form>
+      <div id="campus-questionnaire" class="questionnaireMount"></div>
     </div>
   </section>
 </main><footer class="footer">
