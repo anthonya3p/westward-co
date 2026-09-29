@@ -296,11 +296,10 @@ function pathFor(lang, route) { return lang === 'fr' ? `/${route}` : `/${lang}/$
 
 function languageNav(lang, route, mobile = false) {
   const labels = {fr:'Français', en:'English', es:'Español'};
-  const flags = {fr:'🇫🇷', en:'🇺🇸', es:'🇪🇸'};
-  const links = ['fr','en','es'].map(code => `<a href="${pathFor(code, route)}" lang="${code}" aria-label="${labels[code]}" title="${labels[code]}"${code === lang ? ' class="active" aria-current="page"' : ''}><span aria-hidden="true">${flags[code]}</span></a>`).join('');
-  return mobile
-    ? `<nav class="mobileLang" aria-label="Language / Idioma">${links}</nav>`
-    : `<span class="languageNav" role="navigation" aria-label="Language / Idioma">${links}</span>`;
+  const menuLabels = {fr:'Choisir la langue', en:'Choose language', es:'Elegir idioma'};
+  const links = ['fr','en','es'].map(code => `<a href="${pathFor(code, route)}" lang="${code}" aria-label="${labels[code]}" title="${labels[code]}"${code === lang ? ' class="active" aria-current="page"' : ''}>${code.toUpperCase()}</a>`).join('');
+  const className = mobile ? 'mobileLang' : 'languageNav';
+  return `<details class="${className}"><summary aria-label="${menuLabels[lang]}"><span>${lang.toUpperCase()}</span><svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></summary><div class="languageOptions">${links}</div></details>`;
 }
 
 function alternates(route) {
@@ -324,7 +323,7 @@ for (const route of routes) {
     /<nav class="desktopRight"[\s\S]*?(?=\s*<nav class="mobileLang")/,
     `<nav class="desktopRight" aria-label="Navigation principale droite"><a href="/contact/">Contact</a>${languageNav('fr', route)}</nav>`
   );
-  source = source.replace(/<span class="mobileLang">FR \/ EN<\/span>|<nav class="mobileLang"[\s\S]*?<\/nav>/, languageNav('fr', route, true));
+  source = source.replace(/<span class="mobileLang">FR \/ EN<\/span>|<(?:nav|details) class="mobileLang"[\s\S]*?<\/(?:nav|details)>/, languageNav('fr', route, true));
   await writeFile(sourcePath, source);
 
   const canonical = `https://westwardco.fr/${route}`;

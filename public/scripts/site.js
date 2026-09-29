@@ -21,6 +21,28 @@
       lastY = nextY;
     }, { passive: true });
   }
+  const languageMenus = [...document.querySelectorAll('.languageNav, .mobileLang')];
+  languageMenus.forEach(languageMenu => {
+    languageMenu.addEventListener('toggle', () => {
+      if (languageMenu.open) languageMenus.forEach(other => {
+        if (other !== languageMenu) other.removeAttribute('open');
+      });
+    });
+  });
+  document.addEventListener('click', event => {
+    languageMenus.forEach(languageMenu => {
+      if (!languageMenu.contains(event.target)) languageMenu.removeAttribute('open');
+    });
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    languageMenus.forEach(languageMenu => {
+      if (languageMenu.open) {
+        languageMenu.removeAttribute('open');
+        languageMenu.querySelector('summary')?.focus();
+      }
+    });
+  });
   const form = document.getElementById('contact-form');
   form?.addEventListener('submit', event => {
     event.preventDefault();
