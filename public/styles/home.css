@@ -159,7 +159,7 @@
 }
 .categoryTitle {
   max-width: 680px;
-  font: 400 clamp(4rem,6.7vw,7.3rem)/.84 var(--font-family-display);
+  font: 400 clamp(4rem,6.7vw,7.3rem)/.94 var(--font-family-display);
   letter-spacing: -.035em;
   overflow-wrap: normal;
 }
@@ -220,7 +220,7 @@
 .categoryDetailsHead .eyebrow { margin: 12px 0 0; color: #C8AA82; }
 .categoryDetailsHead h3 {
   margin: 0;
-  font: 400 clamp(3rem,5vw,5.3rem)/.92 var(--font-family-display);
+  font: 400 clamp(3rem,5vw,5.3rem)/1 var(--font-family-display);
   letter-spacing: -.025em;
 }
 .categoryDetailsCopy > p {
@@ -283,7 +283,7 @@
 }
 .destinationCard h4 {
   margin: 0;
-  font: 400 clamp(2.7rem,4vw,4.6rem)/.88 var(--font-family-display);
+  font: 400 clamp(2.7rem,4vw,4.6rem)/.98 var(--font-family-display);
   letter-spacing: -.025em;
 }
 .destinationGridThree .destinationCard h4 { font-size: clamp(2.5rem,3.3vw,3.8rem); }
@@ -332,7 +332,7 @@
 .portalBrand h2 {
   max-width: 920px;
   font-size: clamp(3rem,6vw,6.2rem);
-  line-height: .93;
+  line-height: 1;
   letter-spacing: -.025em;
 }
 .portalBrandInner > p:not(.eyebrow) {
@@ -366,13 +366,13 @@
   .portalProjectsInner { width: min(100% - 28px,720px); }
   .portalProjectsHead { grid-template-columns: 1fr; gap: 28px; margin-bottom: 44px; }
   .portalProjectsHead .eyebrow { grid-column: 1; margin: 0 0 -8px; }
-  .portalProjects h2 { font-size: clamp(3rem,14vw,5rem); line-height: .94; }
+  .portalProjects h2 { font-size: clamp(3rem,14vw,5rem); line-height: 1; }
   .portalProjectsHead > p:last-child { justify-self: start; }
   .categoryChooser { grid-template-columns: 1fr; gap: 14px; }
   .categoryPortal[open] { grid-column: 1; }
   .categoryPortal summary,
   .categoryPortal[open] summary { width: 100%; min-height: clamp(470px,126vw,560px); padding: 26px 22px; }
-  .categoryTitle { max-width: 100%; font-size: clamp(3.15rem,13vw,5rem); line-height: .88; letter-spacing: -.04em; }
+  .categoryTitle { max-width: 100%; font-size: clamp(3.15rem,13vw,5rem); line-height: .98; letter-spacing: -.04em; }
   .categoryIntro { max-width: 440px; margin-top: 24px; }
   .categoryAction { margin-top: 28px; }
   .categoryDetails { padding: 58px 0 26px; }
