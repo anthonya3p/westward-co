@@ -112,6 +112,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
   align-items: start;
+  min-width: 0;
 }
 .categoryPortal { min-width: 0; }
 .categoryPortal[open] { grid-column: 1 / -1; }
@@ -160,6 +161,7 @@
   max-width: 680px;
   font: 400 clamp(4rem,6.7vw,7.3rem)/.84 var(--font-family-display);
   letter-spacing: -.035em;
+  overflow-wrap: normal;
 }
 .categoryIntro {
   max-width: 520px;
@@ -355,7 +357,7 @@
   .primaryButton { min-width: 220px; }
   .portalProjects { padding: 88px 0 96px; }
   .portalProjects::before { top: 28px; font-size: 24vw; }
-  .portalProjectsInner { width: min(100% - 34px,720px); }
+  .portalProjectsInner { width: min(100% - 28px,720px); }
   .portalProjectsHead { grid-template-columns: 1fr; gap: 28px; margin-bottom: 44px; }
   .portalProjectsHead .eyebrow { grid-column: 1; margin: 0 0 -8px; }
   .portalProjects h2 { font-size: clamp(3rem,14vw,5rem); line-height: .94; }
@@ -363,8 +365,8 @@
   .categoryChooser { grid-template-columns: 1fr; gap: 14px; }
   .categoryPortal[open] { grid-column: 1; }
   .categoryPortal summary,
-  .categoryPortal[open] summary { min-height: 540px; padding: 26px; }
-  .categoryTitle { font-size: clamp(3.5rem,15vw,5.8rem); }
+  .categoryPortal[open] summary { width: 100%; min-height: clamp(470px,126vw,560px); padding: 26px 22px; }
+  .categoryTitle { max-width: 100%; font-size: clamp(3.15rem,13vw,5rem); line-height: .88; letter-spacing: -.04em; }
   .categoryIntro { max-width: 440px; margin-top: 24px; }
   .categoryAction { margin-top: 28px; }
   .categoryDetails { padding: 58px 0 26px; }
@@ -380,6 +382,23 @@
   .portalBrandInner { width: min(100% - 40px,720px); }
   .portalBrand h2 { font-size: clamp(3rem,13vw,5rem); }
   .portalBrandInner > p:not(.eyebrow), .portalBrandInner > a { margin-left: 0; }
+}
+
+@media (max-width: 420px) {
+  .portalProjects { padding: 76px 0 82px; }
+  .portalProjectsInner { width: calc(100% - 20px); }
+  .portalProjects h2 { font-size: clamp(2.8rem,13vw,4.4rem); }
+  .categoryPortal summary,
+  .categoryPortal[open] summary { min-height: 500px; padding: 22px 18px; }
+  .categoryEyebrow { font-size: .67rem; letter-spacing: .12em; }
+  .categoryTitle { font-size: clamp(3rem,12.7vw,3.8rem); }
+  .categoryIntro { font-size: 1rem; line-height: 1.55; }
+  .categoryAction { gap: 12px; font-size: .63rem; letter-spacing: .1em; }
+  .categoryAction i { width: 38px; height: 38px; flex: 0 0 38px; }
+  .destinationCard,
+  .destinationGridTwo .destinationCard { min-height: 500px; padding: 22px 18px; }
+  .destinationCard h4,
+  .destinationGridThree .destinationCard h4 { font-size: clamp(2.65rem,12vw,3.5rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
