@@ -107,65 +107,123 @@
   color: rgba(244,239,230,.66);
   font: 400 1rem/1.75 var(--font-family-base);
 }
-.projectWorld {
-  margin-top: 92px;
-  border-top: 1px solid rgba(244,239,230,.18);
-}
-.worldHeader {
+.categoryChooser {
   display: grid;
-  grid-template-columns: minmax(210px,.75fr) minmax(360px,1.25fr) minmax(240px,.8fr);
-  gap: 40px;
-  align-items: end;
-  min-height: 260px;
-  padding: 46px 0 42px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
 }
-.worldHeader > div { align-self: start; }
-.worldNumber,
-.worldTag {
-  margin: 0;
-  font-family: var(--font-family-base);
+.categoryPortal { min-width: 0; }
+.categoryPortal[open] { grid-column: 1 / -1; }
+.categoryPortal summary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  min-height: 670px;
+  padding: 42px;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #F4EFE6;
+  cursor: pointer;
+  list-style: none;
+}
+.categoryPortal summary::-webkit-details-marker { display: none; }
+.categoryPortal summary::before,
+.categoryPortal summary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.categoryPortal summary::before {
+  z-index: -2;
+  background: var(--category-image) center/cover;
+  filter: saturate(.78) contrast(1.05);
+  transition: transform .8s cubic-bezier(.2,.75,.25,1), filter .45s ease;
+}
+.categoryPortal summary::after {
+  z-index: -1;
+  background: linear-gradient(180deg,rgba(13,12,10,.1),rgba(13,12,10,.24) 34%,rgba(13,12,10,.94));
+}
+.categoryPortal summary:hover::before,
+.categoryPortal summary:focus-visible::before { transform: scale(1.035); filter: saturate(.95) contrast(1.05); }
+.categoryPortal summary:focus-visible { outline: 2px solid #F4EFE6; outline-offset: -7px; }
+.categoryPortal[open] summary { min-height: 460px; }
+.categoryEyebrow {
+  margin-bottom: auto;
+  font: 700 .7rem/1.2 var(--font-family-base);
+  letter-spacing: .16em;
   text-transform: uppercase;
 }
-.worldNumber {
-  color: #C8AA82;
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .18em;
-}
-.worldTag {
-  max-width: 230px;
-  margin-top: 18px;
-  color: rgba(244,239,230,.56);
-  font-size: .7rem;
-  line-height: 1.55;
-  letter-spacing: .13em;
-}
-.worldHeader h3 {
-  margin: 0;
-  font: 400 clamp(4.2rem,8vw,8.2rem)/.76 var(--font-family-display);
+.categoryTitle {
+  max-width: 680px;
+  font: 400 clamp(4rem,6.7vw,7.3rem)/.84 var(--font-family-display);
   letter-spacing: -.035em;
-  white-space: nowrap;
 }
-.worldHeader h3 i {
-  color: #B9875F;
-  font-weight: 300;
-}
-.worldHeader > p {
-  margin: 0 0 5px;
-  color: rgba(244,239,230,.7);
+.categoryIntro {
+  max-width: 520px;
+  margin-top: 30px;
+  color: rgba(244,239,230,.78);
   font: 400 1rem/1.7 var(--font-family-base);
 }
-.worldLifestyle {
-  margin-top: 130px;
-  padding-top: 18px;
-}
-.worldLifestyle .worldHeader { grid-template-columns: minmax(210px,.72fr) minmax(430px,1.25fr) minmax(240px,.8fr); }
-.worldGrid {
-  display: grid;
+.categoryAction {
+  display: flex;
   gap: 16px;
+  align-items: center;
+  margin-top: 34px;
+  font: 700 .68rem/1 var(--font-family-base);
+  letter-spacing: .14em;
+  text-transform: uppercase;
 }
-.worldGridThree { grid-template-columns: repeat(3,minmax(0,1fr)); }
-.worldGridTwo { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.categoryAction i {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(244,239,230,.5);
+  border-radius: 50%;
+}
+.categoryAction i::before,
+.categoryAction i::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 13px;
+  height: 1px;
+  background: currentColor;
+  transform: translate(-50%,-50%);
+  transition: transform .3s ease;
+}
+.categoryAction i::after { transform: translate(-50%,-50%) rotate(90deg); }
+.categoryPortal[open] .categoryAction i::after { transform: translate(-50%,-50%) rotate(0); }
+.openLabel { display: none; }
+.categoryPortal[open] .closedLabel { display: none; }
+.categoryPortal[open] .openLabel { display: inline; }
+.categoryDetails {
+  padding: 78px 0 20px;
+  animation: revealCategory .45s ease both;
+}
+@keyframes revealCategory {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.categoryDetailsHead {
+  display: grid;
+  grid-template-columns: .6fr 1.4fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 46px;
+}
+.categoryDetailsHead .eyebrow { margin: 12px 0 0; color: #C8AA82; }
+.categoryDetailsHead h3 {
+  margin: 0;
+  font: 400 clamp(3rem,5vw,5.3rem)/.92 var(--font-family-display);
+  letter-spacing: -.025em;
+}
+.destinationGrid { display: grid; gap: 16px; }
+.destinationGridThree { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.destinationGridTwo { grid-template-columns: repeat(2,minmax(0,1fr)); }
 .destinationCard {
   position: relative;
   isolation: isolate;
@@ -173,13 +231,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 570px;
+  min-height: 560px;
   padding: 30px;
   background: #2B2924;
   color: #F4EFE6;
   text-decoration: none;
 }
-.worldGridTwo .destinationCard { min-height: 660px; padding: 38px; }
+.destinationGridTwo .destinationCard { min-height: 650px; padding: 38px; }
 .destinationCard::before,
 .destinationCard::after {
   content: "";
@@ -220,7 +278,7 @@
   font: 400 clamp(2.7rem,4vw,4.6rem)/.88 var(--font-family-display);
   letter-spacing: -.025em;
 }
-.worldGridThree .destinationCard h4 { font-size: clamp(2.5rem,3.3vw,3.8rem); }
+.destinationGridThree .destinationCard h4 { font-size: clamp(2.5rem,3.3vw,3.8rem); }
 .destinationCard div > p {
   max-width: 460px;
   margin: 22px 0 0;
@@ -302,20 +360,22 @@
   .portalProjectsHead .eyebrow { grid-column: 1; margin: 0 0 -8px; }
   .portalProjects h2 { font-size: clamp(3rem,14vw,5rem); line-height: .94; }
   .portalProjectsHead > p:last-child { justify-self: start; }
-  .projectWorld { margin-top: 68px; }
-  .worldHeader,
-  .worldLifestyle .worldHeader { grid-template-columns: 1fr; gap: 20px; min-height: 0; padding: 34px 0 30px; }
-  .worldHeader > div { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-  .worldTag { max-width: 270px; margin: 0; text-align: right; }
-  .worldHeader h3 { font-size: clamp(4rem,17vw,7rem); line-height: .82; white-space: normal; }
-  .worldHeader > p { max-width: 500px; }
-  .worldLifestyle { margin-top: 88px; padding-top: 0; }
-  .worldGridThree,
-  .worldGridTwo { grid-template-columns: 1fr; }
+  .categoryChooser { grid-template-columns: 1fr; gap: 14px; }
+  .categoryPortal[open] { grid-column: 1; }
+  .categoryPortal summary,
+  .categoryPortal[open] summary { min-height: 540px; padding: 26px; }
+  .categoryTitle { font-size: clamp(3.5rem,15vw,5.8rem); }
+  .categoryIntro { max-width: 440px; margin-top: 24px; }
+  .categoryAction { margin-top: 28px; }
+  .categoryDetails { padding: 58px 0 26px; }
+  .categoryDetailsHead { grid-template-columns: 1fr; gap: 16px; margin-bottom: 32px; }
+  .categoryDetailsHead .eyebrow { margin: 0; }
+  .destinationGridThree,
+  .destinationGridTwo { grid-template-columns: 1fr; }
   .destinationCard,
-  .worldGridTwo .destinationCard { min-height: 540px; padding: 25px; }
+  .destinationGridTwo .destinationCard { min-height: 540px; padding: 25px; }
   .destinationCard h4,
-  .worldGridThree .destinationCard h4 { font-size: clamp(3rem,12vw,4.5rem); }
+  .destinationGridThree .destinationCard h4 { font-size: clamp(3rem,12vw,4.5rem); }
   .portalBrand { padding: 96px 0 106px; }
   .portalBrandInner { width: min(100% - 40px,720px); }
   .portalBrand h2 { font-size: clamp(3rem,13vw,5rem); }
@@ -323,5 +383,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .destinationCard::before, .destinationCard::after, .primaryButton { transition: none; }
+  .destinationCard::before, .destinationCard::after, .categoryPortal summary::before, .categoryAction i::after, .primaryButton { transition: none; }
+  .categoryDetails { animation: none; }
 }
