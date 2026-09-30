@@ -223,6 +223,12 @@
   font: 400 clamp(3rem,5vw,5.3rem)/.92 var(--font-family-display);
   letter-spacing: -.025em;
 }
+.categoryDetailsCopy > p {
+  max-width: 660px;
+  margin: 24px 0 0;
+  color: rgba(244,239,230,.68);
+  font: 400 1rem/1.7 var(--font-family-base);
+}
 .destinationGrid { display: grid; gap: 16px; }
 .destinationGridThree { grid-template-columns: repeat(3,minmax(0,1fr)); }
 .destinationGridTwo { grid-template-columns: repeat(2,minmax(0,1fr)); }
