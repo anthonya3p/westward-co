@@ -107,103 +107,138 @@
   color: rgba(244,239,230,.66);
   font: 400 1rem/1.75 var(--font-family-base);
 }
-.portalGrid {
-  display: grid;
-  grid-template-columns: repeat(12,minmax(0,1fr));
-  grid-template-rows: repeat(2, minmax(520px, 64vh));
-  gap: 18px;
+.projectWorld {
+  margin-top: 92px;
+  border-top: 1px solid rgba(244,239,230,.18);
 }
-.portalCard {
+.worldHeader {
+  display: grid;
+  grid-template-columns: minmax(210px,.75fr) minmax(360px,1.25fr) minmax(240px,.8fr);
+  gap: 40px;
+  align-items: end;
+  min-height: 260px;
+  padding: 46px 0 42px;
+}
+.worldHeader > div { align-self: start; }
+.worldNumber,
+.worldTag {
+  margin: 0;
+  font-family: var(--font-family-base);
+  text-transform: uppercase;
+}
+.worldNumber {
+  color: #C8AA82;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+}
+.worldTag {
+  max-width: 230px;
+  margin-top: 18px;
+  color: rgba(244,239,230,.56);
+  font-size: .7rem;
+  line-height: 1.55;
+  letter-spacing: .13em;
+}
+.worldHeader h3 {
+  margin: 0;
+  font: 400 clamp(4.2rem,8vw,8.2rem)/.76 var(--font-family-display);
+  letter-spacing: -.035em;
+  white-space: nowrap;
+}
+.worldHeader h3 i {
+  color: #B9875F;
+  font-weight: 300;
+}
+.worldHeader > p {
+  margin: 0 0 5px;
+  color: rgba(244,239,230,.7);
+  font: 400 1rem/1.7 var(--font-family-base);
+}
+.worldLifestyle {
+  margin-top: 130px;
+  padding-top: 18px;
+}
+.worldLifestyle .worldHeader { grid-template-columns: minmax(210px,.72fr) minmax(430px,1.25fr) minmax(240px,.8fr); }
+.worldGrid {
+  display: grid;
+  gap: 16px;
+}
+.worldGridThree { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.worldGridTwo { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.destinationCard {
   position: relative;
-  overflow: hidden;
   isolation: isolate;
+  overflow: hidden;
   display: flex;
-  min-width: 0;
-  padding: 34px;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 570px;
+  padding: 30px;
   background: #2B2924;
   color: #F4EFE6;
+  text-decoration: none;
 }
-.portalCard::before {
+.worldGridTwo .destinationCard { min-height: 660px; padding: 38px; }
+.destinationCard::before,
+.destinationCard::after {
   content: "";
   position: absolute;
-  z-index: -2;
   inset: 0;
+  pointer-events: none;
+}
+.destinationCard::before {
+  z-index: 0;
   background: var(--project-image) center/cover;
-  transition: transform .9s cubic-bezier(.2,.75,.25,1);
+  filter: saturate(.84) contrast(1.04);
+  transition: transform .8s cubic-bezier(.2,.75,.25,1), filter .5s ease;
 }
-.portalCard::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: linear-gradient(180deg,rgba(12,12,10,.14),rgba(12,12,10,.18) 36%,rgba(12,12,10,.9));
-  transition: background .4s ease;
+.destinationCard::after {
+  z-index: 1;
+  background: linear-gradient(180deg,rgba(10,10,8,.16),rgba(10,10,8,.22) 38%,rgba(10,10,8,.94));
+  transition: background .35s ease;
 }
-.portalCard:hover::before { transform: scale(1.045); }
-.portalCard:hover::after { background: linear-gradient(180deg,rgba(12,12,10,.08),rgba(12,12,10,.22) 32%,rgba(12,12,10,.94)); }
-.portalCampus { grid-column: 1 / span 7; grid-row: 1; }
-.portalCoffee { grid-column: 8 / -1; grid-row: 1 / -1; }
-.portalDigital { grid-column: 1 / span 5; grid-row: 2; }
-.portalCowboy { grid-column: 6 / span 7; grid-row: 2; }
-.portalIndex {
-  position: absolute;
-  top: 32px;
-  right: 34px;
-  color: rgba(244,239,230,.72);
-  font: 600 .72rem/1 var(--font-family-base);
-  letter-spacing: .16em;
-}
-.portalCardCopy {
-  align-self: flex-end;
-  width: 100%;
-}
-.portalCardCopy > p {
-  margin: 0 0 14px;
-  color: #D8C7AE;
-  font: 600 .7rem/1.3 var(--font-family-base);
-  letter-spacing: .14em;
+.destinationCard > * { position: relative; z-index: 2; }
+.destinationCard:hover::before,
+.destinationCard:focus-visible::before { transform: scale(1.045); filter: saturate(1) contrast(1.04); }
+.destinationCard:hover::after,
+.destinationCard:focus-visible::after { background: linear-gradient(180deg,rgba(10,10,8,.08),rgba(10,10,8,.2) 34%,rgba(10,10,8,.96)); }
+.destinationCard:focus-visible { outline: 2px solid #F4EFE6; outline-offset: 4px; }
+.destinationType {
+  width: max-content;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(244,239,230,.38);
+  background: rgba(19,18,15,.22);
+  backdrop-filter: blur(6px);
+  font: 700 .64rem/1.2 var(--font-family-base);
+  letter-spacing: .13em;
   text-transform: uppercase;
 }
-.portalCard h3 {
+.destinationCard h4 {
   margin: 0;
-  font: 400 clamp(2.5rem,4.8vw,5.1rem)/.9 var(--font-family-display);
+  font: 400 clamp(2.7rem,4vw,4.6rem)/.88 var(--font-family-display);
   letter-spacing: -.025em;
 }
-.portalCoffee h3, .portalDigital h3 { font-size: clamp(2.5rem,4vw,4.4rem); }
-.portalCardCopy > span {
-  display: block;
-  width: min(500px, 100%);
-  margin-top: 24px;
+.worldGridThree .destinationCard h4 { font-size: clamp(2.5rem,3.3vw,3.8rem); }
+.destinationCard div > p {
+  max-width: 460px;
+  margin: 22px 0 0;
   color: rgba(244,239,230,.76);
-  font: 400 .96rem/1.65 var(--font-family-base);
+  font: 400 .94rem/1.65 var(--font-family-base);
 }
-.portalActions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 28px;
-  flex-wrap: wrap;
-}
-.portalActions a {
-  display: inline-flex;
-  min-height: 42px;
-  align-items: center;
-  padding: 11px 15px;
-  border: 1px solid rgba(244,239,230,.5);
-  border-radius: 999px;
-  color: #F4EFE6;
-  text-decoration: none;
-  font: 600 .65rem/1 var(--font-family-base);
-  letter-spacing: .11em;
+.destinationLink {
+  display: inline-block;
+  margin-top: 26px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(244,239,230,.62);
+  font: 700 .67rem/1 var(--font-family-base);
+  letter-spacing: .13em;
   text-transform: uppercase;
-  transition: background .25s ease,color .25s ease,border-color .25s ease;
 }
-.portalActions a:hover, .portalActions a:focus-visible {
-  background: #F4EFE6;
-  border-color: #F4EFE6;
-  color: #1C1B18;
+.mediaCard::after {
+  background: linear-gradient(180deg,rgba(31,24,18,.08),rgba(31,24,18,.28) 35%,rgba(31,24,18,.96));
 }
-.portalActions .portalMedia { border-color: transparent; background: rgba(244,239,230,.12); }
 
 .portalBrand {
   position: relative;
@@ -267,13 +302,20 @@
   .portalProjectsHead .eyebrow { grid-column: 1; margin: 0 0 -8px; }
   .portalProjects h2 { font-size: clamp(3rem,14vw,5rem); line-height: .94; }
   .portalProjectsHead > p:last-child { justify-self: start; }
-  .portalGrid { display: grid; grid-template-columns: 1fr; grid-template-rows: none; gap: 16px; }
-  .portalCampus, .portalCoffee, .portalDigital, .portalCowboy { grid-column: 1; grid-row: auto; min-height: 520px; }
-  .portalCard { padding: 24px; }
-  .portalIndex { top: 24px; right: 24px; }
-  .portalCard h3, .portalCoffee h3, .portalDigital h3 { font-size: clamp(3.1rem,13vw,4.7rem); }
-  .portalCardCopy > span { font-size: .94rem; }
-  .portalActions { align-items: flex-start; flex-direction: column; }
+  .projectWorld { margin-top: 68px; }
+  .worldHeader,
+  .worldLifestyle .worldHeader { grid-template-columns: 1fr; gap: 20px; min-height: 0; padding: 34px 0 30px; }
+  .worldHeader > div { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+  .worldTag { max-width: 270px; margin: 0; text-align: right; }
+  .worldHeader h3 { font-size: clamp(4rem,17vw,7rem); line-height: .82; white-space: normal; }
+  .worldHeader > p { max-width: 500px; }
+  .worldLifestyle { margin-top: 88px; padding-top: 0; }
+  .worldGridThree,
+  .worldGridTwo { grid-template-columns: 1fr; }
+  .destinationCard,
+  .worldGridTwo .destinationCard { min-height: 540px; padding: 25px; }
+  .destinationCard h4,
+  .worldGridThree .destinationCard h4 { font-size: clamp(3rem,12vw,4.5rem); }
   .portalBrand { padding: 96px 0 106px; }
   .portalBrandInner { width: min(100% - 40px,720px); }
   .portalBrand h2 { font-size: clamp(3rem,13vw,5rem); }
@@ -281,5 +323,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .portalCard::before, .portalCard::after, .primaryButton, .portalActions a { transition: none; }
+  .destinationCard::before, .destinationCard::after, .primaryButton { transition: none; }
 }
