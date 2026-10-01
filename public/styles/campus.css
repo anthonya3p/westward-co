@@ -56,3 +56,63 @@
   .buttonGhost{min-height:44px;text-align:left;justify-content:flex-start;padding-left:0;padding-right:0}
 }
 @media(max-width:390px){.campusBranch{display:none}}
+
+
+/* Consistent questionnaire geometry, including Safari date controls. */
+.campusSite .requestSection{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(28px,4vw,70px);padding:60px clamp(22px,5vw,80px);background:var(--campus-deep)}
+.campusSite .requestIntro h2{font-size:clamp(2.3rem,3.5vw,4rem);line-height:1.12}
+.campusSite .requestIntro{min-width:0}
+.campusSite .requestIntro>a{overflow-wrap:anywhere}
+.campusSite .requestFacts{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.campusSite .questionnaireMount{min-width:0;width:100%;box-shadow:10px 10px 0 rgba(216,199,174,.25)}
+.campusSite .campusQuestionnaire{padding:clamp(22px,3vw,42px);width:100%;min-width:0}
+.campusQuestionnaire fieldset,.campusQuestionnaire .formSplit,.campusQuestionnaire label{min-width:0;max-width:100%}
+.campusQuestionnaire .formStep{width:100%}
+.campusQuestionnaire .formSplit{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:stretch;margin-bottom:20px}
+.campusQuestionnaire .formSplit>label{display:flex;flex-direction:column;justify-content:flex-end;gap:9px;margin:0;line-height:1.5}
+.campusQuestionnaire label,.campusQuestionnaire .choiceGroup legend{font-size:10px;line-height:1.6;letter-spacing:.065em}
+.campusQuestionnaire input:not([type=radio]):not([type=checkbox]),.campusQuestionnaire select,.campusQuestionnaire textarea{display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%;margin:0;border:1px solid #b9baaa;padding:12px 14px;font-family:Inter,Arial,sans-serif;font-size:16px;background:#f4efe6}
+.campusQuestionnaire input:not([type=radio]):not([type=checkbox]),.campusQuestionnaire select{height:52px;min-height:52px}
+.campusQuestionnaire input[type=date]{appearance:none;-webkit-appearance:none;text-align:left;overflow:hidden}
+.campusQuestionnaire input[type=date]::-webkit-date-and-time-value{text-align:left;min-height:1.3em}
+.campusQuestionnaire textarea{min-height:110px;margin-top:9px;margin-bottom:22px}
+.campusQuestionnaire .choiceGroup{min-inline-size:0;width:100%;margin:0 0 24px}
+.campusQuestionnaire .choiceGroup legend{padding:0;margin:0;max-width:100%;white-space:normal}
+.campusQuestionnaire .choiceGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
+.campusQuestionnaire .choiceGrid label{position:relative;display:flex;margin:0;min-width:0}
+.campusQuestionnaire .choiceGrid input{width:1px;height:1px;min-height:0;padding:0;margin:0;clip-path:inset(50%);overflow:hidden}
+.campusQuestionnaire .choiceGrid span{width:100%;height:100%;min-height:62px;font-size:13px;line-height:1.45;padding:12px;cursor:pointer}
+.campusQuestionnaire .choiceGrid input:focus-visible+span{outline:2px solid var(--campus-olive);outline-offset:3px}
+.campusQuestionnaire .choiceGrid input:checked+span{box-shadow:inset 0 0 0 1px var(--campus-deep)}
+.campusQuestionnaire .formSplit>.choiceGroup .choiceGrid{grid-template-columns:minmax(0,1fr)}
+.campusQuestionnaire .formSplit>.choiceGroup{display:flex;flex-direction:column}
+.campusQuestionnaire .formSplit>.choiceGroup legend{min-height:48px}
+.campusQuestionnaire .stepHeading{display:grid;grid-template-columns:40px minmax(0,1fr);gap:15px;margin-bottom:27px}
+.campusQuestionnaire .stepHeading h3{font-size:clamp(24px,2.2vw,32px);line-height:1.2;margin:0}
+.campusQuestionnaire .stepHeading p{margin:0 0 8px}
+.campusQuestionnaire .conditionalPanel{padding:18px}
+.campusQuestionnaire .conditionalPanel[hidden],.campusQuestionnaire .formStep[hidden],.campusQuestionnaire button[hidden]{display:none!important}
+.campusQuestionnaire .progressMeta{align-items:baseline;line-height:1.5}
+.campusQuestionnaire .progressMeta>span:last-child{text-align:right}
+.campusQuestionnaire .formNavigation{display:flex;flex-wrap:wrap;justify-content:flex-end}
+.campusQuestionnaire .formNavigation button{min-height:48px;max-width:100%}
+@media(max-width:1050px){.campusSite .requestSection{grid-template-columns:minmax(0,1fr)}.campusSite .requestIntro{position:static}.campusSite .requestIntro h2{max-width:700px}.campusSite .requestIntro>p:not(.kicker){max-width:650px}.campusSite .requestFacts{max-width:450px;margin:22px 0}}
+@media(max-width:740px){
+ .campusSite .requestSection{padding:28px 20px 40px;gap:28px}
+ .campusSite .requestIntro h2{font-size:30px;margin-bottom:14px}
+ .campusSite .requestIntro>p:not(.kicker){font-size:13px;line-height:1.65}
+ .campusSite .requestFacts{gap:10px;padding:15px 0}
+ .campusSite .requestFacts span{display:block;font-size:8px;line-height:1.5}
+ .campusSite .requestFacts strong{display:block;font-size:25px}
+ .campusSite .questionnaireMount{box-shadow:5px 5px 0 rgba(216,199,174,.25)}
+ .campusSite .campusQuestionnaire{padding:24px 18px}
+ .campusQuestionnaire .formSplit{grid-template-columns:minmax(0,1fr);gap:20px;margin-bottom:20px}
+ .campusQuestionnaire .choiceGrid{grid-template-columns:minmax(0,1fr)}
+ .campusQuestionnaire .choiceGrid span{min-height:52px}
+ .campusQuestionnaire .stepHeading{grid-template-columns:30px minmax(0,1fr);gap:12px}
+ .campusQuestionnaire .stepHeading>span{font-size:32px}
+ .campusQuestionnaire .stepHeading h3{font-size:25px}
+ .campusQuestionnaire .formSplit>.choiceGroup legend{min-height:0}
+ .campusQuestionnaire .formNavigation button{flex:1;min-width:100px;font-size:10px;padding:14px}
+ .campusQuestionnaire .formSubmit{flex-basis:100%!important}
+}
