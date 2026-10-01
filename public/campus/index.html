@@ -25,7 +25,7 @@
   <script src="/scripts/campus-questionnaire.js?v=20260929-2" defer></script>
   <script src="/scripts/site.js?v=20260929-4" defer></script>
 </head>
-<body class="campusSite">
+<body class="campusSite" data-view="home">
   <header class="campusHeader" id="site-header">
     <a class="campusBrand" href="/" aria-label="Westward Campus, accueil">
       <img src="/assets/0a89128e-3b66-4128-b890-8c855a164e61-westward-logo-black.png" alt="Westward Co.">
@@ -51,6 +51,21 @@
     </nav>
   </header>
 
+  <section class="campusWelcome" aria-label="Accueil Campus">
+    <div class="welcomePhoto" aria-hidden="true"></div>
+    <div class="welcomeContent">
+      <p class="welcomeEyebrow">Étudier aux États-Unis</p>
+      <h1>Un départ préparé.<br><em>Un avenir à construire.</em></h1>
+      <p class="welcomeLead">Du choix de l’université à l’installation, nous accompagnons les étudiants et leurs familles, étape par étape.</p>
+      <div class="welcomeLinks">
+        <a class="welcomePrimary" href="#demande">Préparer mon départ <small>Le questionnaire pour faire le point</small></a>
+        <a href="mailto:anthony@westwardco.fr?subject=Guide%20gratuit%20Campus">Demander le guide gratuit <small>Les premiers repères pour étudier aux USA</small></a>
+        <a href="#accompagnement">Comprendre l’accompagnement <small>Notre rôle, les étapes et les conditions</small></a>
+      </div>
+    </div>
+    <div class="welcomeFooter"><span>Une expérience vécue, partagée avec vous.</span><a href="https://westwardco.fr">Westward Co.</a></div>
+  </section>
+  <a class="campusBack" href="#accueil">Retour à l’accueil</a>
   <main>
     <section class="campusHero">
       <div class="heroImage" role="img" aria-label="Campus universitaire américain au pied des montagnes"></div>
@@ -162,5 +177,55 @@
     <div class="footerLinks"><a href="#accompagnement">Accompagnement</a><a href="#partenariats">Partenariats</a><a href="https://westwardco.fr">Westward Co.</a><a href="https://westwardco.fr/mentions-legales/">Mentions légales</a><a href="https://westwardco.fr/confidentialite/">Confidentialité</a></div>
     <div class="footerBottom"><span>© 2026 Westward Campus</span><span>Une initiative de <a href="https://westwardco.fr">Westward Co.</a></span></div>
   </footer>
+  <style>
+    .campusWelcome{min-height:calc(100svh - 86px);display:grid;grid-template-columns:.9fr 1.1fr;position:relative;background:var(--campus-paper)}
+    .welcomePhoto{background:linear-gradient(0deg,rgba(24,32,25,.2),transparent),url('/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png') center/cover}
+    .welcomeContent{align-self:center;padding:36px clamp(28px,5vw,90px) 65px;max-width:780px}
+    .welcomeEyebrow{font-size:14px;color:var(--campus-olive);letter-spacing:.12em;text-transform:uppercase;margin:0 0 18px}
+    .welcomeContent h1{font:400 clamp(2.5rem,4.4vw,4.6rem)/1.08 'DM Serif Display',Georgia,serif;letter-spacing:-.025em;margin:0 0 22px;overflow-wrap:normal}
+    .welcomeContent h1 em{color:var(--campus-olive);font-size:.82em}
+    .welcomeLead{font-size:16px;line-height:1.65;color:#4d534d;max-width:510px;margin:0 0 24px}
+    .welcomeLinks{display:grid;gap:9px}
+    .welcomeLinks a{display:block;padding:15px 18px;text-decoration:none;border:1px solid var(--campus-line);font-size:16px;font-weight:600;line-height:1.3;transition:background .2s}
+    .welcomeLinks small{display:block;font-size:13px;font-weight:400;margin-top:5px;opacity:.78;line-height:1.4}
+    .welcomeLinks a:hover{background:var(--campus-cream)}
+    .welcomeLinks .welcomePrimary{background:var(--campus-deep);border-color:var(--campus-deep);color:#fff}
+    .welcomeFooter{position:absolute;bottom:18px;left:calc(45% + 5vw);right:5vw;display:flex;justify-content:space-between;gap:15px;font-size:12px;color:var(--campus-olive)}
+    .campusBack{display:block;padding:20px clamp(22px,6vw,96px);font-size:14px;background:var(--campus-paper)}
+    .campusSite[data-view="home"] main,.campusSite[data-view="home"]>.campusFooter,.campusSite[data-view="home"] .campusBack{display:none}
+    .campusSite:not([data-view="home"]) .campusWelcome{display:none}
+    .campusSite .campusHero{display:none}
+    .campusSite[data-view="request"] main>section:not(.requestSection){display:none}
+    .campusSite[data-view="detail"] .requestSection{display:none}
+    .campusSite[data-view="home"] .headerCta{display:none}
+    @media(max-width:740px){
+      .campusWelcome{min-height:calc(100svh - 68px);grid-template-columns:1fr;grid-template-rows:clamp(80px,14svh,150px) auto;align-content:start}
+      .campusHeader{height:68px;padding:0 20px;grid-template-columns:minmax(0,1fr) auto;gap:10px}
+      .campusBrand img{width:92px;height:43px}.campusBrand{gap:10px}.campusBranch{font-size:17px;padding-left:10px}
+      .campusHeaderActions{display:flex}.campusHeaderActions .headerCta,.menuButton{display:none}.languageNav summary{padding:12px 4px;font-size:14px}
+      .welcomePhoto{background-position:center 42%}
+      .welcomeContent{padding:20px 20px 14px;max-width:620px;width:100%;justify-self:center}
+      .welcomeEyebrow{font-size:12px;margin-bottom:10px}
+      .welcomeContent h1{font-size:clamp(1.8rem,7.4vw,2.7rem);line-height:1.1;margin-bottom:13px}
+      .welcomeLead{font-size:14px;line-height:1.55;margin-bottom:17px}
+      .welcomeLinks{gap:7px}.welcomeLinks a{font-size:14px;padding:12px 14px}.welcomeLinks small{font-size:12px;margin-top:3px}
+      .welcomeFooter{position:static;grid-column:1;padding:2px 20px 15px;font-size:11px;align-items:center}
+      .campusSite[data-view="detail"] .statementMain h2,.campusSite[data-view="detail"] .pathIntro h2,.campusSite[data-view="detail"] .journeyHeading h2{font-size:clamp(2rem,8vw,3rem);line-height:1.12}
+      .campusBranch{display:block!important}.campusBack{padding:16px 20px}
+    }
+    @media(max-height:700px) and (max-width:740px){.campusWelcome{grid-template-rows:55px auto}.welcomeContent{padding-top:13px}.welcomeContent h1{font-size:1.85rem}.welcomeLead{margin-bottom:12px}.welcomeLinks a{padding:10px 13px}.welcomeFooter>span{display:none}}
+    @media(prefers-reduced-motion:reduce){.heroImage,.heroCopy{animation:none!important}}
+  </style>
+  <script>
+    (()=>{
+      const detailHashes=['#accompagnement','#parcours','#partenariats','#faq'];
+      function showView(){
+        const hash=location.hash;
+        document.body.dataset.view=hash==='#demande'?'request':detailHashes.includes(hash)?'detail':'home';
+        requestAnimationFrame(()=>{const target=document.querySelector(hash==='#demande'?'#demande':detailHashes.includes(hash)?hash:'.campusWelcome');if(target)target.scrollIntoView({block:'start',behavior:'instant'});});
+      }
+      showView();window.addEventListener('hashchange',showView);
+    })();
+  </script>
 </body>
 </html>
