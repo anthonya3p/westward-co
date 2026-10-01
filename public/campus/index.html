@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://westwardcampus.fr/">
   <meta property="og:image" content="https://westwardcampus.fr/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png">
   <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/campus.css?v=20261001-4">
+  <link rel="stylesheet" href="/styles/campus.css?v=20261002-1">
   <link rel="preload" as="image" href="/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png">
   <script src="/scripts/campus-questionnaire.js?v=20260929-2" defer></script>
   <script src="/scripts/site.js?v=20260929-4" defer></script>
@@ -61,11 +61,12 @@
       <p class="welcomeEyebrow"><span></span> Votre avenir aux États-Unis</p>
       <h1>Voir plus loin.<br><em>Partir bien préparé.</em></h1>
       <p class="welcomeLead">Une université à choisir. Une nouvelle vie à préparer. Un accompagnement humain pour avancer, avec votre famille, du premier choix jusqu’au départ.</p>
-      <div class="welcomeLinks">
+      <div class="welcomeSignature"><p><strong>Une expérience de père. Un engagement pour les familles.</strong>Né de l’accompagnement de mon fils aux États-Unis.</p></div>
+    </div>
+    <div class="welcomeLinks"><p class="welcomePanelLabel"><span>Votre point de départ</span><span>Campus / USA</span></p>
         <a class="welcomePrimary" href="#demande"><span class="welcomeNumber">01</span><span>Préparer mon départ <small>Faire le point avec le questionnaire</small></span><span class="welcomeAction">Commencer</span></a>
         <a href="mailto:anthony@westwardco.fr?subject=Guide%20gratuit%20Campus"><span class="welcomeNumber">02</span><span>Le guide gratuit <small>Demander les premiers repères</small></span><span class="welcomeAction">Recevoir</span></a>
         <a href="#accompagnement"><span class="welcomeNumber">03</span><span>Notre accompagnement <small>Comprendre notre rôle et les étapes</small></span><span class="welcomeAction">Découvrir</span></a>
-      </div>
     </div>
     <div class="welcomeFooter"><span>Une expérience vécue, partagée avec vous.</span><a href="https://westwardco.fr">Westward Co.</a></div>
   </section>
@@ -182,90 +183,79 @@
     <div class="footerBottom"><span>© 2026 Westward Campus</span><span>Une initiative de <a href="https://westwardco.fr">Westward Co.</a></span></div>
   </footer>
   <style>
-    .campusWelcome{min-height:calc(100svh - 86px);display:grid;grid-template-columns:.9fr 1.1fr;position:relative;background:var(--campus-paper)}
-    .welcomePhoto{background:linear-gradient(0deg,rgba(24,32,25,.2),transparent),url('/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png') center/cover}
-    .welcomeContent{align-self:center;padding:36px clamp(28px,5vw,90px) 65px;max-width:780px}
-    .welcomeEyebrow{font-size:14px;color:var(--campus-olive);letter-spacing:.12em;text-transform:uppercase;margin:0 0 18px}
-    .welcomeContent h1{font:400 clamp(2.5rem,4.4vw,4.6rem)/1.08 'DM Serif Display',Georgia,serif;letter-spacing:-.025em;margin:0 0 22px;overflow-wrap:normal}
-    .welcomeContent h1 em{color:var(--campus-olive);font-size:.82em}
-    .welcomeLead{font-size:16px;line-height:1.65;color:#4d534d;max-width:510px;margin:0 0 24px}
-    .welcomeLinks{display:grid;gap:9px}
-    .welcomeLinks a{display:block;padding:15px 18px;text-decoration:none;border:1px solid var(--campus-line);font-size:16px;font-weight:600;line-height:1.3;transition:background .2s}
-    .welcomeLinks small{display:block;font-size:13px;font-weight:400;margin-top:5px;opacity:.78;line-height:1.4}
-    .welcomeLinks a:hover{background:var(--campus-cream)}
-    .welcomeLinks .welcomePrimary{background:var(--campus-deep);border-color:var(--campus-deep);color:#fff}
-    .welcomeFooter{position:absolute;bottom:18px;left:calc(45% + 5vw);right:5vw;display:flex;justify-content:space-between;gap:15px;font-size:12px;color:var(--campus-olive)}
-    .campusBack{display:block;padding:20px clamp(22px,6vw,96px);font-size:14px;background:var(--campus-paper)}
+
+    .campusWelcome{position:relative;isolation:isolate;min-height:calc(100svh - 86px);display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,390px);align-items:center;gap:5vw;padding:48px clamp(24px,6vw,96px) 80px;color:var(--campus-paper);background:var(--campus-deep);overflow:hidden}
+    .welcomePhoto{position:absolute;inset:0;z-index:-3;background:url('/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png') 65% 40%/cover}
+    .campusWelcome:before{content:'';position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(20,29,22,.95),rgba(20,29,22,.7) 48%,rgba(20,29,22,.25)),linear-gradient(0deg,rgba(20,29,22,.9),transparent 70%)}
+    .campusWelcome:after{content:'';position:absolute;inset:22px;border:1px solid rgba(244,239,230,.18);pointer-events:none;z-index:-1}
+    .welcomeRoute{position:absolute;right:clamp(30px,6vw,96px);top:35px;display:flex;align-items:center;gap:15px;font-size:10px;letter-spacing:.18em}
+    .welcomeRoute i{width:70px;height:1px;background:#d8c7ae}
+    .welcomePhotoCaption{display:none}
+    .welcomeWatermark{position:absolute;bottom:-.18em;left:3vw;font:400 clamp(110px,19vw,290px)/1 'DM Serif Display',Georgia,serif;letter-spacing:-.04em;opacity:.07;pointer-events:none}
+    .welcomeContent{min-width:0;max-width:760px;padding:20px 0}
+    .welcomeEyebrow{display:flex;align-items:center;gap:15px;font-size:10px;font-weight:600;letter-spacing:.19em;text-transform:uppercase;color:#d8c7ae;margin:0 0 27px}
+    .welcomeEyebrow>span{width:32px;height:1px;background:currentColor;flex:none}
+    .welcomeContent h1{font:400 clamp(3rem,6vw,6.5rem)/1.03 'DM Serif Display',Georgia,serif;letter-spacing:-.025em;margin:0 0 24px;max-width:750px}
+    .welcomeContent h1 em{color:#d8c7ae;font-size:.88em}
+    .welcomeLead{font-size:15px;line-height:1.75;color:rgba(244,239,230,.85);max-width:480px;margin:0 0 26px}
+    .welcomeSignature{display:flex;align-items:center;gap:16px;padding-top:20px;border-top:1px solid rgba(244,239,230,.25);max-width:480px}
+    .welcomeSignature>span{font:italic 30px/1 'DM Serif Display',Georgia,serif;color:#d8c7ae}
+    .welcomeSignature p{font-size:11px;line-height:1.65;margin:0;color:rgba(244,239,230,.8)}
+    .welcomeSignature strong{display:block;font-size:11px;font-weight:600;color:var(--campus-paper)}
+    .welcomeLinks{position:relative;display:grid;background:var(--campus-paper);color:var(--campus-ink);box-shadow:0 26px 65px rgba(0,0,0,.27);padding:26px;align-self:center;min-width:0}
+    .welcomeLinks:before{content:'';position:absolute;inset:10px -10px -10px 10px;border:1px solid rgba(216,199,174,.5);z-index:-1}
+    .welcomePanelLabel{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--campus-olive);margin:0 0 21px}
+    .welcomeLinks a{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;text-decoration:none;border-top:1px solid var(--campus-line);padding:23px 0;font:400 22px/1.15 'DM Serif Display',Georgia,serif;transition:background .2s}
+    .welcomeLinks a>span:nth-child(2){min-width:0}
+    .welcomeLinks small{display:block;font:400 11px/1.5 Inter,Arial,sans-serif;margin-top:9px;color:#686d62}
+    .welcomeLinks .welcomePrimary{background:var(--campus-deep);color:var(--campus-paper);padding:23px 18px;margin:0 -8px 10px;border:0}
+    .welcomePrimary small{color:#d8c7ae}
+    .welcomeNumber{font:400 15px/1.3 'DM Serif Display',Georgia,serif;color:var(--campus-olive)}
+    .welcomePrimary .welcomeNumber{color:#d8c7ae}
+    .welcomeAction{grid-column:2;font:600 9px/1.2 Inter,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;margin-top:7px;justify-self:start;border-bottom:1px solid currentColor;padding-bottom:5px}
+    .welcomeLinks a:last-child{padding-bottom:0}
+    .welcomeLinks a:hover{background:#e9dfcf}
+    .welcomeLinks .welcomePrimary:hover{background:#414e40}
+    .welcomeLinks a:focus-visible{outline:2px solid #a7aa91;outline-offset:5px}
+    .welcomeFooter{position:absolute;bottom:37px;left:clamp(24px,6vw,96px);right:clamp(24px,6vw,96px);display:flex;justify-content:space-between;gap:20px;font-size:10px;color:#d8c7ae}
+    .campusBack{display:block;padding:20px clamp(22px,6vw,96px);font-size:12px;background:var(--campus-paper)}
     .campusSite[data-view="home"] main,.campusSite[data-view="home"]>.campusFooter,.campusSite[data-view="home"] .campusBack{display:none}
     .campusSite:not([data-view="home"]) .campusWelcome{display:none}
     .campusSite .campusHero{display:none}
     .campusSite[data-view="request"] main>section:not(.requestSection){display:none}
     .campusSite[data-view="detail"] .requestSection{display:none}
     .campusSite[data-view="home"] .headerCta{display:none}
-    @media(max-width:740px){
-      .campusWelcome{min-height:calc(100svh - 68px);grid-template-columns:1fr;grid-template-rows:clamp(80px,14svh,150px) auto;align-content:start}
-      .campusHeader{height:68px;padding:0 20px;grid-template-columns:minmax(0,1fr) auto;gap:10px}
-      .campusBrand img{width:92px;height:43px}.campusBrand{gap:10px}.campusBranch{font-size:17px;padding-left:10px}
-      .campusHeaderActions{display:flex}.campusHeaderActions .headerCta,.menuButton{display:none}.languageNav summary{padding:12px 4px;font-size:14px}
-      .welcomePhoto{background-position:center 42%}
-      .welcomeContent{padding:20px 20px 14px;max-width:620px;width:100%;justify-self:center}
-      .welcomeEyebrow{font-size:12px;margin-bottom:10px}
-      .welcomeContent h1{font-size:clamp(1.8rem,7.4vw,2.7rem);line-height:1.1;margin-bottom:13px}
-      .welcomeLead{font-size:14px;line-height:1.55;margin-bottom:17px}
-      .welcomeLinks{gap:7px}.welcomeLinks a{font-size:14px;padding:12px 14px}.welcomeLinks small{font-size:12px;margin-top:3px}
-      .welcomeFooter{position:static;grid-column:1;padding:2px 20px 15px;font-size:11px;align-items:center}
-      .campusSite[data-view="detail"] .statementMain h2,.campusSite[data-view="detail"] .pathIntro h2,.campusSite[data-view="detail"] .journeyHeading h2{font-size:clamp(2rem,8vw,3rem);line-height:1.12}
-      .campusBranch{display:block!important}.campusBack{padding:16px 20px}
-    }
-    @media(max-height:700px) and (max-width:740px){.campusWelcome{grid-template-rows:55px auto}.welcomeContent{padding-top:13px}.welcomeContent h1{font-size:1.85rem}.welcomeLead{margin-bottom:12px}.welcomeLinks a{padding:10px 13px}.welcomeFooter>span{display:none}}
-    @media(prefers-reduced-motion:reduce){.heroImage,.heroCopy{animation:none!important}}
-    /* Editorial entry screen: one image, a clear message, three useful destinations. */
     .campusSite[data-view="home"] .campusNav{visibility:hidden}
-    .campusWelcome{grid-template-columns:46% 54%;min-height:calc(100svh - 86px);padding:18px;background:#e9e3d7;gap:0}
-    .welcomePhoto{position:relative;min-width:0;overflow:hidden;background:linear-gradient(180deg,rgba(20,30,22,.16) 15%,rgba(20,30,22,.8) 100%),url('/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png') center/cover;color:#f4efe6}
-    .welcomeRoute{position:absolute;top:32px;left:32px;right:32px;display:flex;align-items:center;gap:18px;font-size:10px;letter-spacing:.2em;font-weight:600}
-    .welcomeRoute i{width:72px;height:1px;background:rgba(244,239,230,.65);position:relative}
-    .welcomeRoute i:before,.welcomeRoute i:after{content:'';position:absolute;top:-2px;width:5px;height:5px;border-radius:50%;background:#f4efe6}
-    .welcomeRoute i:before{left:0}.welcomeRoute i:after{right:0}
-    .welcomePhotoCaption{position:absolute;bottom:75px;left:clamp(25px,3vw,50px);right:25px;z-index:1}
-    .welcomePhotoCaption>span{font-size:10px;letter-spacing:.2em}
-    .welcomePhotoCaption p{font:400 clamp(2rem,3.7vw,4rem)/1.08 'DM Serif Display',Georgia,serif;margin:18px 0 20px}
-    .welcomePhotoCaption small{font-size:11px;letter-spacing:.1em}
-    .welcomeWatermark{position:absolute;left:15px;bottom:-.18em;font:400 clamp(80px,10vw,170px)/1 'DM Serif Display',Georgia,serif;letter-spacing:-.045em;opacity:.12;pointer-events:none}
-    .welcomeContent{background:var(--campus-paper);max-width:none;align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:34px clamp(28px,4.4vw,78px) 62px;min-width:0}
-    .welcomeEyebrow{display:flex;align-items:center;gap:12px;font-size:10px;font-weight:600;letter-spacing:.16em;margin-bottom:24px}
-    .welcomeEyebrow>span{width:27px;height:1px;background:currentColor;flex:none}
-    .welcomeContent h1{font-size:clamp(2.4rem,4.15vw,4.5rem);line-height:1.09;margin-bottom:22px;letter-spacing:-.025em}
-    .welcomeContent h1 em{font-size:.9em;display:inline-block}
-    .welcomeLead{font-size:14px;line-height:1.7;max-width:460px;margin-bottom:28px}
-    .welcomeLinks{gap:0;border-top:1px solid var(--campus-line)}
-    .welcomeLinks a{display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:center;gap:15px;padding:19px 12px;border:0;border-bottom:1px solid var(--campus-line);font-size:15px;transition:background .2s,color .2s}
-    .welcomeLinks small{font-size:11px;line-height:1.5;margin-top:4px}
-    .welcomeNumber{font:400 15px/1 'DM Serif Display',Georgia,serif;color:var(--campus-olive)}
-    .welcomeAction{font-size:9px;letter-spacing:.09em;text-transform:uppercase;text-decoration:underline;text-underline-offset:5px}
-    .welcomeLinks .welcomePrimary{padding:21px 15px;background:var(--campus-deep);color:var(--campus-paper);border:0;margin:0 0 4px}
-    .welcomePrimary .welcomeNumber{color:var(--campus-sage)}
-    .welcomeLinks .welcomePrimary:hover{background:#404b3f}
-    .welcomeLinks a:focus-visible{outline:2px solid var(--campus-olive);outline-offset:3px}
-    .welcomeFooter{bottom:34px;left:calc(46% + 4.4vw);right:calc(4.4vw + 18px);font-size:10px;letter-spacing:.015em}
-    @media(min-width:741px) and (max-width:1050px){.campusWelcome{grid-template-columns:40% 60%}.welcomeContent{padding-left:30px;padding-right:30px}.welcomeFooter{left:calc(40% + 30px);right:48px}.welcomeLinks a{gap:10px}.welcomeAction{display:none}.welcomeLinks a{grid-template-columns:24px minmax(0,1fr)}}
+    @media(max-width:1050px) and (min-width:741px){.campusWelcome{grid-template-columns:minmax(0,1fr) 320px;gap:30px;padding-left:35px;padding-right:35px}.welcomeContent h1{font-size:clamp(45px,6vw,65px)}.welcomeLinks{padding:22px}}
     @media(max-width:740px){
-      .campusWelcome{padding:10px;grid-template-columns:minmax(0,1fr);grid-template-rows:clamp(110px,20svh,190px) auto;min-height:calc(100svh - 68px);background:#e9e3d7}
-      .welcomePhoto{background-position:center 43%}
-      .welcomeRoute{left:20px;right:20px;top:17px;font-size:9px;gap:13px}.welcomeRoute i{width:50px}
-      .welcomePhotoCaption{left:20px;bottom:18px}.welcomePhotoCaption>span,.welcomePhotoCaption small{display:none}
-      .welcomePhotoCaption p{font-size:24px;line-height:1.1;margin:0}.welcomePhotoCaption p br{display:none}
-      .welcomeWatermark{font-size:78px;left:auto;right:10px;bottom:-16px;opacity:.09}
-      .welcomeContent{padding:23px 20px 16px;width:100%;max-width:none;justify-content:center}
-      .welcomeEyebrow{font-size:9px;letter-spacing:.13em;margin-bottom:13px;gap:9px}.welcomeEyebrow>span{width:20px}
-      .welcomeContent h1{font-size:clamp(28px,7.8vw,43px);line-height:1.1;margin-bottom:14px}
-      .welcomeLead{font-size:12px;line-height:1.6;margin-bottom:19px;max-width:460px}
-      .welcomeLinks a{padding:13px 4px;gap:10px;font-size:13px;grid-template-columns:20px minmax(0,1fr) auto}
-      .welcomeLinks .welcomePrimary{padding:15px 11px}.welcomeNumber{font-size:13px}.welcomeLinks small{font-size:10px;margin-top:3px}.welcomeAction{font-size:8px;letter-spacing:.025em}
-      .welcomeFooter{background:var(--campus-paper);padding:0 20px 14px;position:static;font-size:9px;gap:8px}.welcomeFooter>span{display:block}
+      .campusHeader{height:68px;padding:0 20px;grid-template-columns:minmax(0,1fr) auto;gap:10px}
+      .campusBrand img{width:92px;height:43px}.campusBrand{gap:10px}.campusBranch{display:block!important;font-size:17px;padding-left:10px}
+      .campusHeaderActions{display:flex}.campusHeaderActions .headerCta,.menuButton{display:none}.languageNav summary{padding:12px 4px;font-size:14px}
+      .campusWelcome{min-height:calc(100svh - 68px);grid-template-columns:minmax(0,1fr);align-content:center;gap:20px;padding:42px 22px 38px}
+      .campusWelcome:after{inset:10px}.welcomePhoto{background-position:60% 30%}
+      .campusWelcome:before{background:linear-gradient(0deg,rgba(20,29,22,.95),rgba(20,29,22,.64) 70%,rgba(20,29,22,.4))}
+      .welcomeRoute{top:21px;right:24px;font-size:8px;gap:10px}.welcomeRoute i{width:35px}
+      .welcomeContent{padding:0;max-width:500px;justify-self:center;width:100%}
+      .welcomeEyebrow{font-size:8px;letter-spacing:.12em;gap:9px;margin-bottom:16px}.welcomeEyebrow>span{width:20px}
+      .welcomeContent h1{font-size:clamp(32px,9.5vw,48px);line-height:1.05;margin-bottom:14px}
+      .welcomeLead{font-size:12px;line-height:1.65;margin-bottom:0;max-width:460px}
+      .welcomeSignature{display:none}
+      .welcomeLinks{padding:18px;width:100%;max-width:500px;justify-self:center}
+      .welcomePanelLabel{font-size:8px;margin-bottom:13px}
+      .welcomeLinks a{grid-template-columns:20px minmax(0,1fr) auto;gap:9px;align-items:center;font-size:19px;padding:14px 0}
+      .welcomeLinks .welcomePrimary{padding:15px 12px;margin:0 -4px 6px}
+      .welcomeLinks small{font-size:10px;margin-top:5px}
+      .welcomeAction{grid-column:auto;font-size:8px;margin:0}
+      .welcomeNumber{font-size:13px}
+      .welcomeWatermark{font-size:24vw;bottom:-8px;left:15px}
+      .welcomeFooter{bottom:17px;left:24px;right:24px;font-size:8px}
+      .welcomeFooter>span{max-width:220px}
+      .campusBack{padding:16px 20px}
+      .campusSite[data-view="detail"] .statementMain h2,.campusSite[data-view="detail"] .pathIntro h2,.campusSite[data-view="detail"] .journeyHeading h2{font-size:clamp(2rem,8vw,3rem);line-height:1.12}
     }
-    @media(max-width:360px){.welcomeContent{padding-left:15px;padding-right:15px}.welcomeLinks a{grid-template-columns:18px minmax(0,1fr)}.welcomeAction{display:none}.welcomeContent h1{font-size:27px}.welcomeFooter{padding-left:15px;padding-right:15px}}
-    @media(max-height:720px) and (max-width:740px){.campusWelcome{grid-template-rows:90px auto}.welcomeContent{padding-top:16px;padding-bottom:10px}.welcomeContent h1{font-size:29px;margin-bottom:10px}.welcomeEyebrow{margin-bottom:10px}.welcomeLead{font-size:11px;margin-bottom:13px}.welcomeLinks a{padding-top:10px;padding-bottom:10px}.welcomeLinks .welcomePrimary{padding-top:12px;padding-bottom:12px}.welcomePhotoCaption p{font-size:22px}.welcomeFooter>span{display:none}}
+    @media(max-width:360px){.welcomeAction{display:none}.welcomeLinks a{grid-template-columns:20px minmax(0,1fr)}}
+    @media(max-height:720px) and (max-width:740px){.campusWelcome{padding:34px 20px 35px;gap:15px}.welcomeEyebrow{margin-bottom:12px}.welcomeContent h1{font-size:32px;margin-bottom:11px}.welcomeLead{font-size:11px}.welcomeLinks{padding:14px 16px}.welcomeLinks a{font-size:17px;padding:12px 0}.welcomePanelLabel{margin-bottom:11px}.welcomeLinks .welcomePrimary{padding:13px 10px}.welcomeFooter>span{display:none}}
+    @media(prefers-reduced-motion:reduce){.welcomeLinks a{transition:none}}
   </style>
   <script>
     (()=>{
