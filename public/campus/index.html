@@ -52,15 +52,19 @@
   </header>
 
   <section class="campusWelcome" aria-label="Accueil Campus">
-    <div class="welcomePhoto" aria-hidden="true"></div>
+    <div class="welcomePhoto" aria-hidden="true">
+      <div class="welcomeRoute"><span>FRANCE</span><i></i><span>USA</span></div>
+      <div class="welcomePhotoCaption"><span>WESTWARD CAMPUS</span><p>L’Amérique,<br>à votre horizon.</p><small>Orientation · Admission · Installation</small></div>
+      <span class="welcomeWatermark">CAMPUS</span>
+    </div>
     <div class="welcomeContent">
-      <p class="welcomeEyebrow">Étudier aux États-Unis</p>
-      <h1>Un départ préparé.<br><em>Un avenir à construire.</em></h1>
-      <p class="welcomeLead">Du choix de l’université à l’installation, nous accompagnons les étudiants et leurs familles, étape par étape.</p>
+      <p class="welcomeEyebrow"><span></span> Votre avenir aux États-Unis</p>
+      <h1>Voir plus loin.<br><em>Partir bien préparé.</em></h1>
+      <p class="welcomeLead">Une université à choisir. Une nouvelle vie à préparer. Un accompagnement humain pour avancer, avec votre famille, du premier choix jusqu’au départ.</p>
       <div class="welcomeLinks">
-        <a class="welcomePrimary" href="#demande">Préparer mon départ <small>Le questionnaire pour faire le point</small></a>
-        <a href="mailto:anthony@westwardco.fr?subject=Guide%20gratuit%20Campus">Demander le guide gratuit <small>Les premiers repères pour étudier aux USA</small></a>
-        <a href="#accompagnement">Comprendre l’accompagnement <small>Notre rôle, les étapes et les conditions</small></a>
+        <a class="welcomePrimary" href="#demande"><span class="welcomeNumber">01</span><span>Préparer mon départ <small>Faire le point avec le questionnaire</small></span><span class="welcomeAction">Commencer</span></a>
+        <a href="mailto:anthony@westwardco.fr?subject=Guide%20gratuit%20Campus"><span class="welcomeNumber">02</span><span>Le guide gratuit <small>Demander les premiers repères</small></span><span class="welcomeAction">Recevoir</span></a>
+        <a href="#accompagnement"><span class="welcomeNumber">03</span><span>Notre accompagnement <small>Comprendre notre rôle et les étapes</small></span><span class="welcomeAction">Découvrir</span></a>
       </div>
     </div>
     <div class="welcomeFooter"><span>Une expérience vécue, partagée avec vous.</span><a href="https://westwardco.fr">Westward Co.</a></div>
@@ -215,6 +219,53 @@
     }
     @media(max-height:700px) and (max-width:740px){.campusWelcome{grid-template-rows:55px auto}.welcomeContent{padding-top:13px}.welcomeContent h1{font-size:1.85rem}.welcomeLead{margin-bottom:12px}.welcomeLinks a{padding:10px 13px}.welcomeFooter>span{display:none}}
     @media(prefers-reduced-motion:reduce){.heroImage,.heroCopy{animation:none!important}}
+    /* Editorial entry screen: one image, a clear message, three useful destinations. */
+    .campusSite[data-view="home"] .campusNav{visibility:hidden}
+    .campusWelcome{grid-template-columns:46% 54%;min-height:calc(100svh - 86px);padding:18px;background:#e9e3d7;gap:0}
+    .welcomePhoto{position:relative;min-width:0;overflow:hidden;background:linear-gradient(180deg,rgba(20,30,22,.16) 15%,rgba(20,30,22,.8) 100%),url('/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png') center/cover;color:#f4efe6}
+    .welcomeRoute{position:absolute;top:32px;left:32px;right:32px;display:flex;align-items:center;gap:18px;font-size:10px;letter-spacing:.2em;font-weight:600}
+    .welcomeRoute i{width:72px;height:1px;background:rgba(244,239,230,.65);position:relative}
+    .welcomeRoute i:before,.welcomeRoute i:after{content:'';position:absolute;top:-2px;width:5px;height:5px;border-radius:50%;background:#f4efe6}
+    .welcomeRoute i:before{left:0}.welcomeRoute i:after{right:0}
+    .welcomePhotoCaption{position:absolute;bottom:75px;left:clamp(25px,3vw,50px);right:25px;z-index:1}
+    .welcomePhotoCaption>span{font-size:10px;letter-spacing:.2em}
+    .welcomePhotoCaption p{font:400 clamp(2rem,3.7vw,4rem)/1.08 'DM Serif Display',Georgia,serif;margin:18px 0 20px}
+    .welcomePhotoCaption small{font-size:11px;letter-spacing:.1em}
+    .welcomeWatermark{position:absolute;left:15px;bottom:-.18em;font:400 clamp(80px,10vw,170px)/1 'DM Serif Display',Georgia,serif;letter-spacing:-.045em;opacity:.12;pointer-events:none}
+    .welcomeContent{background:var(--campus-paper);max-width:none;align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:34px clamp(28px,4.4vw,78px) 62px;min-width:0}
+    .welcomeEyebrow{display:flex;align-items:center;gap:12px;font-size:10px;font-weight:600;letter-spacing:.16em;margin-bottom:24px}
+    .welcomeEyebrow>span{width:27px;height:1px;background:currentColor;flex:none}
+    .welcomeContent h1{font-size:clamp(2.4rem,4.15vw,4.5rem);line-height:1.09;margin-bottom:22px;letter-spacing:-.025em}
+    .welcomeContent h1 em{font-size:.9em;display:inline-block}
+    .welcomeLead{font-size:14px;line-height:1.7;max-width:460px;margin-bottom:28px}
+    .welcomeLinks{gap:0;border-top:1px solid var(--campus-line)}
+    .welcomeLinks a{display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:center;gap:15px;padding:19px 12px;border:0;border-bottom:1px solid var(--campus-line);font-size:15px;transition:background .2s,color .2s}
+    .welcomeLinks small{font-size:11px;line-height:1.5;margin-top:4px}
+    .welcomeNumber{font:400 15px/1 'DM Serif Display',Georgia,serif;color:var(--campus-olive)}
+    .welcomeAction{font-size:9px;letter-spacing:.09em;text-transform:uppercase;text-decoration:underline;text-underline-offset:5px}
+    .welcomeLinks .welcomePrimary{padding:21px 15px;background:var(--campus-deep);color:var(--campus-paper);border:0;margin:0 0 4px}
+    .welcomePrimary .welcomeNumber{color:var(--campus-sage)}
+    .welcomeLinks .welcomePrimary:hover{background:#404b3f}
+    .welcomeLinks a:focus-visible{outline:2px solid var(--campus-olive);outline-offset:3px}
+    .welcomeFooter{bottom:34px;left:calc(46% + 4.4vw);right:calc(4.4vw + 18px);font-size:10px;letter-spacing:.015em}
+    @media(min-width:741px) and (max-width:1050px){.campusWelcome{grid-template-columns:40% 60%}.welcomeContent{padding-left:30px;padding-right:30px}.welcomeFooter{left:calc(40% + 30px);right:48px}.welcomeLinks a{gap:10px}.welcomeAction{display:none}.welcomeLinks a{grid-template-columns:24px minmax(0,1fr)}}
+    @media(max-width:740px){
+      .campusWelcome{padding:10px;grid-template-columns:minmax(0,1fr);grid-template-rows:clamp(110px,20svh,190px) auto;min-height:calc(100svh - 68px);background:#e9e3d7}
+      .welcomePhoto{background-position:center 43%}
+      .welcomeRoute{left:20px;right:20px;top:17px;font-size:9px;gap:13px}.welcomeRoute i{width:50px}
+      .welcomePhotoCaption{left:20px;bottom:18px}.welcomePhotoCaption>span,.welcomePhotoCaption small{display:none}
+      .welcomePhotoCaption p{font-size:24px;line-height:1.1;margin:0}.welcomePhotoCaption p br{display:none}
+      .welcomeWatermark{font-size:78px;left:auto;right:10px;bottom:-16px;opacity:.09}
+      .welcomeContent{padding:23px 20px 16px;width:100%;max-width:none;justify-content:center}
+      .welcomeEyebrow{font-size:9px;letter-spacing:.13em;margin-bottom:13px;gap:9px}.welcomeEyebrow>span{width:20px}
+      .welcomeContent h1{font-size:clamp(28px,7.8vw,43px);line-height:1.1;margin-bottom:14px}
+      .welcomeLead{font-size:12px;line-height:1.6;margin-bottom:19px;max-width:460px}
+      .welcomeLinks a{padding:13px 4px;gap:10px;font-size:13px;grid-template-columns:20px minmax(0,1fr) auto}
+      .welcomeLinks .welcomePrimary{padding:15px 11px}.welcomeNumber{font-size:13px}.welcomeLinks small{font-size:10px;margin-top:3px}.welcomeAction{font-size:8px;letter-spacing:.025em}
+      .welcomeFooter{background:var(--campus-paper);padding:0 20px 14px;position:static;font-size:9px;gap:8px}.welcomeFooter>span{display:block}
+    }
+    @media(max-width:360px){.welcomeContent{padding-left:15px;padding-right:15px}.welcomeLinks a{grid-template-columns:18px minmax(0,1fr)}.welcomeAction{display:none}.welcomeContent h1{font-size:27px}.welcomeFooter{padding-left:15px;padding-right:15px}}
+    @media(max-height:720px) and (max-width:740px){.campusWelcome{grid-template-rows:90px auto}.welcomeContent{padding-top:16px;padding-bottom:10px}.welcomeContent h1{font-size:29px;margin-bottom:10px}.welcomeEyebrow{margin-bottom:10px}.welcomeLead{font-size:11px;margin-bottom:13px}.welcomeLinks a{padding-top:10px;padding-bottom:10px}.welcomeLinks .welcomePrimary{padding-top:12px;padding-bottom:12px}.welcomePhotoCaption p{font-size:22px}.welcomeFooter>span{display:none}}
   </style>
   <script>
     (()=>{
