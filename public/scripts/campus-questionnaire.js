@@ -88,10 +88,11 @@
       link.href = href;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
-      link.setAttribute('aria-label', `${text.label}, ${displayNumber}. ${text.external}.`);
-      const label = document.createElement('strong'); label.textContent = text.label;
-      const phone = document.createElement('span'); phone.textContent = displayNumber;
-      link.append(label, phone);
+      link.setAttribute('aria-label', `WhatsApp. ${text.external}.`);
+const label = document.createElement('strong');
+label.textContent = 'WhatsApp';
+link.append(label);
+link.style.alignItems = 'center';
       container.append(link);
     });
     const contactOption = document.querySelector('#campus-form input[name="format_contact"]');
