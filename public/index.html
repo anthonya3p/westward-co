@@ -18,20 +18,22 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "@id": "https://westwardco.fr/#website", "url": "https://westwardco.fr/", "name": "Westward Co.", "inLanguage": "fr-FR", "publisher": {"@id": "https://westwardco.fr/#organization"}}</script>
   <link rel="stylesheet" href="/styles/base.css"><link rel="stylesheet" href="/styles/chrome.css?v=20260929-2">
   <link rel="stylesheet" href="/styles/home.css?v=20261012-1">
+  <link rel="stylesheet" href="/styles/home-portal.css?v=20261012-2">
   <link rel="preload" as="image" href="/assets/1ab40899-ffe2-4c18-956b-239a7f4a623a-utah-hero-real.jpg">
   <script src="/scripts/site.js?v=20260929-4" defer></script>
-</head><body><header class="header" id="site-header">
+  <script src="/scripts/home-portal.js?v=20261012-2" defer></script>
+</head><body class="westwardPortal"><header class="header" id="site-header">
   <div class="headerInner">
     <nav class="desktopLeft" aria-label="Navigation principale gauche">
       <a href="#projets">Les univers</a><a href="#projet">Le projet</a>
     </nav>
     <button class="menuButton" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
     <a class="brand" href="/" aria-label="Westward Co. - accueil"><img src="/assets/0a89128e-3b66-4128-b890-8c855a164e61-westward-logo-black.png" alt="Westward Co."></a>
-    <nav class="desktopRight" aria-label="Navigation principale droite"><a href="mailto:anthony@westwardco.fr">Contact</a><details class="languageNav"><summary aria-label="Choisir la langue"><span>FR</span><svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></summary><div class="languageOptions"><a href="/" lang="fr" aria-label="Français" title="Français" class="active" aria-current="page">FR</a><a href="/en/" lang="en" aria-label="English" title="English">EN</a><a href="/es/" lang="es" aria-label="Español" title="Español">ES</a></div></details></nav>
+    <nav class="desktopRight" aria-label="Navigation principale droite"><a href="/contact/">Contact</a><details class="languageNav"><summary aria-label="Choisir la langue"><span>FR</span><svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></summary><div class="languageOptions"><a href="/" lang="fr" aria-label="Français" title="Français" class="active" aria-current="page">FR</a><a href="/en/" lang="en" aria-label="English" title="English">EN</a><a href="/es/" lang="es" aria-label="Español" title="Español">ES</a></div></details></nav>
     <details class="mobileLang"><summary aria-label="Choisir la langue"><span>FR</span><svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></summary><div class="languageOptions"><a href="/" lang="fr" aria-label="Français" title="Français" class="active" aria-current="page">FR</a><a href="/en/" lang="en" aria-label="English" title="English">EN</a><a href="/es/" lang="es" aria-label="Español" title="Español">ES</a></div></details>
   </div>
   <nav class="mobileMenu" id="mobile-menu" aria-label="Navigation mobile" hidden>
-    <a href="#projets">Les univers</a><a href="#projet">Le projet</a><a href="mailto:anthony@westwardco.fr">Contact</a>
+    <a href="#projets">Les univers</a><a href="#projet">Le projet</a><a href="/contact/">Contact</a>
   </nav>
 </header><main>
   <section class="hero" style="background-image:linear-gradient(rgba(28,27,24,.33),rgba(28,27,24,.58)),url('/assets/1ab40899-ffe2-4c18-956b-239a7f4a623a-utah-hero-real.jpg')">
@@ -47,11 +49,12 @@
     <div class="portalProjectsHead"><p class="eyebrow">Les univers Westward Co.</p><h2>Choisissez votre<br>direction.</h2><p>Westward Co. développe des services pour accompagner les projets et des expériences pour faire vivre son identité.</p></div>
 
     <div class="categoryChooser">
-      <details class="categoryPortal categoryCreation" name="westward-category">
+      <details class="categoryPortal categoryCreation" id="mobilite-projet-usa" name="westward-category">
         <summary style="--category-image:url('/assets/15fbcdd2-521d-4f95-ac0b-6574e3ad5410-westward-campus-bg.png')">
           <span class="categoryEyebrow">Étudier · s’expatrier · entreprendre</span>
           <span class="categoryTitle">Mobilité<br>&amp; Projet USA</span>
           <span class="categoryIntro">Des services pour préparer des études aux États-Unis ou donner une identité claire à un projet d’expatriation et d’implantation.</span>
+          <span class="categoryBrands"><span>Mon Enfant aux USA</span><span>Westward Campus</span><span>Westward Digital</span></span>
           <span class="categoryAction"><span class="closedLabel">Découvrir cet univers</span><span class="openLabel">Refermer</span><i aria-hidden="true"></i></span>
         </summary>
         <div class="categoryDetails">
@@ -64,17 +67,18 @@
         </div>
       </details>
 
-      <details class="categoryPortal categoryLifestyle" name="westward-category">
+      <details class="categoryPortal categoryLifestyle" id="lifestyle" name="westward-category">
         <summary style="--category-image:url('/assets/24543af8-3354-4564-995b-f3ab4ed56620-westward-coffee-bg.png')">
           <span class="categoryEyebrow">Partager · découvrir · affirmer</span>
           <span class="categoryTitle">Lifestyle</span>
           <span class="categoryIntro">Des expériences et des produits qui traduisent l’esprit Westward Co. dans la vie quotidienne.</span>
+          <span class="categoryBrands"><span>Westward Coffee</span><span>Cowboy Culture</span></span>
           <span class="categoryAction"><span class="closedLabel">Découvrir cet univers</span><span class="openLabel">Refermer</span><i aria-hidden="true"></i></span>
         </summary>
         <div class="categoryDetails">
           <header class="categoryDetailsHead"><p class="eyebrow">Lifestyle</p><div class="categoryDetailsCopy"><h3>Un univers à vivre.<br>Une identité à porter.</h3><p>Le café crée la rencontre. Le vêtement prolonge l’histoire. Ensemble, ils donnent une présence concrète à la culture Westward Co.</p></div></header>
           <div class="destinationGrid destinationGridTwo">
-            <a class="destinationCard" href="https://westwardcoffee.fr" style="--project-image:url('/assets/24543af8-3354-4564-995b-f3ab4ed56620-westward-coffee-bg.png')"><span class="destinationType">Se retrouver</span><div><h4>Westward Coffee</h4><p>Créer un moment de rencontre autour du café, avec une expérience mobile inspirée par la culture américaine.</p><span class="destinationLink">Visiter le site</span></div></a>
+            <a class="destinationCard" href="https://westwardcoffee.fr" style="--project-image:url('/assets/24543af8-3354-4564-995b-f3ab4ed56620-westward-coffee-bg.png')"><span class="destinationType">Se retrouver</span><div><h4>Westward Coffee</h4><p>Créer un moment de rencontre autour du café, avec une expérience inspirée par la culture américaine.</p><span class="destinationLink">Visiter le site</span></div></a>
             <a class="destinationCard" href="https://cowboyculture.fr" style="--project-image:url('/assets/1e854af7-4c40-4e47-b15a-4cf4830b1f88-westward-cowboy-bg.png')"><span class="destinationType">Affirmer son style</span><div><h4>Cowboy Culture</h4><p>Faire entrer l’esprit de l’Ouest américain dans le quotidien à travers des vêtements, des accessoires et des objets contemporains.</p><span class="destinationLink">Visiter le site</span></div></a>
           </div>
         </div>
@@ -85,7 +89,7 @@
 </main><footer class="footer">
   <div class="footerGrid">
     <div class="footerBrand"><img src="/assets/49dc0be8-ac8c-464d-b4f4-c8be1ae4d64a-westward-logo-white.png" alt="Westward Co."><p>Westward Co. — France × United States</p></div>
-    <nav class="footerNav" aria-label="Navigation de pied de page"><a href="#projets">Les univers</a><a href="#projet">Le projet</a><a href="mailto:anthony@westwardco.fr">Contact</a></nav>
+    <nav class="footerNav" aria-label="Navigation de pied de page"><a href="#projets">Les univers</a><a href="#projet">Le projet</a><a href="/contact/">Contact</a></nav>
     <div class="footerContact"><a href="mailto:anthony@westwardco.fr">anthony@westwardco.fr</a>
       <div class="footerLegal"><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Politique de confidentialité</a></div>
     </div>
