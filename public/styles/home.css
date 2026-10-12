@@ -411,3 +411,24 @@
   .destinationCard::before, .destinationCard::after, .categoryPortal summary::before, .categoryAction i::after, .primaryButton { transition: none; }
   .categoryDetails { animation: none; }
 }
+
+/* Homepage organisation — 12 October 2026 */
+.categoryTitle { font-size: clamp(2.8rem, 5.2vw, 5.7rem); line-height: 1.06; overflow-wrap: anywhere; }
+.categoryEyebrow, .categoryAction { line-height: 1.5; }
+.destinationCard h4, .destinationGridThree .destinationCard h4 { line-height: 1.08; overflow-wrap: anywhere; }
+.portalProjectsInner, .categoryDetails, .destinationGrid, .destinationCard > div { min-width: 0; }
+@media (min-width: 901px) and (max-width: 1100px) {
+ .categoryPortal summary { padding: 30px; }
+ .destinationGridThree { grid-template-columns: repeat(2, minmax(0,1fr)); }
+ .destinationGridThree .destinationCard:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 900px) {
+ .categoryTitle { font-size: clamp(2.5rem, 9vw, 4.6rem); }
+ .categoryPortal summary, .categoryPortal[open] summary { min-height: 460px; }
+}
+@media (max-width: 420px) {
+ .categoryTitle { font-size: clamp(2.3rem, 9.8vw, 3.5rem); }
+ .categoryPortal summary, .categoryPortal[open] summary { min-height: 440px; }
+ .categoryAction { flex-wrap: wrap; }
+ .portalBrandInner > a { max-width: 100%; overflow-wrap: anywhere; }
+}
