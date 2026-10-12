@@ -76,3 +76,147 @@
   .westwardPortal .portalSwitch,
   .westwardPortal .portalBack { transition: none; }
 }
+
+/* First-screen entrance, scoped to the existing Westward Co. homepage. */
+.westwardPortal {
+  --entry-header: 93px;
+  --entry-intro: 96px;
+  --entry-gap: 14px;
+}
+.westwardPortal .hero {
+  min-height: 0;
+  height: var(--entry-intro);
+  background-image: none !important;
+  background-color: #F4EFE6;
+  color: #1C1B18;
+}
+.westwardPortal .heroInner {
+  width: min(1260px, calc(100% - 48px));
+  padding: 8px 0;
+}
+.westwardPortal .heroLogo,
+.westwardPortal .hero .lead,
+.westwardPortal .heroActions { display: none; }
+.westwardPortal .heroCopy { width: 100%; }
+.westwardPortal .hero .kicker {
+  margin: 0 0 6px;
+  color: #80644D;
+  font-size: .6rem;
+  letter-spacing: .19em;
+}
+.westwardPortal .hero h1 {
+  font-size: clamp(1.45rem, 2.1vw, 1.85rem);
+  line-height: 1.04;
+  letter-spacing: -.02em;
+}
+.westwardPortal .hero h1 br { display: block; width: auto; }
+.westwardPortal .portalProjects {
+  padding: 0 var(--entry-gap) var(--entry-gap);
+  overflow: visible;
+  background: #F4EFE6;
+  color: #F4EFE6;
+}
+.westwardPortal .portalProjects::before { display: none; }
+.westwardPortal .portalProjectsInner { width: 100%; max-width: none; }
+/* Retain the section heading for assistive navigation without another intro. */
+.westwardPortal .portalProjectsHead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.westwardPortal .categoryChooser {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--entry-gap);
+}
+.westwardPortal .categoryPortal[open] { grid-column: 1 / -1; }
+.westwardPortal .categoryPortal > summary {
+  height: calc(100vh - var(--entry-header) - var(--entry-intro) - var(--entry-gap));
+  height: calc(100svh - var(--entry-header) - var(--entry-intro) - var(--entry-gap));
+  min-height: 420px;
+  padding: clamp(26px, 3.3vw, 52px);
+}
+.westwardPortal .categoryPortal > summary::after {
+  background: linear-gradient(180deg, rgba(13,12,10,.22), rgba(13,12,10,.18) 24%, rgba(13,12,10,.87) 78%, rgba(13,12,10,.94));
+}
+.westwardPortal .categoryTitle {
+  max-width: 780px;
+  font-size: clamp(2.75rem, 5.2vw, 6.3rem);
+  line-height: 1.02;
+  overflow-wrap: normal;
+}
+.westwardPortal .categoryIntro {
+  max-width: 510px;
+  margin-top: 18px;
+  font-size: .94rem;
+  line-height: 1.6;
+}
+.westwardPortal .categoryBrands { margin-top: 18px; padding-top: 15px; }
+.westwardPortal .categoryAction { margin-top: 24px; }
+.westwardPortal .categoryPortal[open] > summary {
+  height: auto;
+  min-height: 300px;
+}
+.westwardPortal .categoryPortal[open] .categoryIntro { max-width: 740px; }
+.westwardPortal .categoryPortal[open] .categoryEyebrow { margin-bottom: 28px; }
+.westwardPortal .categoryDetails {
+  padding: 34px clamp(20px, 3vw, 48px) 40px;
+  background: #171612;
+  color: #F4EFE6;
+}
+@media (max-width: 1100px) and (min-width: 701px) {
+  .westwardPortal .categoryPortal > summary { padding: 26px; }
+  .westwardPortal .categoryTitle { font-size: clamp(2.4rem, 5vw, 3.8rem); }
+  .westwardPortal .categoryEyebrow { font-size: .6rem; letter-spacing: .1em; }
+  .westwardPortal .categoryIntro { font-size: .86rem; }
+  .westwardPortal .categoryBrands { font-size: .7rem; }
+}
+@media (max-width: 900px) {
+  .westwardPortal { --entry-header: 87px; --entry-intro: 86px; }
+  .westwardPortal .categoryDetails { padding: 26px 20px 30px; }
+}
+@media (max-width: 700px) {
+  .westwardPortal { --entry-intro: 64px; --entry-gap: 8px; }
+  .westwardPortal .heroInner { width: calc(100% - 28px); padding: 8px 0; }
+  .westwardPortal .hero .kicker { display: none; }
+  .westwardPortal .hero h1 { font-size: clamp(1.2rem, 4.8vw, 1.35rem); line-height: 1.1; }
+  .westwardPortal .hero h1 br { display: block; width: auto; }
+  .westwardPortal .categoryChooser { grid-template-columns: 1fr; }
+  .westwardPortal .categoryPortal > summary {
+    height: calc((100vh - var(--entry-header) - var(--entry-intro) - 2 * var(--entry-gap)) / 2);
+    height: calc((100svh - var(--entry-header) - var(--entry-intro) - 2 * var(--entry-gap)) / 2);
+    min-height: 188px;
+    padding: 16px 20px;
+  }
+  .westwardPortal .categoryEyebrow,
+  .westwardPortal .categoryIntro { display: none; }
+  .westwardPortal .categoryTitle { font-size: clamp(1.85rem, 7.7vw, 3rem); line-height: 1.03; }
+  .westwardPortal .categoryBrands {
+    max-width: 100%;
+    margin-top: 8px;
+    padding-top: 0;
+    border: 0;
+    font-size: .7rem;
+    line-height: 1.6;
+    letter-spacing: 0;
+  }
+  .westwardPortal .categoryBrands span + span::before { margin: 0 5px; }
+  .westwardPortal .categoryAction { margin-top: 10px; gap: 12px; font-size: .61rem; letter-spacing: .09em; flex-wrap: nowrap; }
+  .westwardPortal .categoryAction i { width: 30px; height: 30px; flex: 0 0 30px; }
+  .westwardPortal .categoryPortal[open] > summary { height: auto; min-height: 208px; }
+  .westwardPortal .categoryDetails { padding: 22px 14px 26px; }
+  .westwardPortal .portalToolbar { margin-bottom: 26px; }
+  .westwardPortal .portalSwitch { flex-basis: 110px; padding: 10px; font-size: .74rem; }
+  .westwardPortal .destinationCard,
+  .westwardPortal .destinationGridTwo .destinationCard { min-height: 440px; }
+}
+@media (max-width: 360px) {
+  .westwardPortal .categoryPortal > summary { padding: 12px 16px; }
+  .westwardPortal .categoryTitle { font-size: 1.8rem; }
+  .westwardPortal .categoryBrands { font-size: .67rem; margin-top: 6px; }
+  .westwardPortal .categoryAction { margin-top: 8px; }
+}
