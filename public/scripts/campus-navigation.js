@@ -41,6 +41,20 @@
     }
   };
   const t = copy[lang];
+  const whatsappAfterReview = {
+    fr: {
+      label: 'Continuer sur WhatsApp',
+      message: 'Bonjour, je viens de terminer le questionnaire Westward Campus et je souhaite poursuivre mon projet avec vous.'
+    },
+    en: {
+      label: 'Continue on WhatsApp',
+      message: 'Hello, I have completed the Westward Campus questionnaire and would like to continue my project with you.'
+    },
+    es: {
+      label: 'Continuar por WhatsApp',
+      message: 'Hola, he terminado el cuestionario de Westward Campus y quisiera continuar mi proyecto con ustedes.'
+    }
+  }[lang];
   const ids = ['pourquoi', 'choisir-ecole', 'tableau-de-bord', 'mon-accompagnement'];
   const navHTML = ids.map((id, i) => `<a href="#${id}">${t.nav[i]}</a>`).join('');
   const welcome = document.querySelector('.campusWelcome');
@@ -261,7 +275,14 @@
   let payload = null;
   const confirm = review.querySelector('[data-confirm]');
   const reviewStatus = review.querySelector('[data-review-status]');
-  function invalidate() { payload = null; review.hidden = true; confirm.disabled = false; reviewStatus.textContent = ''; }
+  function invalidate() {
+    payload = null;
+    review.hidden = true;
+    confirm.disabled = false;
+    reviewStatus.textContent = '';
+    const whatsapp = review.querySelector('[data-whatsapp-review]');
+    if (whatsapp) whatsapp.remove();
+  }
   form.addEventListener('input', invalidate);
   form.addEventListener('change', invalidate);
   const next = form.querySelector('[data-next]');
@@ -293,6 +314,17 @@
     payload = { ...Object.fromEntries(values.entries()), resume: summary, type: 'campus', besoins: values.getAll('besoins') };
     review.querySelector('pre').textContent = summary;
     review.querySelector('[data-mail]').href = `mailto:anthony@westwardco.fr?subject=${encodeURIComponent(t.subject)}&body=${encodeURIComponent(summary)}`;
+    let whatsapp = review.querySelector('[data-whatsapp-review]');
+    if (!whatsapp) {
+      whatsapp = document.createElement('a');
+      whatsapp.dataset.whatsappReview = 'true';
+      whatsapp.className = 'campusReviewWhatsApp';
+      whatsapp.target = '_blank';
+      whatsapp.rel = 'noopener noreferrer';
+      whatsapp.textContent = whatsappAfterReview.label;
+      review.querySelector('.campusReviewActions').append(whatsapp);
+    }
+    whatsapp.href = `https://wa.me/33760512465?text=${encodeURIComponent(whatsappAfterReview.message)}`;
     reviewStatus.textContent = '';
     review.hidden = false;
     review.scrollIntoView({ block: 'start', behavior: 'smooth' });
