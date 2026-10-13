@@ -103,3 +103,55 @@ body.campusSite a.campusWhatsApp{flex-direction:row!important;align-items:center
 body.campusSite a.campusWhatsApp:before{content:"";width:20px;height:20px;flex:none;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%230c2716' d='M16 3a13 13 0 0 0-11 20l-2 6 6-2A13 13 0 1 0 16 3Zm0 23a10 10 0 0 1-5-1l-4 1 1-4a10 10 0 1 1 8 4Z'/%3E%3Cpath fill='%230c2716' d='M11 10c.5-1 1-1 2 1l1 2c.2.5 0 1-.4 1.4l-.8.8c1 2 2.7 3.5 5 4.3l1-1c.4-.5.9-.6 1.4-.4l2 .9c.7.3.8.8.7 1.4-.4 2-1.8 3-4 3-4 0-10-5-10-10 0-1.5.5-2.6 1.1-3.4Z'/%3E%3C/svg%3E")}
 @media(max-width:1100px){.campusV2[data-campus-page="home"] .campusWelcome{grid-template-columns:minmax(0,1fr) 360px;padding-left:32px;padding-right:32px}.campusV2 .homeJourneyList{grid-template-columns:repeat(2,minmax(0,1fr))}.campusV2 .homeCriteriaGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:740px){.campusV2[data-campus-page="home"] .campusWelcome{min-height:auto;grid-template-columns:1fr;gap:26px;padding:46px 20px 54px}.campusV2[data-campus-page="home"] .campusWelcome:before{background:linear-gradient(0deg,rgba(18,28,20,.96),rgba(18,28,20,.68) 70%,rgba(18,28,20,.45))}.campusV2[data-campus-page="home"] .welcomeContent h1{font-size:clamp(2.65rem,12vw,4.2rem)}.campusV2[data-campus-page="home"] .welcomeSignature{display:block}.campusV2[data-campus-page="home"] .welcomeLinks{max-width:none;width:100%;padding:20px}.campusV2[data-campus-page="home"] .welcomeFooter{position:static}.campusV2 .homeWhyGrid,.campusV2 .homeSupportGrid,.campusV2 .homeDashboardPanel,.campusV2 .homeLifeGrid{grid-template-columns:1fr}.campusV2 .homeStoryVisual{min-height:440px}.campusV2 .homeBenefitGrid,.campusV2 .homeCriteriaGrid,.campusV2 .homeJourneyList{grid-template-columns:1fr}.campusV2 .homeJourneyStep{min-height:0;border-left:0;padding:24px}.campusV2 .homeJourneyNo{margin-bottom:24px}.campusV2 .homeSchoolActions,.campusV2 .homeFinalActions{display:grid;grid-template-columns:1fr}.campusV2 .homeWhatsappCta,.campusV2 .homePrimaryCta,.campusV2 .homeSecondaryCta{width:100%}}
+
+
+/* CTA alignment and contact gating */
+.campusV2 .homeHeroActions,
+.campusV2 .homeSchoolActions,
+.campusV2 .homeFinalActions {
+  justify-content:center;
+  justify-items:center;
+  align-items:center;
+}
+.campusV2 .homeHeroActions > a,
+.campusV2 .homeSchoolActions > a,
+.campusV2 .homeFinalActions > a {
+  width:min(100%,420px);
+  margin-inline:auto;
+  text-align:center;
+}
+.campusV2[data-campus-page="home"] .welcomeLinks > a.homeGuideLink {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:min(100%,420px);
+  min-height:50px;
+  margin:16px auto 0;
+  padding:13px 18px;
+  border:1px solid rgba(40,49,41,.28);
+  border-radius:8px;
+  background:transparent;
+  color:#283129;
+  font:700 11px/1.35 Inter,Arial,sans-serif;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  text-align:center;
+  text-decoration:none;
+}
+.campusV2[data-campus-page="home"] .welcomeLinks > a.homeGuideLink:hover {
+  background:#ebe3d7;
+}
+@media(max-width:740px){
+  .campusV2 .homeHeroActions,
+  .campusV2 .homeSchoolActions,
+  .campusV2 .homeFinalActions { width:100%; }
+  .campusV2 .homeHeroActions > a,
+  .campusV2 .homeSchoolActions > a,
+  .campusV2 .homeFinalActions > a,
+  .campusV2[data-campus-page="home"] .welcomeLinks > a.homeGuideLink {
+    width:100%;
+    max-width:420px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
