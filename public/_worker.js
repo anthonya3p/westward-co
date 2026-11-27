@@ -1,6 +1,6 @@
 const SITES = {
-  "westwardetudesusa.fr": { route: "campus", primary: "westwardetudesusa.fr" },
-  "www.westwardetudesusa.fr": { route: "campus", primary: "westwardetudesusa.fr" },
+  "westwardcoetudes.fr": { route: "campus", primary: "westwardcoetudes.fr" },
+  "www.westwardcoetudes.fr": { route: "campus", primary: "westwardcoetudes.fr" },
   "westwarddigital.fr": { route: "digital", primary: "westwarddigital.fr" },
   "www.westwarddigital.fr": { route: "digital", primary: "westwarddigital.fr" },
   "westwardcoffee.fr": { route: "coffee-shop", primary: "westwardcoffee.fr" },
@@ -46,7 +46,7 @@ export default {
     if (!site && ['westwardco.fr', 'www.westwardco.fr'].includes(url.hostname.toLowerCase())) {
       const match = url.pathname.match(/^\/(?:(en|es)\/)?campus\/?(?:index\.html)?$/);
       if (match) {
-        url.hostname = 'westwardetudesusa.fr';
+        url.hostname = 'westwardcoetudes.fr';
         url.pathname = match[1] ? '/' + match[1] + '/' : '/';
         return Response.redirect(url.toString(), 301);
       }
