@@ -1,6 +1,6 @@
 const SITES = {
-  "westwardcampus.fr": { route: "campus", primary: "westwardcampus.fr" },
-  "www.westwardcampus.fr": { route: "campus", primary: "westwardcampus.fr" },
+  "westwardetudesusa.fr": { route: "campus", primary: "westwardetudesusa.fr" },
+  "www.westwardetudesusa.fr": { route: "campus", primary: "westwardetudesusa.fr" },
   "westwarddigital.fr": { route: "digital", primary: "westwarddigital.fr" },
   "www.westwarddigital.fr": { route: "digital", primary: "westwarddigital.fr" },
   "westwardcoffee.fr": { route: "coffee-shop", primary: "westwardcoffee.fr" },
@@ -42,6 +42,15 @@ export default {
     const url = new URL(request.url);
     const site = SITES[url.hostname.toLowerCase()];
 
+    // Legacy paths on the parent website redirect to the renamed service.
+    if (!site && ['westwardco.fr', 'www.westwardco.fr'].includes(url.hostname.toLowerCase())) {
+      const match = url.pathname.match(/^\/(?:(en|es)\/)?campus\/?(?:index\.html)?$/);
+      if (match) {
+        url.hostname = 'westwardetudesusa.fr';
+        url.pathname = match[1] ? '/' + match[1] + '/' : '/';
+        return Response.redirect(url.toString(), 301);
+      }
+    }
     if (!site) return env.ASSETS.fetch(request);
 
     if (url.hostname !== site.primary) {
