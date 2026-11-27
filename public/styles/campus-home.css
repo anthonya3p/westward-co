@@ -155,3 +155,8 @@ body.campusSite a.campusWhatsApp:before{content:"";width:20px;height:20px;flex:n
     margin-right:auto;
   }
 }
+
+/* Allow the longer study service name to fit the existing visual identity. */
+.campusSite .campusBranch{white-space:normal;max-width:9.5rem;line-height:1.15;letter-spacing:0}
+.campusSite .footerIdentity>span{line-height:1.15}
+@media(max-width:600px){.campusSite .campusBranch{max-width:6.2rem;font-size:14px!important;line-height:1.12}.campusSite .campusBrand{min-width:0}.campusSite .campusBrand img{flex-shrink:0}}
