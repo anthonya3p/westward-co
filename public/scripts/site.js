@@ -53,10 +53,10 @@
     const data = new FormData(form);
     const lang = document.documentElement.lang;
     const labels = lang === 'en'
-      ? {subject:'Study project — Westward Co. Campus',name:'Name',email:'Email',phone:'Phone',situation:'Current situation',intake:'Planned intake',project:'Project',empty:'Not provided'}
+      ? {subject:'Study project — Westward Co. Études aux USA',name:'Name',email:'Email',phone:'Phone',situation:'Current situation',intake:'Planned intake',project:'Project',empty:'Not provided'}
       : lang === 'es'
-        ? {subject:'Proyecto de estudios — Westward Co. Campus',name:'Nombre',email:'Correo electrónico',phone:'Teléfono',situation:'Situación actual',intake:'Inicio previsto',project:'Proyecto',empty:'No indicado'}
-        : {subject:'Projet d’études — Westward Co. Campus',name:'Nom',email:'E-mail',phone:'Téléphone',situation:'Situation',intake:'Rentrée envisagée',project:'Projet',empty:'Non renseigné'};
+        ? {subject:'Proyecto de estudios — Westward Co. Études aux USA',name:'Nombre',email:'Correo electrónico',phone:'Teléfono',situation:'Situación actual',intake:'Inicio previsto',project:'Proyecto',empty:'No indicado'}
+        : {subject:'Projet d’études — Westward Co. Études aux USA',name:'Nom',email:'E-mail',phone:'Téléphone',situation:'Situation',intake:'Rentrée envisagée',project:'Projet',empty:'Non renseigné'};
     if (type === 'campus') {
       const body = data.get('resume') || `${labels.name} : ${data.get('nom') || ''}\n${labels.email} : ${data.get('email') || ''}\n${labels.phone} : ${data.get('telephone') || labels.empty}\n${labels.situation} : ${data.get('situation') || ''}\n${labels.intake} : ${data.get('rentree') || labels.empty}\n\n${labels.project} :\n${data.get('message') || ''}`;
       return `mailto:anthony@westwardco.fr?subject=${encodeURIComponent(labels.subject)}&body=${encodeURIComponent(body)}`;
