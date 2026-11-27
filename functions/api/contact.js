@@ -40,7 +40,7 @@ export async function onRequestPost({ request, env }) {
   const lines = type === 'campus'
     ? ['DEMANDE DE SUIVI ÉTUDIANT', '', data.resume]
     : [`Nom : ${data.nom}`, `E-mail : ${data.email}`, '', 'Message :', data.message];
-  const subject = type === 'campus' ? 'Nouveau projet d’études — Westward Co. Campus' : `Nouveau contact — ${data.objet || 'Westward Co.'}`;
+  const subject = type === 'campus' ? 'Nouveau projet d’études — Westward Co. Études aux USA' : `Nouveau contact — ${data.objet || 'Westward Co.'}`;
   const text = lines.join('\n');
   const html = `<h1>${escapeHtml(subject)}</h1><p>${lines.map(escapeHtml).join('<br>')}</p>`;
 
