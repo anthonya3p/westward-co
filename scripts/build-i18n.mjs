@@ -603,7 +603,7 @@ function alternates(route) {
 function localizeLinks(html, lang) {
   if (lang === 'fr') return html;
   const prefix = `/${lang}`;
-  html = html.replace(/href="https:\/\/westwardetudesusa\.fr\/?"/g, `href="https://westwardetudesusa.fr/${lang}/"`);
+  html = html.replace(/href="https:\/\/westwardcoetudes\.fr\/?"/g, `href="https://westwardcoetudes.fr/${lang}/"`);
   const destinations = ['/#notre-histoire','/nos-univers/','/coffee-shop/','/cowboy-culture/','/digital/','/contact/','/mentions-legales/','/confidentialite/'];
   for (const destination of destinations) html = html.split(`href="${destination}"`).join(`href="${prefix}${destination}"`);
   html = html.split('href="/"').join(`href="${prefix}/"`);
